@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
+import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 function App() {
   return (
     <div>
       <Layout>
-        <div>BurgerBuilder</div>{" "}
-        {/*  In above div we need to replace with real BurgerBuilder component*/}
+        <BurgerBuilder />
       </Layout>
     </div>
   );
