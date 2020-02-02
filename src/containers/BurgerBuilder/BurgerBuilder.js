@@ -3,10 +3,22 @@ import Aux from "../../hoc/Aux";
 import Burger from "../../components/Burger/Burger";
 
 class BurgerBuilder extends Component {
+  // Passing ingredients from here would be appropriate for BurgerIngredient component instead of hardcoding in there.
+  // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
+
+  state = {
+    ingredients: {
+      salad: 1,
+      meat: 2,
+      cheese: 1,
+      bacon: 1
+    }
+  };
+
   render() {
     return (
       <Aux>
-        <Burger />
+        <Burger ingredients={this.state.ingredients} />
         <div>Build Controls</div>
       </Aux>
     );
