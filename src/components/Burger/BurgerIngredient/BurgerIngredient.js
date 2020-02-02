@@ -29,6 +29,8 @@ class BurgerIngredient extends Component {
       case "bacon":
         ingredient = <div className={classes.Bacon}></div>;
         break;
+      default:
+        break;
     }
     return ingredient;
   }
@@ -36,8 +38,8 @@ class BurgerIngredient extends Component {
 
 // Implementing prop-types for this component. This could be a functional component, but simply turned into class based
 
-BurgerIngredient.PropTypes = {
-    type = PropTypes.string.isRequired // It says, the prop type should be string and is required
-}
+BurgerIngredient.propTypes = {
+  type: PropTypes.string.isRequired // It says, the prop type should be string and is required
+};
 
 export default BurgerIngredient;
