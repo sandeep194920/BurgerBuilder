@@ -1,0 +1,11 @@
+** This is some notes I've made while coding along. 
+
+1. Initial videos show how to setup the structure. Initially, everything will be div and we replace one by one with component
+2. In video 159, he shows how to convert JS object to array. I've modified a little bit but the concept is same.
+  * Doubt I have in this concept of conversion : He uses [...Array(some length)].map(........)
+  * Here I see [...Array(lenght)] creates [-,-,-] empty spaces and maps though this, fills the spaces with content and 
+    then returns it. But I tried doing - new Array(length).map() and it didn't work. But I see even this creates 
+    empty spaces like this [-,-,-].  I will answer this below if I find it.
+Commit (0cf0fa5) - added functionality to convert object to array in burger to pass it t…
+3. In video 160, in the process of flattening the array, I used .flat() but he used reduce function. Both are right, but learn this, it might be useful.
+

@@ -15,10 +15,14 @@ const burger = (props) => {
     const tempArr = [...Array(props.ingredients[ing])].map((a) => ing); // Note that instead of [...Array()], the new Array() doesnt work.
     return tempArr;
   });
-  const transformedIngredients = myIngredientsArray.flat();
-  const burgerIngredients = transformedIngredients.map((ingredient, index) => (
-    <BurgerIngredient key={index} type={ingredient} />
-  ));
+  const transformedIngredients = myIngredientsArray.flat(); // In video 160, instead of using .flat() like this, he uses reduce function. Go through that as well if you want.
+  let burgerIngredients = <p>Start adding ingredients</p>;
+
+  if (transformedIngredients.length > 0) {
+    burgerIngredients = transformedIngredients.map((ingredient, index) => (
+      <BurgerIngredient key={index} type={ingredient} />
+    ));
+  }
 
   // 2. For Max's method refer video 159. (Outputting Burger Ingredients Dynamically)
   // In his video he shows something similar but I have split the functionality little bit and made it easy to understand
