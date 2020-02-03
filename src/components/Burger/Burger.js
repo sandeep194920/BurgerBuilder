@@ -16,7 +16,7 @@ const burger = (props) => {
     return tempArr;
   });
   const transformedIngredients = myIngredientsArray.flat(); // In video 160, instead of using .flat() like this, he uses reduce function. Go through that as well if you want.
-  let burgerIngredients = <p>Start adding ingredients</p>;
+  let burgerIngredients = <p>Please start adding ingredients!</p>;
 
   if (transformedIngredients.length > 0) {
     burgerIngredients = transformedIngredients.map((ingredient, index) => (
