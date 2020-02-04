@@ -8,4 +8,28 @@
     empty spaces like this [-,-,-].  I will answer this below if I find it.
 Commit (0cf0fa5) - added functionality to convert object to array in burger to pass it t…
 3. In video 160, in the process of flattening the array, I used .flat() but he used reduce function. Both are right, but learn this, it might be useful.
+4. To know a bit about css flexbox - https://www.youtube.com/watch?v=JJSoEo8JSnc
+   Flex box is best way to design grid css. 
+5. Now we are building BuildControls (which includes BuildControl) component.
 
+To summarize workflow till here: 
+
+Set 1 Workflow as follows:
+
+* Project structure created with create-react-app
+* Added font (open-sans)
+* Created components and containers folders
+* Layout was created and App component holds Layout
+* Inside Layout we now should have 
+  a. Toolbar, SideDrawer, Backdrop, Logo and NavigationItems
+  b. BurgerBuilder
+     b.1 BurgerBuilder should have Burger
+          -> Burger will have BurgerIngredients
+            -> BurgerIngredients will have individual BurgerIngredient
+     b.2 BuildControls
+          -> BuildControls will have individual BuildControl
+
+Note : So far we have done till BuildControls (UI Of BuildControls). v0.1 tag in git starts from BuildControls
+Next we will hookup BuildControls to state (video 163 - Connecting State to BuildControls)
+
+         
