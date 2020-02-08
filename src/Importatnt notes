@@ -40,3 +40,11 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
   Also, I felt disabled ingredient button functionality - My way is better than Max's way.
 
 9. Added price functionality and also dispalyed in UI. It's pretty straight forward.
+10. Now adding Order Now button in BuildControls component.
+  * For this, it will also be good to disable this button if no ingredients are added. 
+    Hence we make use of 'purchasable' property in BurgerBuilder state. If it's true then it is purchasable, else no.
+  * Adding a method 'updatePurchaseState' which at the end is called in addIngredientHandler and removeIngredientHandler
+    to check if the above added 'purchasable' property need to be updated after ingredient being added or removed
+  * You can see the error (video 166. Adding order button), where the state of the ingredients is not up to date. 
+    We got to know this when we needed to add two ingredients for the ORDER NOW button to become enabled. 
+    Hence we passed the parameter of updated ingredients into updatePurchaseState(). 

@@ -22,7 +22,8 @@ class BurgerBuilder extends Component {
       cheese: 0,
       bacon: 0
     },
-    totalPrice: 4 // default price without any ingredients
+    totalPrice: 4, // default price without any ingredients
+    purchasable: false // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
   };
 
   // MY WAY COMMENTED BELOW
@@ -53,6 +54,23 @@ class BurgerBuilder extends Component {
 
   // MY WAY COMMENTED ABOVE
 
+  updatePurchaseState = (ingredients) => {
+    // If we don't get the ingredients here as an argument and use {...this.state.ingredients}, as I did earlier, then we were getting the ingredients state
+    // which was not upto date. Even in the video (166. Adding the Order Button), you can see the same.
+    let totalIngredients = 0;
+    for (const ingredient in ingredients) {
+      totalIngredients += ingredients[ingredient];
+    }
+    // if (totalIngredients > 0) {
+    //   this.setState({ updatePurchasable: true });
+    // } else {
+    //   this.setState({ updatePurchasable: false });
+    // }
+
+    // The above if loop can be simply written as
+    this.setState({ purchasable: totalIngredients > 0 });
+  };
+
   addIngredientHanlder = (type) => {
     // process of updating ingredients
     const oldCount = this.state.ingredients[type];
@@ -67,6 +85,7 @@ class BurgerBuilder extends Component {
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice + priceAddition;
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.updatePurchaseState(updatedIngredients);
   };
   removeIngredientHanlder = (type) => {
     // process of updating ingredients
@@ -86,6 +105,7 @@ class BurgerBuilder extends Component {
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - priceDeduction;
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.updatePurchaseState(updatedIngredients);
   };
 
   render() {
@@ -110,6 +130,7 @@ class BurgerBuilder extends Component {
           ingredientRemoved={this.removeIngredientHanlder}
           disabled={disabledInfo}
           price={this.state.totalPrice}
+          purchasable={this.state.purchasable}
         />
       </Aux>
     );
