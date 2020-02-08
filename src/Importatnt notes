@@ -48,3 +48,5 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
   * You can see the error (video 166. Adding order button), where the state of the ingredients is not up to date. 
     We got to know this when we needed to add two ingredients for the ORDER NOW button to become enabled. 
     Hence we passed the parameter of updated ingredients into updatePurchaseState(). 
+  * Now, I wrote the Max's way of getting totalIngredients inside updatePurchaseState(). Refer that method for detail 
+    explanation about map and reduce shown with and without return statement

@@ -57,10 +57,32 @@ class BurgerBuilder extends Component {
   updatePurchaseState = (ingredients) => {
     // If we don't get the ingredients here as an argument and use {...this.state.ingredients}, as I did earlier, then we were getting the ingredients state
     // which was not upto date. Even in the video (166. Adding the Order Button), you can see the same.
-    let totalIngredients = 0;
-    for (const ingredient in ingredients) {
-      totalIngredients += ingredients[ingredient];
-    }
+
+    // My way of getting totalIngredients below - using for in loop
+
+    // let totalIngredients = 0;
+    // for (const ingredient in ingredients) {
+    //   totalIngredients += ingredients[ingredient];
+    // }
+
+    // Max's way of getting totalIngredients below - using map and reduce.
+    // Note : Object.keys(ingredients) converts ingredients obj to array having keys --> ['salad','cheese'..]
+    // .map(ing) gives single ingredient like salad and ingredients[ingredient] gives value. Once map
+    // returns the totalIngredients then the reduce is called. reduce takes sum as 0 (value after ,)
+    // and then adds 1 to each iteration of totalIngredient starting from 0 (value after ,)
+
+    const totalIngredients = Object.keys(ingredients)
+      .map((ingredient) => {
+        return ingredients[ingredient];
+      })
+      .reduce((sum, el) => sum + el, 0);
+
+    // This can also be written as below without a return statement
+
+    // const totalIngredients = Object.keys(ingredients)
+    //   .map((ingredient) => ingredients[ingredient])
+    //   .reduce((sum, el) => sum + el, 0);
+
     // if (totalIngredients > 0) {
     //   this.setState({ updatePurchasable: true });
     // } else {
