@@ -33,3 +33,5 @@ Note : So far we have done till BuildControls (UI Of BuildControls). v0.1 tag in
 Next we will hookup BuildControls to state (video 163 - Connecting State to BuildControls)
          
 6. Added (My way to connect the state to BuildControls), and also disabled 'Less' btn if the ingredients are 0
+7. Commented the functionalities : addIngredient, removeIngredient in each component which I had created (comments say - My way of ... )
+8. Built the same functionalities in Max's way. I did this just to compare my way to his and make my building process better

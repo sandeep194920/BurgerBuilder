@@ -18,9 +18,10 @@ const buildControls = (props) => {
         <BuildControl
           label={control.label}
           key={control.type}
-          addIngredient={() => props.addIngredient(control.type)}
-          removeIngredient={() => props.removeIngredient(control.type)}
-          disabled={props.ingredients[control.type] <= 0 ? true : false} // My way for adding this disabled functionality
+          //addIngredient={() => props.addIngredient(control.type)} // My way of adding Ingredient
+          // removeIngredient={() => props.removeIngredient(control.type)} // My way of removing Ingredient
+          // disabled={props.ingredients[control.type] <= 0 ? true : false} // My way for adding this  disabled functionality
+          added={() => props.ingredientAdded(control.type)}
         />
       ))}
     </div>
