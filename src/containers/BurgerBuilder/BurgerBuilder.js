@@ -5,7 +5,7 @@ import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 
 // Creating global constant for Ingredient prices
 const INGREDIENT_PRICES = {
-  sald: 0.5,
+  salad: 0.5,
   cheese: 0.4,
   meat: 1.3,
   bacon: 0.7
@@ -109,6 +109,7 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.addIngredientHanlder}
           ingredientRemoved={this.removeIngredientHanlder}
           disabled={disabledInfo}
+          price={this.state.totalPrice}
         />
       </Aux>
     );

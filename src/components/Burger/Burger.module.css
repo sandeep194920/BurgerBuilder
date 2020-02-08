@@ -7,6 +7,7 @@
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
+  overflow: scroll;
 }
 /* Media queries is for desktop */
 

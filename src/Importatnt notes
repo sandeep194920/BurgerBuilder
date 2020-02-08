@@ -38,3 +38,5 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
   Note : I added a method countIngredients() in BurgerBuilder component to help remove ingredients. But when I saw Max's 
   explanation, I didn't feel the need to add this. So you can see the uncommented way of doing the same in removeIngredientHandler()
   Also, I felt disabled ingredient button functionality - My way is better than Max's way.
+
+9. Added price functionality and also dispalyed in UI. It's pretty straight forward.
