@@ -31,5 +31,5 @@ Set 1 Workflow as follows:
 
 Note : So far we have done till BuildControls (UI Of BuildControls). v0.1 tag in git starts from BuildControls
 Next we will hookup BuildControls to state (video 163 - Connecting State to BuildControls)
-
          
+6. Added (My way to connect the state to BuildControls), and also disabled 'Less' btn if the ingredients are 0
