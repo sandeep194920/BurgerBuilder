@@ -68,9 +68,32 @@ class BurgerBuilder extends Component {
     const newPrice = oldPrice + priceAddition;
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
   };
-  removeIngredientHanlder = (type) => {};
+  removeIngredientHanlder = (type) => {
+    // process of updating ingredients
+    const oldCount = this.state.ingredients[type];
+    if (oldCount <= 0) {
+      // In my way, I made use of countIngredients method (commented above) which I feel unnecessary. This if statement would do
+      return;
+    }
+    const updatedCount = oldCount - 1;
+    const updatedIngredients = {
+      ...this.state.ingredients
+    };
+    updatedIngredients[type] = updatedCount;
+
+    // process of updating price
+    const priceDeduction = INGREDIENT_PRICES[type];
+    const oldPrice = this.state.totalPrice;
+    const newPrice = oldPrice - priceDeduction;
+    this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+  };
 
   render() {
+    // Max's way of adding disabled ingredient button functionality
+    const disabledInfo = { ...this.state.ingredients };
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0; // This check produces true/false for each ingredient like {salad: true,meat:false...}
+    }
     return (
       <Aux>
         <Burger ingredients={this.state.ingredients} />
@@ -82,7 +105,11 @@ class BurgerBuilder extends Component {
         /> */}
         {/* MY WAY ABOVE */}
 
-        <BuildControls ingredientAdded={this.addIngredientHanlder} />
+        <BuildControls
+          ingredientAdded={this.addIngredientHanlder}
+          ingredientRemoved={this.removeIngredientHanlder}
+          disabled={disabledInfo}
+        />
       </Aux>
     );
   }

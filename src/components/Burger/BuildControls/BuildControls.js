@@ -22,6 +22,8 @@ const buildControls = (props) => {
           // removeIngredient={() => props.removeIngredient(control.type)} // My way of removing Ingredient
           // disabled={props.ingredients[control.type] <= 0 ? true : false} // My way for adding this  disabled functionality
           added={() => props.ingredientAdded(control.type)}
+          removed={() => props.ingredientRemoved(control.type)}
+          disabled={props.disabled[control.type]}
         />
       ))}
     </div>

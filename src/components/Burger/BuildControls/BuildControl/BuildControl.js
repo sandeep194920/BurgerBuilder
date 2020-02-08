@@ -8,6 +8,8 @@ const buildControl = (props) => (
       className={classes.Less}
       // onClick={props.removeIngredient} // My way of onClick for add-ingredient
       // disabled={props.disabled} //My way for adding this disabled functionality
+      onClick={props.removed}
+      disabled={props.disabled}
     >
       Less
     </button>

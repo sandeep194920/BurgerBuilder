@@ -35,3 +35,6 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
 6. Added (My way to connect the state to BuildControls), and also disabled 'Less' btn if the ingredients are 0
 7. Commented the functionalities : addIngredient, removeIngredient in each component which I had created (comments say - My way of ... )
 8. Built the same functionalities in Max's way. I did this just to compare my way to his and make my building process better
+  Note : I added a method countIngredients() in BurgerBuilder component to help remove ingredients. But when I saw Max's 
+  explanation, I didn't feel the need to add this. So you can see the uncommented way of doing the same in removeIngredientHandler()
+  Also, I felt disabled ingredient button functionality - My way is better than Max's way.
