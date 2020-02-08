@@ -7,12 +7,23 @@ const controls = [
   { label: "Meat", type: "meat" },
   { label: "Cheese", type: "cheese" },
   { label: "Bacon", type: "bacon" }
-].map((control) => <BuildControl label={control.label} key={control.type} />);
+];
+// ].map((control) => <BuildControl label={control.label} key={control.type} />);
+// can also uncomment the above line and modify JSX accordingly. In that case you can call only {controls} inside div below
 
-// This is one way of creating controls. The other way is just to harcode this. Thi s approach helps if ingredients grow.
-
-const buildControls = (props) => (
-  <div className={classes.BuildControls}>{controls}</div>
-);
+const buildControls = (props) => {
+  return (
+    <div className={classes.BuildControls}>
+      {controls.map((control) => (
+        <BuildControl
+          label={control.label}
+          key={control.type}
+          addIngredient={() => props.addIngredient(control.type)}
+          removeIngredient={() => props.removeIngredient(control.type)}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default buildControls;

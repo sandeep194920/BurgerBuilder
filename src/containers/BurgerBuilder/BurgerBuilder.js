@@ -9,18 +9,45 @@ class BurgerBuilder extends Component {
 
   state = {
     ingredients: {
-      salad: 2,
-      meat: 1,
-      cheese: 1,
-      bacon: 2
+      salad: 0,
+      meat: 0,
+      cheese: 0,
+      bacon: 0
     }
+  };
+
+  addIngredientHandler = (ingredient) => {
+    const ingredients = { ...this.state.ingredients };
+    ingredients[ingredient] = ingredients[ingredient] + 1;
+    this.setState({ ingredients: ingredients });
+  };
+
+  countIngredients() {
+    const ingredients = { ...this.state.ingredients };
+    let totalIngredients = 0;
+    for (const ingredient in ingredients) {
+      totalIngredients += ingredients[ingredient];
+    }
+    return totalIngredients;
+  }
+
+  removeIngredientHandler = (ingredient) => {
+    if (this.countIngredients() <= 0) {
+      return;
+    }
+    const ingredients = { ...this.state.ingredients };
+    ingredients[ingredient] = ingredients[ingredient] - 1;
+    this.setState({ ingredients: ingredients });
   };
 
   render() {
     return (
       <Aux>
         <Burger ingredients={this.state.ingredients} />
-        <BuildControls />
+        <BuildControls
+          addIngredient={this.addIngredientHandler}
+          removeIngredient={this.removeIngredientHandler}
+        />
       </Aux>
     );
   }
