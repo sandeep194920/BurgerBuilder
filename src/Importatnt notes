@@ -73,3 +73,5 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
       Cancel Button is same as clicking backdrop so we can use purchaseCancelHandler (as backdrop) for that. We need to 
       implement Continue button click, and this will be purchaseContinueHandler. 
       * First we just give alert message in purchaseContinueHandler just so we know it's working. Later we will tweak it.
+  
+  17. Adding the price in the OrderSummary before we move to build Toolbar
