@@ -1,0 +1,9 @@
+.Backdrop {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 100; /* z-index: 100; lets this component of backdrop sit above all elements. FYI Modal has z-index of 500 as it should need to sit above backdrop  */
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}

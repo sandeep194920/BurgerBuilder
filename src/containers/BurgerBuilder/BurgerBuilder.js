@@ -133,9 +133,14 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState(updatedIngredients);
   };
 
-  // When Order Now is clicked
+  // When Order Now is clicked, it opens modal and the backdrop (Backdrop has been put inside Modal)
   purchaseHandler = () => {
     this.setState({ purchasing: true });
+  };
+
+  // When Backdrop is clicked, it closes the modal and the backdrop (Backdrop has been put inside Modal)
+  purchaseCancelHandler = () => {
+    this.setState({ purchasing: false });
   };
 
   render() {
@@ -146,7 +151,10 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={this.state.purchasing}>
+        <Modal
+          show={this.state.purchasing}
+          modalClosed={this.purchaseCancelHandler}
+        >
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />

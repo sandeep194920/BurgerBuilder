@@ -60,3 +60,9 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
   
   12. Created OrderSummary
   13. Dynamically showing OrderSummary Modal now. 
+  14. Created a Backdrop and added it to the Modal. We can add Backdrop anywhere like App or Layout, but then we
+      need to make sure that we handle that properly by managing state etc..
+      * But it makes more sense to place Backdrop inside Modal (For sidedrawer, its also suits to place backdrop in sidedrawer).
+        This is because Modal is closely connected with Backdrop. When Modal opens or closes, then Backdrop also needs to open/close.
+      * We also implement onClick in Backdrop because, as I said, if Modal closes then Backdrop should also close. Clicking BD should close both modal and BD.
+      
