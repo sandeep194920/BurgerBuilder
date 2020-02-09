@@ -59,4 +59,4 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
       in our app it is BurgerBuilder container since it has state and other things there
   
   12. Created OrderSummary
-     
+  13. Dynamically showing OrderSummary Modal now. 

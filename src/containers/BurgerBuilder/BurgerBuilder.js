@@ -25,7 +25,8 @@ class BurgerBuilder extends Component {
       bacon: 0
     },
     totalPrice: 4, // default price without any ingredients
-    purchasable: false // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
+    purchasable: false, // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
+    purchasing: false
   };
 
   // MY WAY COMMENTED BELOW
@@ -132,6 +133,11 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState(updatedIngredients);
   };
 
+  // When Order Now is clicked
+  purchaseHandler = () => {
+    this.setState({ purchasing: true });
+  };
+
   render() {
     // Max's way of adding disabled ingredient button functionality
     const disabledInfo = { ...this.state.ingredients };
@@ -140,7 +146,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
@@ -158,6 +164,7 @@ class BurgerBuilder extends Component {
           disabled={disabledInfo}
           price={this.state.totalPrice}
           purchasable={this.state.purchasable}
+          ordered={this.purchaseHandler}
         />
       </Aux>
     );
