@@ -50,3 +50,10 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
     Hence we passed the parameter of updated ingredients into updatePurchaseState(). 
   * Now, I wrote the Max's way of getting totalIngredients inside updatePurchaseState(). Refer that method for detail 
     explanation about map and reduce shown with and without return statement
+
+  11. Modal, Backdrop creation phase
+    * Modal is a wrapper (container), shown in middle of the page. Inside this, we can show any component (props.children) as per our needs
+    * Backdrop is used with Modal so that when the Backdrop is clicked, the modal disappears
+    * Backdrop is not put inside Modal folder itself because, the backdrop can also be combined with sidedrawer (designed later)
+    * WHERE TO ADD ? --> So, first develop the modal and then think which container/ component is the suitable place to add this modal,
+      in our app it is BurgerBuilder container since it has state and other things there

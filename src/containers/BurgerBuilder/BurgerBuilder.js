@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Aux from "../../hoc/Aux";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-
+import Modal from "../../components/UI/Modal/Modal";
 // Creating global constant for Ingredient prices
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -138,6 +138,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
+        <Modal></Modal>
         <Burger ingredients={this.state.ingredients} />
         {/* MY WAY OF BELOW */}
         {/* <BuildControls
