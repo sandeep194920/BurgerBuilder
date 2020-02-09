@@ -65,4 +65,6 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
       * But it makes more sense to place Backdrop inside Modal (For sidedrawer, its also suits to place backdrop in sidedrawer).
         This is because Modal is closely connected with Backdrop. When Modal opens or closes, then Backdrop also needs to open/close.
       * We also implement onClick in Backdrop because, as I said, if Modal closes then Backdrop should also close. Clicking BD should close both modal and BD.
-      
+  
+  15. Two buttons are now required to be present in OrderSummary. So it's better to create its own component. Hence created
+      Button in UI folder. 
