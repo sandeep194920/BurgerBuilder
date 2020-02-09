@@ -57,3 +57,6 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
     * Backdrop is not put inside Modal folder itself because, the backdrop can also be combined with sidedrawer (designed later)
     * WHERE TO ADD ? --> So, first develop the modal and then think which container/ component is the suitable place to add this modal,
       in our app it is BurgerBuilder container since it has state and other things there
+  
+  12. Created OrderSummary
+     
