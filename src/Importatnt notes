@@ -68,3 +68,8 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
   
   15. Two buttons are now required to be present in OrderSummary. So it's better to create its own component. Hence created
       Button in UI folder. 
+
+  16. Now that we built the Button, and used two buttons (Continue and Cancel) in the OrderSummary, we now need to implement the onClick for them.
+      Cancel Button is same as clicking backdrop so we can use purchaseCancelHandler (as backdrop) for that. We need to 
+      implement Continue button click, and this will be purchaseContinueHandler. 
+      * First we just give alert message in purchaseContinueHandler just so we know it's working. Later we will tweak it.

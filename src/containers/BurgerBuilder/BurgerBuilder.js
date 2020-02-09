@@ -138,9 +138,14 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: true });
   };
 
-  // When Backdrop is clicked, it closes the modal and the backdrop (Backdrop has been put inside Modal)
+  // When Backdrop is clicked/Cancel button is clicked (inside OrderSummary), it closes the modal and the backdrop (Backdrop has been put inside Modal)
   purchaseCancelHandler = () => {
     this.setState({ purchasing: false });
+  };
+
+  // When Continue button is clicked in the OrderSummary, it closes the modal and the backdrop (Backdrop has been put inside Modal)
+  purchaseContinueHandler = () => {
+    alert("Continue...");
   };
 
   render() {
@@ -155,7 +160,11 @@ class BurgerBuilder extends Component {
           show={this.state.purchasing}
           modalClosed={this.purchaseCancelHandler}
         >
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+            ingredients={this.state.ingredients}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         {/* MY WAY OF BELOW */}
