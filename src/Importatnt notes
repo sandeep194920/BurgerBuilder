@@ -1,5 +1,7 @@
 ** This is some notes I've made while coding along. 
 
+Set 1 Workflow as follows:
+
 1. Initial videos show how to setup the structure. Initially, everything will be div and we replace one by one with component
 2. In video 159, he shows how to convert JS object to array. I've modified a little bit but the concept is same.
   * Doubt I have in this concept of conversion : He uses [...Array(some length)].map(........)
@@ -14,7 +16,7 @@ Commit (0cf0fa5) - added functionality to convert object to array in burger to p
 
 To summarize workflow till here: 
 
-Set 1 Workflow as follows:
+Set 1 Workflow summary:
 
 * Project structure created with create-react-app
 * Added font (open-sans)
@@ -31,7 +33,11 @@ Set 1 Workflow as follows:
 
 Note : So far we have done till BuildControls (UI Of BuildControls). v0.1 tag in git starts from BuildControls
 Next we will hookup BuildControls to state (video 163 - Connecting State to BuildControls)
-         
+
+* * * Tag v0.1 - Building the Burger
+
+Set 2 Workflow as follows:
+
 6. Added (My way to connect the state to BuildControls), and also disabled 'Less' btn if the ingredients are 0
 7. Commented the functionalities : addIngredient, removeIngredient in each component which I had created (comments say - My way of ... )
 8. Built the same functionalities in Max's way. I did this just to compare my way to his and make my building process better
@@ -51,27 +57,40 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
   * Now, I wrote the Max's way of getting totalIngredients inside updatePurchaseState(). Refer that method for detail 
     explanation about map and reduce shown with and without return statement
 
-  11. Modal, Backdrop creation phase
-    * Modal is a wrapper (container), shown in middle of the page. Inside this, we can show any component (props.children) as per our needs
-    * Backdrop is used with Modal so that when the Backdrop is clicked, the modal disappears
-    * Backdrop is not put inside Modal folder itself because, the backdrop can also be combined with sidedrawer (designed later)
-    * WHERE TO ADD ? --> So, first develop the modal and then think which container/ component is the suitable place to add this modal,
-      in our app it is BurgerBuilder container since it has state and other things there
+11. Modal, Backdrop creation phase
+  * Modal is a wrapper (container), shown in middle of the page. Inside this, we can show any component (props.children) as per our needs
+  * Backdrop is used with Modal so that when the Backdrop is clicked, the modal disappears
+  * Backdrop is not put inside Modal folder itself because, the backdrop can also be combined with sidedrawer (designed later)
+  * WHERE TO ADD ? --> So, first develop the modal and then think which container/ component is the suitable place to add this modal,
+    in our app it is BurgerBuilder container since it has state and other things there
   
-  12. Created OrderSummary
-  13. Dynamically showing OrderSummary Modal now. 
-  14. Created a Backdrop and added it to the Modal. We can add Backdrop anywhere like App or Layout, but then we
-      need to make sure that we handle that properly by managing state etc..
-      * But it makes more sense to place Backdrop inside Modal (For sidedrawer, its also suits to place backdrop in sidedrawer).
-        This is because Modal is closely connected with Backdrop. When Modal opens or closes, then Backdrop also needs to open/close.
-      * We also implement onClick in Backdrop because, as I said, if Modal closes then Backdrop should also close. Clicking BD should close both modal and BD.
-  
-  15. Two buttons are now required to be present in OrderSummary. So it's better to create its own component. Hence created
-      Button in UI folder. 
+12. Created OrderSummary
+13. Dynamically showing OrderSummary Modal now. 
+14. Created a Backdrop and added it to the Modal. We can add Backdrop anywhere like App or Layout, but then we
+    need to make sure that we handle that properly by managing state etc..
+    * But it makes more sense to place Backdrop inside Modal (For sidedrawer, its also suits to place backdrop in sidedrawer).
+      This is because Modal is closely connected with Backdrop. When Modal opens or closes, then Backdrop also needs to open/close.
+    * We also implement onClick in Backdrop because, as I said, if Modal closes then Backdrop should also close. Clicking BD should close both modal and BD.
 
-  16. Now that we built the Button, and used two buttons (Continue and Cancel) in the OrderSummary, we now need to implement the onClick for them.
-      Cancel Button is same as clicking backdrop so we can use purchaseCancelHandler (as backdrop) for that. We need to 
-      implement Continue button click, and this will be purchaseContinueHandler. 
-      * First we just give alert message in purchaseContinueHandler just so we know it's working. Later we will tweak it.
-  
-  17. Adding the price in the OrderSummary before we move to build Toolbar
+15. Two buttons are now required to be present in OrderSummary. So it's better to create its own component. Hence created
+    Button in UI folder. 
+
+16. Now that we built the Button, and used two buttons (Continue and Cancel) in the OrderSummary, we now need to implement the onClick for them.
+    Cancel Button is same as clicking backdrop so we can use purchaseCancelHandler (as backdrop) for that. We need to 
+    implement Continue button click, and this will be purchaseContinueHandler. 
+    * First we just give alert message in purchaseContinueHandler just so we know it's working. Later we will tweak it.
+
+17. Adding the price in the OrderSummary before we move to build Toolbar
+
+
+* * * Tag v0.2 - completed - build the burger, continue checkout or cancel. Now proceeding with the toolbar in the next version. Note: Continue button just shows alert for now. It's yet to be implemented
+
+Set 3 Workflow as follows:
+
+18. Design of Toolbar - We are going to add this component in Layout component. Toolbar resides in Navigation Folder.
+    Other components like NavigationItems will also reside in Navigation component. (Refer point number 5 bullet points about Toolbar)
+    * Note: BEST PRACTICE : The toolbar component should contain <header></header> with in which the other components like button(for sidedrawer),
+          Logo, and navigation items should be. Navigation items inside the toolbar should be in <nav></nav>
+    * Note: z-index for toolbar is 90, backdrop 100 and modal 500. First Modal, next backdrop and then toolbar.
+    
+19. 

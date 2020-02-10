@@ -1,0 +1,21 @@
+/* Mobile first */
+.Toolbar {
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #703b09;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* vertical alignment  */
+  padding: 0 20px;
+  box-sizing: border-box; /* should be aligned correctly even with the padding */
+  z-index: 90; /* Note: z-index for toolbar is 90, backdrop 100 and modal 500 */
+}
+
+.Toolbar nav {
+  /* For nav inside toolbar */
+
+  height: 100%; /* 100% height of Toolbar */
+}
