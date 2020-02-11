@@ -92,5 +92,9 @@ Set 3 Workflow as follows:
     * Note: BEST PRACTICE : The toolbar component should contain <header></header> with in which the other components like button(for sidedrawer),
           Logo, and navigation items should be. Navigation items inside the toolbar should be in <nav></nav>
     * Note: z-index for toolbar is 90, backdrop 100 and modal 500. First Modal, next backdrop and then toolbar.
-    
-19. 
+
+19. Logo - Added from Max's resource file. In Logo.module.css, we set box-sizing:border-box. The meaning of this is - we
+           need the height of the .Logo to be 80%, and we also need padding to be the part of this. That is the meaning of
+           box-sizing:border-box
+           
+20. 
