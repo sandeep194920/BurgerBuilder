@@ -1,0 +1,10 @@
+/* This is for desktop. We first build desktop's NavigationItems because, at this point, we don't have siderawer yet to build mobile*/
+.NavigationItems {
+  display: flex; /* Aligns the flex items (navigation items / li tags) next to each other */
+  justify-content: space-between;
+  align-items: center; /* Vertically centres the flex items (navigation items / li tags) */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%; /* 100% of the toolbar height*/
+}

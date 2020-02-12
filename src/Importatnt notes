@@ -97,4 +97,5 @@ Set 3 Workflow as follows:
            need the height of the .Logo to be 80%, and we also need padding to be the part of this. That is the meaning of
            box-sizing:border-box
            
-20. 
+20. Now we need to do the navigation items which go into the <nav></nav> in the toolbar. We need to outsource this because 
+    we will be using it again in the sidedrawer. NavigationItems component is created for this and then NavigationItem is created.
