@@ -31,4 +31,5 @@
 /* This Logo css below is to control the height relavent to this sideDrawer component. It doesnt interfere with orgiinal Logo.module.css */
 .Logo {
   height: 11%;
+  margin-bottom: 32px;
 }

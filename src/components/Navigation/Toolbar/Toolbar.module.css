@@ -24,3 +24,9 @@
 .Logo {
   height: 80%;
 }
+/* We don't need to see this toolbar on the mobile devices, hence hiding this */
+@media (max-width: 499px) {
+  .DesktopOnly {
+    display: none;
+  }
+}

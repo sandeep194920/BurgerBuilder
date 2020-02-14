@@ -117,4 +117,6 @@ Set 3 Workflow as follows:
   
    Here we are following second approach which I think makes more sennse as the logo can then be generic in logo css.
    In conclusion, we reset logo height both in sidedrawer as well as toolbar accordingly. REFER Video 177. Working on Responsive Adjustments to understand this
-   
+
+22. Now taking care of navigation items to look good on mobile devices (responsive css for NavigationItems). We are making 
+    this in Mobile first way.

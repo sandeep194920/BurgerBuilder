@@ -1,25 +1,47 @@
+/* MobileFirst (Initially built for desktop, see previous commits. Now that code has been pushed to @media */
 .NavigationItem {
-  margin: 0;
+  margin: 10px 0;
   box-sizing: border-box;
-  display: flex; /*This is applied on li tag and it acts as a flex container for the 'a' tag inside it*/
-  align-items: center;
-  height: 100%;
+  display: block;
+  width: 100%;
 }
 
 .NavigationItem a {
-  color: white;
+  color: #8f5c2c;
   text-decoration: none;
-  height: 100%;
-  padding: 16px 10px;
+  width: 100%;
   box-sizing: border-box;
-  border-bottom: 4px solid transparent;
-  display: block; /* with this, the height has an effect */
+  display: block;
 }
 
 .NavigationItem a:hover,
 .NavigationItem a.active,
 .NavigationItem a:active {
-  background-color: #8f5c2c;
-  border-bottom: 4px solid #40a4c8;
-  color: white;
+  color: #40a4c8;
+}
+
+/* Desktop */
+@media (min-width: 500px) {
+  .NavigationItem {
+    margin: 0;
+    display: flex; /*This is applied on li tag and it acts as a flex container for the 'a' tag inside it*/
+    align-items: center;
+    height: 100%;
+    width: auto; /* setting this here to auto because we don't want to use the width 100% defined in the mobile part above */
+  }
+
+  .NavigationItem a {
+    color: white;
+    height: 100%;
+    padding: 16px 10px;
+    border-bottom: 4px solid transparent;
+  }
+
+  .NavigationItem a:hover,
+  .NavigationItem a.active,
+  .NavigationItem a:active {
+    background-color: #8f5c2c;
+    border-bottom: 4px solid #40a4c8;
+    color: white;
+  }
 }

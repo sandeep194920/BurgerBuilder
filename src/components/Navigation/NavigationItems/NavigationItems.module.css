@@ -1,10 +1,17 @@
-/* This is for desktop. We first build desktop's NavigationItems because, at this point, we don't have siderawer yet to build mobile*/
+/* This is for mobile now (initally was for desktop). Look at previous commits where it was for desktop here. */
 .NavigationItems {
   display: flex; /* Aligns the flex items (navigation items / li tags) next to each other */
-  justify-content: space-between;
   align-items: center; /* Vertically centres the flex items (navigation items / li tags) */
   margin: 0;
+  flex-flow: column;
   padding: 0;
   list-style: none;
   height: 100%; /* 100% of the toolbar height*/
+}
+
+/* We need to change the default flex box items- row to column in the sidDrawer for NavigationItems */
+@media (min-width: 500px) {
+  .NavigationItems {
+    flex-flow: row;
+  }
 }
