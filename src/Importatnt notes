@@ -101,5 +101,20 @@ Set 3 Workflow as follows:
 20. Now we need to do the navigation items which go into the <nav></nav> in the toolbar. We need to outsource this because 
     we will be using it again in the sidedrawer. NavigationItems component is created for this and then NavigationItem is created.
 
-21. Now that we added Navigation to toolbar (desktop), it's time to add Navigation to mobile devices and that is by sidedrawer component. 
-    
+21. Now that we added Navigation to toolbar (desktop), it's time to add Navigation to mobile devices and that is by sidedrawer component. Now 
+    we added SidDrawer but the logo looks big. So logo and navigation items need to be taken care of, so we next include
+    responsive css to NavigationItem.
+
+    Note: So the problem at this point is that, the logo is bigger in sidedrawer. The reason is, in the Logo css, we 
+    set height of logo to 80% to look good in the toolbar. But the same logo component when used in the sidedrawer looks
+    way to bigger due to its 80% height. 
+    So the 80% height is ok for toolbar and not to the sidedrawer. The thing to observe here is that we are kind of 
+    favouring toolbar and not the sidedrawer in the logo css. So two things we can do here: 
+
+    1. Make the logo responsive. For bigger screen, it should be 80% (sits on the toolbar) and smaller height for sidedrawer.
+    2. Set the logo height back to 100% and then change its height in toolbar css and sidedrawer css. So, that means,
+       we are actually setting the height of the logo when in toolbar or sidedrawer when those components are used accordingly.
+  
+   Here we are following second approach which I think makes more sennse as the logo can then be generic in logo css.
+   In conclusion, we reset logo height both in sidedrawer as well as toolbar accordingly. REFER Video 177. Working on Responsive Adjustments to understand this
+   

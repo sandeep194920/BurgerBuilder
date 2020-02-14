@@ -27,3 +27,8 @@
   transform: translate(-100%);
   /* This makes the SidDrawer shift left so that it won't be visible in the screen */
 }
+
+/* This Logo css below is to control the height relavent to this sideDrawer component. It doesnt interfere with orgiinal Logo.module.css */
+.Logo {
+  height: 11%;
+}
