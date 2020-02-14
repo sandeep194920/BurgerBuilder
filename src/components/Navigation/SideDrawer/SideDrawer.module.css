@@ -1,0 +1,29 @@
+/* Mobile */
+.SideDrawer {
+  position: fixed; /*Should be fixed even on the scroll*/
+  width: 280px;
+  max-width: 70%; /*should adjust to 70% even on narrow devices*/
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  background-color: white;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-out;
+}
+/* If the screen-size is more than 500px (desktop usually), then siddrawer shouldn't be displayed */
+@media (min-width: 500px) {
+  .SideDrawer {
+    display: none;
+  }
+}
+
+.Open {
+  transform: translateX(0);
+  /* This basically gets the SidDrawer into the picture by applying the style above at the top of this page (that means, back to normal*/
+}
+.Close {
+  transform: translate(-100%);
+  /* This makes the SidDrawer shift left so that it won't be visible in the screen */
+}
