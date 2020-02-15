@@ -184,3 +184,12 @@ Set 4 Workflow as follows:
     * Assign this function to a variable and export that as default.
   
   Later in the course, we use a different URL for authentication hence we now created an instance.
+
+29. Now we have set the axios instance, we now should be able to send the POST request. Where to send POST request? 
+    Well, the right place to send POST request (for sending orders to Backend) is purchaseContinueHandler() in BurgerBuilder.
+    Here we are just alerting now if we click Continue button.
+    Note: We later change this by adding some more functionalities. We later will fill a form before we send order to Backend.
+    But for now in the purchaseContinueHandler(), we send the order to backend using POST request of axios. The url written
+    in the post() is the url written in the post + baseURL written in the instance of axios.
+
+    example :instance --> baseURL('xyz.io'),  post('/orders.json'), mainURL -> 'xyz.io/orders' (For firebase, adding .json is important)

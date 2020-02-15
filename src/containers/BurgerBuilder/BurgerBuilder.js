@@ -4,6 +4,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+import axios from "../../axios-orders";
 
 // Creating global constant for Ingredient prices
 const INGREDIENT_PRICES = {
@@ -145,7 +146,20 @@ class BurgerBuilder extends Component {
 
   // When Continue button is clicked in the OrderSummary, it closes the modal and the backdrop (Backdrop has been put inside Modal)
   purchaseContinueHandler = () => {
-    alert("Continue...");
+    // Sending Order to backend using POST Request of axios
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      // Dummy data fields below for now
+      customer: {
+        name: "Sandeep",
+        country: "India"
+      }
+    };
+    axios
+      .post("/orders.json", order)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   render() {
