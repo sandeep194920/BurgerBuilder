@@ -134,3 +134,20 @@ Set 3 Workflow as follows:
     showing or hiding sidedrawer.
 
 24. Added Max's css for DrawerToggle
+25. Performance Optimizations : One thing at this point if you notice; the modal simply is rendered everytime
+    even though we don't click Order Now btn. The reason for this is, the render method of BurgerBuilder is run everytime
+    if something on the BurgerBuilder changes, for example, if I add a component, the BurgerIngredient is added and hence 
+    the Burger part changes and hence the BurgerBuilder changes. When the BurgerBuilder is changed the BurgerBuilder's
+    render is run again. When this happens, the Modal (also OrderSummary inside Modal) is run everytime.
+
+    So, to summarize, when BurgerIngredient is added/removed the Modal is rendered because it resides in render of BurgerBuilder
+    which changes when this happens. This is a performance hit. To avoid this we use shouldComponentUpdate. This shouldComponentUpdate
+    can be used in two places - Modal or OrderSummary. But the right place is Modal because it is the one which wraps 
+    OrderSummary. So I would convert Modal into class based (can be done with react hooks later) and implement shouldComponentUpdate.
+
+   * What is PureComponent (class based) or React Memo (react hooks based)? 
+   
+   PureComponent/React Memo is shouldComponentUpdate functionality but it compares all the previous props with the present props.
+   It's needed sometimes but not all the times. Here in the Modal we could have used it but its an overkill because we have
+   only one prop that is show prop which needs to be compared, and this alone would be enough to tell if the Modal needs
+   to be rendered or not. Hence using PureComponent here in Modal is not necessary.
