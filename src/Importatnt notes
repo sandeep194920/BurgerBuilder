@@ -120,3 +120,15 @@ Set 3 Workflow as follows:
 
 22. Now taking care of navigation items to look good on mobile devices (responsive css for NavigationItems). We are making 
     this in Mobile first way.
+
+23. Now adding Backdrop to the SidDrawer component. We need an onClick listener of backdrop come back to sidedrawer which 
+    inturn should come back to Layout. We can handle this click in SidDrawer itself which comes from backdrop, but 
+    Layout would be the appropriate component to handle this click listener because we need a connection between 
+    the toolbar and sidedrawer at the end. That is because when the menu button in the toolbar is clicked, then only
+    the sidedrawer should open. So, the component which holds toolbar and sidedrawer is the layout. So we add 
+    SidDrawer component's Backdrop's click listener in Layout.
+
+    In this commit we also added hamburger icon component (DrawerToggle) and placed this in SidDrawer component. This is 
+    the replacement of MENU text in the toolbar. The reason for placing this in the sidedrawer component is that it 
+    actually belongs to the sidedrawer even though it resides on toolbar, because this button is mainly used for 
+    showing or hiding sidedrawer.
