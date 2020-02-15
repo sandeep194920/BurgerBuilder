@@ -11,7 +11,7 @@ const modal = (props) => (
     <div
       className={classes.Modal}
       style={{
-        transform: props.show ? "translateY(0)" : "translateX(-100)",
+        transform: props.show ? "translateY(0)" : "translateX(-100vh)", // in translateX, vh was missed till now so the modal wasn't getting out of way
         opacity: props.show ? "1" : "0"
       }}
     >

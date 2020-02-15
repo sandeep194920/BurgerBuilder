@@ -132,3 +132,5 @@ Set 3 Workflow as follows:
     the replacement of MENU text in the toolbar. The reason for placing this in the sidedrawer component is that it 
     actually belongs to the sidedrawer even though it resides on toolbar, because this button is mainly used for 
     showing or hiding sidedrawer.
+
+24. Added Max's css for DrawerToggle

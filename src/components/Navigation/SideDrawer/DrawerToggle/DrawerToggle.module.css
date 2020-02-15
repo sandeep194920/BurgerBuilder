@@ -1,3 +1,31 @@
+/* Added below CSS for DrawerToggle from the Max's resouces file */
+.DrawerToggle {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.DrawerToggle div {
+  width: 90%;
+  height: 3px;
+  background-color: white;
+}
+
+@media (min-width: 500px) {
+  .DrawerToggle {
+    display: none;
+  }
+}
+/* Added above CSS for DrawerToggle from the Max's resouces file */
+
+/* My CSS used before pasting Max's which is above */
+
 .ToggleButton div {
   width: 25px;
   height: 2px;
