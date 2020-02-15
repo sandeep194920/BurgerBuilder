@@ -151,3 +151,12 @@ Set 3 Workflow as follows:
    It's needed sometimes but not all the times. Here in the Modal we could have used it but its an overkill because we have
    only one prop that is show prop which needs to be compared, and this alone would be enough to tell if the Modal needs
    to be rendered or not. Hence using PureComponent here in Modal is not necessary.
+
+26. Modifying the folder structure a bit: When we started the project, the Layout was a stateless component but now 
+    it handles state. So for a moment we feel its better to move this folder into Containers. But if we take a closer 
+    look at Layout, all it does is just Wraps the props.children (BurgerBuilder for now and other compoents like Authentication Page later),
+    and it also has fixed Toolbar and SidDrawer. So, the main focus is that it wraps the children and hence we can consider
+    this to be a higher order component. Moving Layout into hoc folder makes more sense, but its not mandatory. 
+    I am moving it into hoc here.
+
+    We are DONE WITH THE CRUCIAL BASE PART OF BURGER BUILDER
