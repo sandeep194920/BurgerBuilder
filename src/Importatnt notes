@@ -193,3 +193,21 @@ Set 4 Workflow as follows:
     in the post() is the url written in the post + baseURL written in the instance of axios.
 
     example :instance --> baseURL('xyz.io'),  post('/orders.json'), mainURL -> 'xyz.io/orders' (For firebase, adding .json is important)
+    The requests and responses are asynchronous. Meaning, it doesn't expect for the program to stop while it requests data from server.
+    Instead the program continues and if we then try using this response in the normal flow, we might get an error 
+    as the response data might not be ready yet. Hence we use promises in then block of POST and GET of axios.
+    then block code is a different thread altogether and once its ready then that data is updated in the program wherever 
+    necessary.
+
+30. When request is being sent and recieved it might take some time to get the data back. We usually show spinner or 
+    something on the screen so that user know that it's loading. This spinner can be shown in place of OrderSummary.
+    Spinner is shown inside the modal in place of OrderSummary and the modal then disappers once the order is placed 
+    (we get the response back).
+    Creating Spinner inside UI as it is an UI component.
+    Getting spinner from https://projects.lukehaas.me/css-loaders/
+    BG color FFFFF and FG Color 521751 selected for spinner
+
+    VERY IMP NOTE : I fell into this trap. While setting the spinner inside the modal, my spinner was working but the
+    OrderSummary wasn't showing after continue button click. Reason is in the modal, we are not checking if the props.children
+    changed (i.e., Spinner & OrderSummary). So basically, in shouldComponentUpdate in the modal, we also need to check
+    this with the exisiting check for show prop

@@ -5,6 +5,7 @@ import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import axios from "../../axios-orders";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 // Creating global constant for Ingredient prices
 const INGREDIENT_PRICES = {
@@ -27,7 +28,8 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 4, // default price without any ingredients
     purchasable: false, // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
-    purchasing: false
+    purchasing: false,
+    loading: false
   };
 
   // MY WAY COMMENTED BELOW
@@ -146,6 +148,7 @@ class BurgerBuilder extends Component {
 
   // When Continue button is clicked in the OrderSummary, it closes the modal and the backdrop (Backdrop has been put inside Modal)
   purchaseContinueHandler = () => {
+    this.setState({ loading: true });
     // Sending Order to backend using POST Request of axios
     const order = {
       ingredients: this.state.ingredients,
@@ -158,8 +161,13 @@ class BurgerBuilder extends Component {
     };
     axios
       .post("/orders.json", order)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => {
+        this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
+        console.log(response);
+      })
+      .catch((error) => {
+        this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
+      });
   };
 
   render() {
@@ -168,18 +176,26 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0; // This check produces true/false for each ingredient like {salad: true,meat:false...}
     }
+
+    let orderSummary = (
+      <OrderSummary
+        purchaseCancelled={this.purchaseCancelHandler}
+        purchaseContinued={this.purchaseContinueHandler}
+        ingredients={this.state.ingredients}
+        price={this.state.totalPrice}
+      />
+    );
+    if (this.state.loading) {
+      orderSummary = <Spinner />;
+    }
+
     return (
       <Aux>
         <Modal
           show={this.state.purchasing}
           modalClosed={this.purchaseCancelHandler}
         >
-          <OrderSummary
-            purchaseCancelled={this.purchaseCancelHandler}
-            purchaseContinued={this.purchaseContinueHandler}
-            ingredients={this.state.ingredients}
-            price={this.state.totalPrice}
-          />
+          {orderSummary}
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         {/* MY WAY OF BELOW */}
