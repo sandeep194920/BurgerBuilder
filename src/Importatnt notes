@@ -161,4 +161,26 @@ Set 3 Workflow as follows:
 
     We are DONE WITH THE CRUCIAL BASE PART OF BURGER BUILDER
 
+
+
 * * * Tag v1.0-release - completed - COMPLETED BASE PART. BURGERBUILDER, TOOLBAR, SIDDRAWER, MODAL, ORDERSUMMARY all done. 
+
+Set 4 Workflow as follows:
+
+ Implementing Backend - Firebase - When we click Order Now button, the Orders should go and store in firebase
+
+27. Watch video for steps to create project on firebase console. No point in noting them here. (Video 209 - Creating the Firebase project)
+    Once you setup the database, in the rules part, set read and write to true. This can be changed once authentication is implemented.
+
+    DB URL : https://react-my-burger-664c0.firebaseio.com/
+
+28. Now that we have setup the Database, we'll send http request now using library called axios.
+    npm install --save axios. We can use axios two ways. One is globally and other way is using axios instance.
+    Here we use axios instance. So I'll create axios-orders.js file in src folder and create axios instance for orders here.
+
+   Creating axios instance : 
+
+    * First we create instance of axios using axios.create() and assign baseURL inside. 
+    * Assign this function to a variable and export that as default.
+  
+  Later in the course, we use a different URL for authentication hence we now created an instance.
