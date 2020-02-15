@@ -15,7 +15,7 @@ class Modal extends Component {
     // Note that if you don't return true or false in shouldCompUpdate then it throws a warning.
     if (
       nextProps.show !== this.props.show ||
-      nextProps.children !== this.props.children
+      nextProps.children !== this.props.children // props.children check is required to see if
     ) {
       return true;
     } else {
