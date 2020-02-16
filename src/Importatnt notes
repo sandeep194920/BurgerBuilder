@@ -211,3 +211,10 @@ Set 4 Workflow as follows:
     OrderSummary wasn't showing after continue button click. Reason is in the modal, we are not checking if the props.children
     changed (i.e., Spinner & OrderSummary). So basically, in shouldComponentUpdate in the modal, we also need to check
     this with the exisiting check for show prop
+
+31. Adding Error handler hoc - If something went wrong in a component like BurgerBuilder (or any other component) and we need to 
+    display the error message (inside the modal on that component), then we can use a higher order component which 
+    returns a function which when executed executes the passed component with additional modal that exists. Sounds Confusing right?
+    Watch video 213. Handling Errors
+    We use withErrorHandler
+    Note : This type of hoc can be implemented on any component for any purpose, not only errors.
