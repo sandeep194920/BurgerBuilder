@@ -218,3 +218,19 @@ Set 4 Workflow as follows:
     Watch video 213. Handling Errors
     We use withErrorHandler
     Note : This type of hoc can be implemented on any component for any purpose, not only errors.
+
+32. In the previous task we posted orders into backend. Now let's get ingredients from backend using get method of axios.
+    We will get rid of ingredients present in the BurgerBuilder state and get that from firebase.
+
+    IMPORTANT NOTE : In this commit there are multiple changes to be noted. 
+
+    1. We changed if loop in the BurgerBuilder component. This is used because we render ingredients from backend and the
+       compoents using this will fail if it's not loaded on time. Hence we show spinner dynamically for which we added if loop.
+       Compoents included under this if for dynamic rendering are the ones which depends on ingredients(passing props to its children).
+    2. The ComponentDidMount in withErrorHandler is converted into ComponentWillMount after this ingredient has been put to firebase.
+       The reason for this is, if we make a typo in ingredient rendering url, in axios.get('/ingredient.json'), we don't get 
+       the error displayed on the screen like what we get for post ('/orders.json').
+       This is because, the ingredients is fetched inside <BurgerBuilder/> which is a child of withErrorHandler and the CDM inside withErrorHandler
+       is executed after the child. In this case the cdm is never called. The error actually occurs in child part first in which case
+       the cdm in withErrorHandler never executed. So cdm is converted in to cwm. In future cwm will not be supported hence we 
+       can use constructor in withErrorHandler which I am not doing it here.

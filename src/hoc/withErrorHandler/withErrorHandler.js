@@ -10,7 +10,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
     // Note that this method will be executed after the Wrapped component (BurgerBuilder in this case)is executed.
     // That means the axios instance written in BurgerBuilder is executed and then reaches the interceptors written
     // inside this below componentDidMount()
-    componentDidMount() {
+    componentWillMount() {
+      // Changing this from cdm to cwm. Because this must be loaded before child comps loaded. Constructor also can be used instead of cwm
       //used to clear error if any occured in response interceptors below
       axios.interceptors.request.use((req) => {
         this.setState({ error: null });

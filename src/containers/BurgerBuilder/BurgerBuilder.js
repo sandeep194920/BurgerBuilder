@@ -21,16 +21,14 @@ class BurgerBuilder extends Component {
   // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
 
   state = {
-    ingredients: {
-      salad: 0,
-      meat: 0,
-      cheese: 0,
-      bacon: 0
-    },
+    ingredients: null, // this was initially set to ingredients object,
+    // but now we fetch this from firebase backend. Due to this being null, the parts of app will fail like OrderSummary and others which depend on this.
+    // Hence we conditionally render them once this is available
     totalPrice: 4, // default price without any ingredients
     purchasable: false, // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
     purchasing: false,
-    loading: false
+    loading: false,
+    error: false // Used for ingredients fetching in componentDidMount; if ingredients fail then this will be used to display error message
   };
 
   // MY WAY COMMENTED BELOW
@@ -172,6 +170,14 @@ class BurgerBuilder extends Component {
       });
   };
 
+  // getting ingredients from firebase (previously we had it in local state)
+  componentDidMount() {
+    axios
+      .get("/ingredients.json")
+      .then((response) => this.setState({ ingredients: response.data }))
+      .catch((error) => this.setState({ error: true }));
+  }
+
   render() {
     // Max's way of adding disabled ingredient button functionality
     const disabledInfo = { ...this.state.ingredients };
@@ -179,16 +185,44 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0; // This check produces true/false for each ingredient like {salad: true,meat:false...}
     }
 
-    let orderSummary = (
-      <OrderSummary
-        purchaseCancelled={this.purchaseCancelHandler}
-        purchaseContinued={this.purchaseContinueHandler}
-        ingredients={this.state.ingredients}
-        price={this.state.totalPrice}
-      />
+    // The if loop below is added because we have set the ingredients to null here and fetching it from firebase.
+    // Before we fetch them, the child components that depend on the ingredients will fail. Hence we show
+    // spinner till the components will be available
+
+    // Three such components that has ingredients passed into it is Buger, BuildControls and OrderSummary.
+    // So we conditionally render them. (Note that OrderSummary was enclosed with other if else loop above,
+    // but now is included here)
+    let orderSummary = null;
+    let burger = this.state.error ? ( //If the error is set, which means if ingredients in not loaded by anychance from firebase
+      <p>Failed to load ingredients</p>
+    ) : (
+      <Spinner />
     );
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
+    if (this.state.ingredients) {
+      burger = (
+        <Aux>
+          <Burger ingredients={this.state.ingredients} />
+          <BuildControls
+            ingredientAdded={this.addIngredientHanlder}
+            ingredientRemoved={this.removeIngredientHanlder}
+            disabled={disabledInfo}
+            price={this.state.totalPrice}
+            purchasable={this.state.purchasable}
+            ordered={this.purchaseHandler}
+          />
+        </Aux>
+      );
+      orderSummary = (
+        <OrderSummary
+          purchaseCancelled={this.purchaseCancelHandler}
+          purchaseContinued={this.purchaseContinueHandler}
+          ingredients={this.state.ingredients}
+          price={this.state.totalPrice}
+        />
+      );
+      if (this.state.loading) {
+        orderSummary = <Spinner />;
+      }
     }
 
     return (
@@ -199,23 +233,7 @@ class BurgerBuilder extends Component {
         >
           {orderSummary}
         </Modal>
-        <Burger ingredients={this.state.ingredients} />
-        {/* MY WAY OF BELOW */}
-        {/* <BuildControls
-          addIngredient={this.addIngredientHandler}
-          removeIngredient={this.removeIngredientHandler}
-          ingredients={this.state.ingredients} //My way for adding this disabled functionality
-        /> */}
-        {/* MY WAY ABOVE */}
-
-        <BuildControls
-          ingredientAdded={this.addIngredientHanlder}
-          ingredientRemoved={this.removeIngredientHanlder}
-          disabled={disabledInfo}
-          price={this.state.totalPrice}
-          purchasable={this.state.purchasable}
-          ordered={this.purchaseHandler}
-        />
+        {burger}
       </Aux>
     );
   }

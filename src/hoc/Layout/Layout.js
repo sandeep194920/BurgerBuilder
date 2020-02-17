@@ -4,7 +4,7 @@ import classes from "./Layout.module.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import Sidedrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 class Layout extends Component {
-  // The click listener of the backdrop component of SidDrawer is handled here because this is the common component
+  // The click listener of the backdrop component of SideDrawer is handled here because this is the common component
   // that has both Toolbar and SidDrawer. This connection is important because we have a menu button in the toolbar
   // which when clicked opens the sidedrawer. Hence we turn this component from function to class so that we can set state
 
