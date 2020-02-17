@@ -11,22 +11,28 @@ const withErrorHandler = (WrappedComponent, axios) => {
     // That means the axios instance written in BurgerBuilder is executed and then reaches the interceptors written
     // inside this below componentDidMount()
     componentWillMount() {
+      console.log("CWM withErrorHandler"); // Testing which one is executed first. This one vs BurgerBuilder CDM
       // Changing this from cdm to cwm. Because this must be loaded before child comps loaded. Constructor also can be used instead of cwm
       //used to clear error if any occured in response interceptors below
-      axios.interceptors.request.use((req) => {
+      this.reqInterceptor = axios.interceptors.request.use((req) => {
         this.setState({ error: null });
         return req; // We need to return request in the interceptor request so that it proceeds
       });
       //The below method is the method we are interested in but we are writing the interceptors.requests just to
       // clear the errors if any occured during the response interceptors below
-      axios.interceptors.response.use(
+      this.resInterceptor = axios.interceptors.response.use(
         (res) => res, // We need to return response in the interceptor response so that it proceeds
         (error) => {
           this.setState({ error: error });
         }
       );
     }
-
+    // cwum is used to unmount this component once some other component is rendered. Else it will create a problem.
+    componentWillUnmount() {
+      // Here we clear the interceptors created during cwm
+      axios.interceptors.request.eject(this.reqInterceptor);
+      axios.interceptors.request.eject(this.resInterceptor);
+    }
     // We use this errrorConfirmedHandler to clear any errors (setting back to null) once the backdrop is clicked which is in the modal
     errorConfirmedHandler = () => {
       this.setState({ error: null });

@@ -172,6 +172,7 @@ class BurgerBuilder extends Component {
 
   // getting ingredients from firebase (previously we had it in local state)
   componentDidMount() {
+    console.log("CDM BURGERBUILDER");
     axios
       .get("/ingredients.json")
       .then((response) => this.setState({ ingredients: response.data }))
