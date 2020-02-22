@@ -235,5 +235,7 @@ Set 4 Workflow as follows:
        the cdm in withErrorHandler never executed. So cdm is converted in to cwm. In future cwm will not be supported hence we 
        can use constructor in withErrorHandler which I am not doing it here.
 
-33. ComponentWillUnmount : This is used to unmount the coponent and clear anything like interceptors. For better understanding, watch
-    Video 215. Removing Old interceptors
+33. ComponentWillUnmount : This is used to unmount the component and clear anything like interceptors. For better understanding, watch
+    Video 215. Removing Old interceptors. Unmounting actually means disappear from dom. So ComponentWillUnmount will be 
+    executed when the component is disappeared from dom. At this time we need to clear (eject) any old interceptors, so that when we use
+    withErrorHandler(AnyComponent) we don't end up creating more and more unused interceptors.
