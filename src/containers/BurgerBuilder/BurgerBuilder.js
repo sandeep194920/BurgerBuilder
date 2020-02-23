@@ -173,7 +173,27 @@ class BurgerBuilder extends Component {
 
     // Commented code above sends order to backend. We don't need this feature now but later once the checkout form is filled we need it then
     console.log(this.props);
-    this.props.history.push("/checkout");
+
+    // this.props.history.push({
+    //   pathname: "/checkout",
+    //   search: "?ingredients=" + this.state.ingredients
+    // });
+    // The above search is not possible because ingredients is not a variable but is an object and can't be passed directly.
+    // We need to convert them to string like salad=1&bacon=2 and so on.
+
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(encodeURIComponent(i) + "=" + this.state.ingredients[i]);
+      // encodeURIComponent is provided by javascript which is a helper method that removes whitespace and so on, but is not required in this case
+    }
+    // This for loop created queryParams = [salad=1,bacon=2,....]
+    // Now we need to join & sign at the end of each ingredient value like salad=1&bacon=2&.... and return a string. This is done by .join on array of queryParams
+    const queryString = queryParams.join("&");
+
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?ingredients=" + queryString
+    });
   };
 
   // getting ingredients from firebase (previously we had it in local state)

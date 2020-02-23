@@ -294,3 +294,27 @@ Set 5 Workflow as follows:
     continue which is on the checkout page (CheckoutSummary component). If clicked on cancel of checkout we need to 
     go back to the BurgerBuilder component again, and on clicking the continue on the checkout page should take us to the 
     contact-data form which we will implement later.
+
+38. Now that we implemeted Cancel checkout functionality, we need to take care of Continue checkout. Before we do that 
+    it's now time to solve the problem we had above about the Burger that appears in Checkout. In point number 34. I had
+    written a note which I'll represent again below. 
+
+    NOTE : We built Checkout component which needs ingredients from BurgerBuilder as props to pass it to its child component.
+           But the Checkout and BurgerBuilder are of same level. I mean like below diagram
+
+                    -- BurgerBuilder --> This has ingredients
+                    |
+           Layout --
+                    |
+                    __ Checkout  --> This needs ingredients to pass it to CheckoutSummary
+          
+          * How to get ingredients into Checkout now?
+
+          ->  We solve this here by using queryparams. Now you can see the difference between passing the props and 
+          the query params. 
+
+          -> Passing props works through series of components if there is a parent child relationship. I mean if the 
+             passer is the parent and the reciever is the child.
+
+          -> Passing props doesn't work if there is no parent child relationship and if components are at parallel levels like
+             BurgerBuilder and Checkout. In this case we can use queryparams.
