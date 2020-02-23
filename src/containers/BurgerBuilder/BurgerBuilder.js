@@ -147,27 +147,33 @@ class BurgerBuilder extends Component {
 
   // When Continue button is clicked in the OrderSummary, it closes the modal and the backdrop (Backdrop has been put inside Modal)
   purchaseContinueHandler = () => {
-    this.setState({ loading: true });
-    // Sending Order to backend using POST Request of axios
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      // Dummy data fields below for now
-      customer: {
-        name: "Sandeep",
-        country: "India"
-      }
-    };
-    axios
-      .post("/orders.json", order)
-      .then((response) => {
-        this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
-      });
+    // Commented code below sends order to backend. We don't need this feature now but later once the checkout form is filled we need it then
+
+    // this.setState({ loading: true });
+    // // Sending Order to backend using POST Request of axios
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   // Dummy data fields below for now
+    //   customer: {
+    //     name: "Sandeep",
+    //     country: "India"
+    //   }
+    // };
+    // axios
+    //   .post("/orders.json", order)
+    //   .then((response) => {
+    //     this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
+    //   });
+
+    // Commented code above sends order to backend. We don't need this feature now but later once the checkout form is filled we need it then
+    console.log(this.props);
+    this.props.history.push("/checkout");
   };
 
   // getting ingredients from firebase (previously we had it in local state)

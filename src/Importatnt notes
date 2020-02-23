@@ -274,3 +274,20 @@ Set 5 Workflow as follows:
     Component Wrapped with BrowserRouter - The main component or the component used for Routing (This automatically includes children) should be 
     wrapped with BrowserRouter so that where ever the Route is used it works.
     Switch is used to match the single Route. When that Route is hit then it stops checking other Route elements.
+
+36. Need to show Checkout component on clicking continue button. Checkout component should be replace BurgerBuilder on continue btn click
+    We comment the code responsible for sending order to backend on-click in purchaseContinueHandler because this part 
+    should be done later once we checkout finally after filling checkout form (which will be added later).
+    Instead of sending code to backend, when we click continue we need to replace BurgerBuilder page by Checkout Page 
+    using Routing as I described above. Hence commenting the code responsible for sending order to backend in purchaseContinueHandler.
+    
+    NOTE : <Route path="/" component = {ABC} />   --> Suppose XYZ component is the child of ABC
+    
+    Here, not that when we check the props inside XYZ (which is in Route here) we see history, match and so on.
+    But eve though XYZ is the child of ABC, XYZ will not have all these props like history, match and so on.
+    There are two ways to get these props in XYZ (child of ABC) incase we need it.
+
+      * By passing on props to children
+      * By using withRouter HOC on XYZ. We take this approach as its the most elegant way of doing it.
+
+
