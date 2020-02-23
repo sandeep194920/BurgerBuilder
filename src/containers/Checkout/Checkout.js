@@ -12,11 +12,26 @@ class Checkout extends Component {
       bacon: 3
     }
   };
+
+  // This is executed when the Checkout is cancelled and should show the BurgerBuilder
+  checkoutCancelledHandler = () => {
+    // goBack is implemented here because the previous page was BurgerBuilder, and upon cancelling Checkout, it
+    // should go back to the BurgerBuilder page
+    this.props.history.goBack();
+  };
+  checkoutContinuedHandler = () => {
+    // not yet implemented contact-date. This comment will be removed once implemented.
+    this.props.history.replace("/checkout/contact-data");
+  };
   render() {
     return (
       <div>
         {/* Temporary ingredients passing here from this state. It actually will come from BurgerBuilder later */}
-        <CheckoutSummary ingredients={this.state.ingredients} />
+        <CheckoutSummary
+          ingredients={this.state.ingredients}
+          checkoutCancelled={this.checkoutCancelledHandler}
+          checkoutContinued={this.checkoutContinuedHandler}
+        />
       </div>
     );
   }

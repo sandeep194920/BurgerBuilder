@@ -290,4 +290,7 @@ Set 5 Workflow as follows:
       * By passing on props to children
       * By using withRouter HOC on XYZ. We take this approach as its the most elegant way of doing it.
 
-
+37. Now we have checkout page that appears on continue button click. We now need to implement button clicks for cancel and 
+    continue which is on the checkout page (CheckoutSummary component). If clicked on cancel of checkout we need to 
+    go back to the BurgerBuilder component again, and on clicking the continue on the checkout page should take us to the 
+    contact-data form which we will implement later.
