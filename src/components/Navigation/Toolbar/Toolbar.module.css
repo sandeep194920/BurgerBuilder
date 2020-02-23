@@ -20,7 +20,7 @@
   height: 100%; /* 100% height of Toolbar */
 }
 
-/* This Logo css below is to control the height relavent to this toolbar component. It doesnt interfere with orgiinal Logo.module.css */
+/* This Logo css below is to control the height relavent to this toolbar component. It doesnt interfere with orginal Logo.module.css */
 .Logo {
   height: 80%;
 }

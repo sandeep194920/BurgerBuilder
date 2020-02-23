@@ -154,7 +154,7 @@ Set 3 Workflow as follows:
 
 26. Modifying the folder structure a bit: When we started the project, the Layout was a stateless component but now 
     it handles state. So for a moment we feel its better to move this folder into Containers. But if we take a closer 
-    look at Layout, all it does is just Wraps the props.children (BurgerBuilder for now and other compoents like Authentication Page later),
+    look at Layout, all it does is just Wraps the props.children (BurgerBuilder for now and other components like Authentication Page later),
     and it also has fixed Toolbar and SidDrawer. So, the main focus is that it wraps the children and hence we can consider
     this to be a higher order component. Moving Layout into hoc folder makes more sense, but its not mandatory. 
     I am moving it into hoc here.
@@ -225,8 +225,8 @@ Set 4 Workflow as follows:
     IMPORTANT NOTE : In this commit there are multiple changes to be noted. 
 
     1. We changed if loop in the BurgerBuilder component. This is used because we render ingredients from backend and the
-       compoents using this will fail if it's not loaded on time. Hence we show spinner dynamically for which we added if loop.
-       Compoents included under this if for dynamic rendering are the ones which depends on ingredients(passing props to its children).
+       components using this will fail if it's not loaded on time. Hence we show spinner dynamically for which we added if loop.
+       Components included under this if for dynamic rendering are the ones which depends on ingredients(passing props to its children).
     2. The ComponentDidMount in withErrorHandler is converted into ComponentWillMount after this ingredient has been put to firebase.
        The reason for this is, if we make a typo in ingredient rendering url, in axios.get('/ingredient.json'), we don't get 
        the error displayed on the screen like what we get for post ('/orders.json').
@@ -239,3 +239,30 @@ Set 4 Workflow as follows:
     Video 215. Removing Old interceptors. Unmounting actually means disappear from dom. So ComponentWillUnmount will be 
     executed when the component is disappeared from dom. At this time we need to clear (eject) any old interceptors, so that when we use
     withErrorHandler(AnyComponent) we don't end up creating more and more unused interceptors.
+
+* * * Tag v1.1-release - completed - Completed Axios part. Now moving on to routing with react-router
+
+Set 5 Workflow as follows:
+
+ Implementing Routing - Single page application - Feels like multi page using react-router
+ 
+34. Now time to implement the second page. The page we built till now was BurgerBuilder, and the fixed toolbar and sidnavs (common for all pages),
+    but now we will build checkout page. To give a bigpicture, we first started with BurgerBuilder component and now
+    when we click checkout link on the toolbar, the BurgerBuilder should disappear and Checkout page should appear.
+    For this we implement routing to handle multiple pages. We create Checkout container (Folder, js and css) in same 
+    level as BurgerBuilder inside containers folder.
+
+    In the Checkout container we have info about what user will buy like burger itself, continue and cancel buttons. 
+    The goal is to take the user to the form later once he hits continue. To achieve this Checkout component we create
+    Order inside components which holds CheckoutSummary.
+
+    NOTE : We built Checkout component which needs ingredients from BurgerBuilder as props to pass it to its child component.
+           But the Checkout and BurgerBuilder are of same level. I mean like below diagram
+
+                    -- BurgerBuilder --> This has ingredients
+                    |
+           Layout --
+                    |
+                    __ Checkout  --> This needs ingredients to pass it to CheckoutSummary
+          
+          How to get ingredients into Checkout now?

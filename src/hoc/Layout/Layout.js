@@ -3,6 +3,7 @@ import Aux from "../Aux/Aux";
 import classes from "./Layout.module.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import Sidedrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+
 class Layout extends Component {
   // The click listener of the backdrop component of SideDrawer is handled here because this is the common component
   // that has both Toolbar and SidDrawer. This connection is important because we have a menu button in the toolbar
