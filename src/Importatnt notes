@@ -266,3 +266,11 @@ Set 5 Workflow as follows:
                     __ Checkout  --> This needs ingredients to pass it to CheckoutSummary
           
           How to get ingredients into Checkout now?
+          We will answer this later. Reference to this problem is lets say 111 (This is just for reference which I can use when I answer this below)
+
+35. npm install --save react-router-dom  
+    Installed rreact-router-dom and react-router package. Above npm installs both of these.
+
+    Component Wrapped with BrowserRouter - The main component or the component used for Routing (This automatically includes children) should be 
+    wrapped with BrowserRouter so that where ever the Route is used it works.
+    Switch is used to match the single Route. When that Route is hit then it stops checking other Route elements.
