@@ -2,18 +2,32 @@ import React, { Component } from "react";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 
 class Checkout extends Component {
-  // Temporary state created to hold temporary ingredients. This ingredients object need to come from BurgerBuilder
-  // but for now we write it here to pass it to CheckoutSummary. We will modify this later
   state = {
-    ingredients: {
-      salad: 1,
-      meat: 1,
-      cheese: 2,
-      bacon: 3
-    }
+    ingredients: {}
   };
 
-  // This is executed when the Checkout is cancelled and should show the BurgerBuilder
+  // We get the ingredients from the queryParams built inside the purchaseContinueHandler (continue button on OrderSummary)
+  // and use those ingredients here in CDM to build the same burger for checkout
+  // These queryParams which is passed in purchaseContinueHandler in BurgerBuilder will be available in location props
+  componentDidMount() {
+    // By implementing CDM, we can get rid of state in this component which was used only to build dummy components
+
+    // search prop will have  search: "?ingredients=bacon=1&cheese=0&meat=0&salad=0".
+    // To extact this we use URLSearchParams(this.props.location.search)
+
+    const query = new URLSearchParams(this.props.location.search);
+    const ingredients = {};
+    // console.log(query.entries()); // Each entry of query.entries will have like this ['salad','1']
+    for (let param of query.entries()) {
+      // console.log(param[0]); // This will have salad bacon and so on; just the key names
+      // console.log(param[1]); // This will have the value
+      ingredients[param[0]] = +param[1]; // '+' converts the value from string to number
+      // Now we have new ingredients
+      this.setState({ ingredients: ingredients });
+    }
+  }
+
+  // This below method is executed when the Checkout is cancelled and should show the BurgerBuilder
   checkoutCancelledHandler = () => {
     // goBack is implemented here because the previous page was BurgerBuilder, and upon cancelling Checkout, it
     // should go back to the BurgerBuilder page

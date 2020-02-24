@@ -318,3 +318,13 @@ Set 5 Workflow as follows:
 
           -> Passing props doesn't work if there is no parent child relationship and if components are at parallel levels like
              BurgerBuilder and Checkout. In this case we can use queryparams.
+
+39. Now that we generated the queryParams where we get the URL http://localhost:3000/checkout?ingredients=bacon=0&cheese=0&meat=0&salad=1
+    when we click on continue orderSummary, we now need to take care of using this queryParams in the Checkout to create 
+    the ingredients. We do this in ComponentDidMount inside Checkout because when the continue button on the orderSummary is 
+    clicked we show/mount the Checkout component on to the DOM. Hence ComponentDidMount is the ideal place to use this queryParams.
+    These queryParams which is passed in purchaseContinueHandler in BurgerBuilder to the Checkout component will be available in location props.
+    (Do a console log of props in the purchaseContinueHandler and you will know. The same props will be passed so you can access 
+    in Checkout component)
+    To extact this query params which is in search prop, we use URLSearchParams(this.props.location.search) inside CDM 
+    of Checkout
