@@ -328,3 +328,12 @@ Set 5 Workflow as follows:
     in Checkout component)
     To extact this query params which is in search prop, we use URLSearchParams(this.props.location.search) inside CDM 
     of Checkout
+
+40. We now get the ingredients from BurgerBuilder into Checkout component thorugh queryParams. Let's now build ContactData.
+    We will build it as a container since it manages its own state. This will be under Checkout folder.
+    We show this ContactData as nested route i.e inside Checkout itself.
+    
+    QUESTION I HAVE : But One thing I don't understand is Why we need nested route when we can just use that component normally inside 
+    checkout?
+    The answer is that if I use ContactData normally then it will be loaded right away when Checkout is loaded. But we 
+    want the behavior such that the ContactData should be loaded when the Checkout continue button is clicked.

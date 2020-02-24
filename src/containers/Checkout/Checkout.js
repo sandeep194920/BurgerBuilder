@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
+import { Route } from "react-router-dom";
+import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
   state = {
@@ -34,7 +36,6 @@ class Checkout extends Component {
     this.props.history.goBack();
   };
   checkoutContinuedHandler = () => {
-    // not yet implemented contact-date. This comment will be removed once implemented.
     this.props.history.replace("/checkout/contact-data");
   };
   render() {
@@ -45,6 +46,14 @@ class Checkout extends Component {
           ingredients={this.state.ingredients}
           checkoutCancelled={this.checkoutCancelledHandler}
           checkoutContinued={this.checkoutContinuedHandler}
+        />
+        {/* The below ContactData component is the nested route (Route rendered inside Route and the main Route is checkout) */}
+
+        {/* this.props.match.path gives the existing url + contact-data. If this is not added then the contact-data will not be appended to the current url but will be appended to the checkout since this Route is 
+        rendered from within the checkout */}
+        <Route
+          path={this.props.match.path + "/contact-data"}
+          component={ContactData}
         />
       </div>
     );
