@@ -337,3 +337,54 @@ Set 5 Workflow as follows:
     checkout?
     The answer is that if I use ContactData normally then it will be loaded right away when Checkout is loaded. But we 
     want the behavior such that the ContactData should be loaded when the Checkout continue button is clicked.
+
+41. We have built basic version of ContactData. Let's now submit the order by clicking ORDER button in the ContactData.
+    We will tweak ContactData later when we use forms.
+    When we click button inside the form, it reloads the page. To avoid this default behavior we use event.preventDefault()
+    inside the orderHandler() in ContactData.
+    Also, we need to pass ingredients and totalPrice from Checkout to ContactData within the Route as props. For this we can convert 
+
+    <Route path={this.props.match+"/contact-data"} component={ContactData}/>
+    into 
+    <Route path={this.props.match+"/contact-data"} render = {()=>(<ContactData ingredients={ingredients}) price={this.state.totalPrice}/>}/>
+                                                      |
+                                                      ^
+                                                      This render takes arrow function as input. Refer Routing videos for this explanation.
+                                                    
+    By converting the <Route path= .. above, we are now able to pass the ingredients and totalPrice to ContactData, but the drawback is 
+    we will not be able to pass history, match and other Route related props (These props are required because we need to use history props in orderHandler
+    inside ContactData to redirect to homepage after order has been placed).
+
+    To get the Route props like history and match we can use two approaches.
+        1. To wrap the ContactData with withRouter (import {withRouter} from 'react-router-dom') because this is the component in which we like to get the Route props.                                           
+        2. To pass on the props like how I do in Checkout component. I use 
+
+        <Route
+          path={this.props.match.path + "/contact-data"}
+          render={(props) => (----------------------------------> props passed here is the props of react-router-dom that includes history, match and so on..
+          <ContactData
+              ingredients={this.state.ingredients}
+              price={this.state.totalPrice}
+              {...props}/>---------------------------------------> props here is the props coming from react-router-dom (histoy, map and so on). I also tried ...this.props here and that is the Checkout component props and not react-router-dom's props
+
+     I took this approach as Max but I also tried removing props in the render = {(removed here)} and for {...props} I did {...this.props} and 
+     that works too. Here I can simply pass the props which is used in Checkout and that includes Route props.
+
+    Again, all these are done here just to be able to use history props to redirect to homepage after ordering in ContactData
+
+TODO : At this point (Video 257. Order Submission & passing data between pages) everything is working fine but there is one warning which I'm not able 
+       to figure out at this time. 
+
+       When I click Order button (of ContactData), I get this warning below
+
+    Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+    in ContactData (created by Context.Consumer)
+    in withRouter(ContactData) (at Checkout.js:64)
+    in Route (at Checkout.js:61)
+    in div (at Checkout.js:50)
+    in Checkout (created by Context.Consumer)
+
+    I tried reading through all the comments in QA section but no luck. I guess it has something to do with ComponentWillMount and componentWillUnmount.
+    I will come back to this once I have an answer for this.
+
+    

@@ -186,14 +186,21 @@ class BurgerBuilder extends Component {
       queryParams.push(encodeURIComponent(i) + "=" + this.state.ingredients[i]);
       // encodeURIComponent is provided by javascript which is a helper method that removes whitespace and so on, but is not required in this case
     }
-    // This for loop created queryParams = [salad=1,bacon=2,....]
+    // This for loop created queryParams = [salad=1,bacon=2,meat=1,cheese=2]
+    // We also need price
+    queryParams.push("price=" + this.state.totalPrice);
+    // Now we have queryParams = [salad=1,bacon=2,meat=1,cheese=2,price=4] --> random values
     // Now we need to join & sign at the end of each ingredient value like salad=1&bacon=2&.... and return a string. This is done by .join on array of queryParams
     const queryString = queryParams.join("&");
+    // queryString will be something like salad=1&bacon=2&meat=1&cheese=3&price=4
 
     this.props.history.push({
       pathname: "/checkout",
       search: "?" + queryString
     });
+
+    // So the url will be like localhost:3000/checkout?salad=1&bacon=2&meat=1&cheese=3&price=4
+    // In the checkout component we have to extract this
   };
 
   // getting ingredients from firebase (previously we had it in local state)

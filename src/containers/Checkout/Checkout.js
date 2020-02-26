@@ -5,7 +5,8 @@ import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
   state = {
-    ingredients: {}
+    ingredients: {},
+    totalPrice: 0
   };
 
   // We get the ingredients from the queryParams built inside the purchaseContinueHandler (continue button on OrderSummary)
@@ -21,11 +22,17 @@ class Checkout extends Component {
     const ingredients = {};
     // console.log(query.entries()); // Each entry of query.entries will have like this ['salad','1']
     for (let param of query.entries()) {
-      // console.log(param[0]); // This will have salad bacon and so on; just the key names
-      // console.log(param[1]); // This will have the value
-      ingredients[param[0]] = +param[1]; // '+' converts the value from string to number
+      // console.log(param[0]); // This will have salad bacon and so on; just the key names and it may also contain price
+      // console.log(param[1]); // This will have the value and also one of the values is the price value
+      let price = 0;
+      if (param[0] === "price") {
+        price = param[1];
+      } else {
+        ingredients[param[0]] = +param[1]; // '+' converts the value from string to number
+      }
+
       // Now we have new ingredients
-      this.setState({ ingredients: ingredients });
+      this.setState({ ingredients: ingredients, totalPrice: price });
     }
   }
 
@@ -53,7 +60,15 @@ class Checkout extends Component {
         rendered from within the checkout */}
         <Route
           path={this.props.match.path + "/contact-data"}
-          component={ContactData}
+          render={() => (
+            <ContactData
+              ingredients={this.state.ingredients}
+              price={this.state.totalPrice}
+              // {...props}
+              // I have to pass this props to get history, match and so on in the ContactData. If I use the component = {} syntax then I don't need to pass this way
+              // but can get it automatically these props in ContactData, but then the drawback would be not being able to pass ingredients and totalPrice props.
+            />
+          )}
         />
       </div>
     );

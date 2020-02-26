@@ -31,7 +31,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
     componentWillUnmount() {
       // Here we clear the interceptors created during cwm
       axios.interceptors.request.eject(this.reqInterceptor);
-      axios.interceptors.request.eject(this.resInterceptor);
+      axios.interceptors.response.eject(this.resInterceptor);
     }
     // We use this errrorConfirmedHandler to clear any errors (setting back to null) once the backdrop is clicked which is in the modal
     errorConfirmedHandler = () => {
