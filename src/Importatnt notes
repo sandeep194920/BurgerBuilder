@@ -387,4 +387,7 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
     I tried reading through all the comments in QA section but no luck. I guess it has something to do with ComponentWillMount and componentWillUnmount.
     I will come back to this once I have an answer for this.
 
-    
+42. Now the goal is to create My Orders page. We create Orders folder inside the containers because like BurgerBuilder and 
+    Checkout, even Orders should be a separate page so it should come under same level of BurgerBuilder and Checkout.
+    In this Orders, we need to return list of individual Order Components. Hence we create Order and its Css in 
+    the Order folder which already exists in components.
