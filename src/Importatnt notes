@@ -391,3 +391,12 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
     Checkout, even Orders should be a separate page so it should come under same level of BurgerBuilder and Checkout.
     In this Orders, we need to return list of individual Order Components. Hence we create Order and its Css in 
     the Order folder which already exists in components.
+
+43. Now that we have created My Orders page ( not yet getting the Orders from backend in there), we now update the Checkout Link to
+    Orders link. We replace anchor tag (<a />) in the NavigationItem with NavLink tag. NavLink is also known as Link tag having 
+    additional functionality of inbuilt active css class which we can use to lighlight the link. So if you use Link and apply 
+    css of active manually then that also would have same effect of using NavLink. 
+    The reason we replace <a/> tag is, when we click on a tag, then the page reloads but we don't need that behavior since
+    we lose all the data of state if page reloads. Hence we use Link or NavLink.
+    Take a look at the comments written in NavigationItem to get some clarity.
+    This acive class concept is bit tricky. Go through video 259. Implementing NavLinks, to get more on this.
