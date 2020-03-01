@@ -400,3 +400,11 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
     we lose all the data of state if page reloads. Hence we use Link or NavLink.
     Take a look at the comments written in NavigationItem to get some clarity.
     This acive class concept is bit tricky. Go through video 259. Implementing NavLinks, to get more on this.
+
+44. Now in the orders page, lets now get the orders from backend. We get orders from firebase in object format, we convert
+    that to array so that we can use map on that. In this process, we use the key prop (we assign this unique key from orders backend), so that
+    we can use this as key in map function. All this is done in Orders.js. Also, to display errors if any, we use
+    withErrorHandler hoc in Orders.js. The hint when to use withErrorHandler is - use it when we use axios and when
+    we think error occurance is possible. 
+    In this commit we wrote all the logic to get the orders from backend and wrapped the orders component with withErrorHandler.
+    In the next commit we will work on displaying the fetched orders properly using order component.
