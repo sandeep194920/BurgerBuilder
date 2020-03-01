@@ -408,3 +408,5 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
     we think error occurance is possible. 
     In this commit we wrote all the logic to get the orders from backend and wrapped the orders component with withErrorHandler.
     In the next commit we will work on displaying the fetched orders properly using order component.
+
+45. Let's modify Order.js component to display all the ingredients and price things which we get as props from Orders.js.

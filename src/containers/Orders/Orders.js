@@ -39,7 +39,8 @@ class Orders extends Component {
         <Order
           key={order.id}
           ingredients={order.ingredients}
-          price={order.price}
+          price={+order.price} // This plus is added to convert the string price to number format
+          // If u dont pass + here then use Number.parseFloat in Order.js component where price is displayed
         />
       ));
     }
