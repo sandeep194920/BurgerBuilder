@@ -10,7 +10,7 @@ const navigationItems = (props) => (
       {/* active prop is not passed anymore to the above NavigationItem since we now use NavLink in  NavigationItem */}
       Burger Builder
     </NavigationItem>
-    <NavigationItem link="/orders">Checkout </NavigationItem>
+    <NavigationItem link="/orders">Orders</NavigationItem>
   </ul>
 );
 

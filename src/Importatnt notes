@@ -410,3 +410,11 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
     In the next commit we will work on displaying the fetched orders properly using order component.
 
 45. Let's modify Order.js component to display all the ingredients and price things which we get as props from Orders.js.
+    Displaying Orders is done. Now need to work on checkout form next. 
+
+* * * Tag v1.2-release - completed - Completed Orders part, so we have BurgerBuilder and Orders done with only Checkout form design left. 
+                                    Now moving on to designing checkout form
+
+Set 5 Workflow as follows:
+
+ Designing checkout form - We'll design checkout form and its validation here
