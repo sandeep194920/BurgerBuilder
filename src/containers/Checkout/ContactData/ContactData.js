@@ -4,6 +4,8 @@ import classes from "./ContactData.module.css";
 import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import { withRouter } from "react-router-dom";
+import Input from "../../../components/UI/Input/Input";
+
 class ContactData extends Component {
   state = {
     name: "",
@@ -51,7 +53,9 @@ class ContactData extends Component {
   render() {
     let form = (
       <form>
-        <input
+        {/* We used to have normal input buttons here till now. Now am commenting them and use the Input created in UI which is generic one for any input type (even though we have only input and textarea there for now) */}
+
+        {/* <input
           className={classes.Input}
           type="text"
           name="name"
@@ -74,7 +78,35 @@ class ContactData extends Component {
           type="text"
           name="postal"
           placeholder="Postal Code"
+        /> */}
+
+        {/* The above commented code was used for input before */}
+
+        <Input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          inputtype="input "
         />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          inputtype="input "
+        />
+        <Input
+          type="text"
+          name="street"
+          placeholder="Street"
+          inputtype="input "
+        />
+        <Input
+          type="text"
+          name="postal"
+          placeholder="Postal Code"
+          inputtype="input "
+        />
+
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>

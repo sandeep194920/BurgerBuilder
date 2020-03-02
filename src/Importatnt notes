@@ -417,4 +417,12 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
 
 Set 5 Workflow as follows:
 
- Designing checkout form - We'll design checkout form and its validation here
+ Designing checkout form - We'll design checkout form (ContactData.js) and its validation here. The design process includes
+ * Currently the state in the ContactData is not used. Firstly, we need to decide which all data is used in ContactData
+   that we like to store in backend (now its hardcoded in orderHandler in customer object), and then need to sync that with the state.
+ * Dynamically use components of form
+ * Cater for form validation. Note that the formik library works for form validation and form Submission which we are not using it here.
+
+46. We start the form with first putting input in their own component (UI/Input) and using that in ContactData. Note that 
+    this part of ContactData can also be done using formik (forms library) for future projects.
+    

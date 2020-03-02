@@ -1,0 +1,25 @@
+.Input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.Label {
+  font-weight: bold;
+  display: block;
+  margin: 8px;
+}
+.InputElement {
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit; /* To get the same font we have for the rest of the application. This is the default anyways*/
+  padding: 6px 10px;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+.InputElement:focus {
+  background-color: #ccc;
+  outline: none;
+}
