@@ -8,11 +8,68 @@ import Input from "../../../components/UI/Input/Input";
 
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: ""
+    orderForm: {
+      // each key here represents one inputElement
+      name: {
+        elementType: "input",
+        // elementConfig will be the DOM props for each elementType.
+        // For example for elementType input, <input type="text" placeholder="Name" />, type and placeholder will be elementConfig
+        elementConfig: {
+          placeholder: "Your Name",
+          type: "text"
+        },
+        value: "" // value is common to any type of inputElement and hence we have it outside of elementConfig. We can have it inside of elementConfig too.
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          placeholder: "Your Street",
+          type: "text"
+        },
+        value: ""
+      },
+      zipCode: {
+        elementType: "input",
+        elementConfig: {
+          placeholder: "ZipCode",
+          type: "text"
+        },
+        value: ""
+      },
+      country: {
+        elementType: "input",
+        elementConfig: {
+          placeholder: "Country",
+          type: "text"
+        },
+        value: ""
+      },
+      zipCode: {
+        elementType: "input",
+        elementConfig: {
+          placeholder: "ZipCode",
+          type: "text"
+        },
+        value: ""
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          placeholder: "Email",
+          type: "email"
+        },
+        value: ""
+      },
+      deliveryMethod: {
+        elementType: "select",
+        elementConfig: {
+          options: [
+            { value: "fastest", displayValue: "Fastest" },
+            { value: "cheapest", displayValue: "Cheapest" }
+          ]
+        },
+        value: ""
+      }
     },
     loading: false
   };
@@ -29,12 +86,8 @@ class ContactData extends Component {
     // Sending Order to backend using POST Request of axios
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
-      // Dummy data fields below for now
-      customer: {
-        name: "Sandeep",
-        country: "India"
-      }
+      price: this.props.price
+      // customer data now comes from state
     };
     axios
       .post("/orders.json", order)
@@ -82,12 +135,37 @@ class ContactData extends Component {
 
         {/* The above commented code was used for input before */}
 
-        <Input
+        {/* The below commented part is the one used before setting up the state */}
+
+        {/* <Input
           type="text"
           name="name"
           placeholder="Your Name"
-          inputtype="input "
+          inputtype="input"
         />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          inputtype="input"
+        />
+        <Input
+          type="text"
+          name="street"
+          placeholder="Street"
+          inputtype="input"
+        />
+        <Input
+          type="text"
+          name="postal"
+          placeholder="Postal Code"
+          inputtype="input"
+        /> */}
+
+        {/* The above commented part is the one used before setting up the state */}
+
+        {/* The below one is the one using state elements. It's not yet complete, we will do this part in the next commit */}
+        <Input elementType="..." elementConfig="..." value="..." />
         <Input
           type="email"
           name="email"

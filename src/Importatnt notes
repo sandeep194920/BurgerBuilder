@@ -425,4 +425,9 @@ Set 5 Workflow as follows:
 
 46. We start the form with first putting input in their own component (UI/Input) and using that in ContactData. Note that 
     this part of ContactData can also be done using formik (forms library) for future projects.
-    
+
+47. Now that we have designed inputElement (input, text area and so on - for now we have only input), we will now focus on 
+    inputElement in detail. I mean what should go into each inputElement.
+    Time to think about what customer info like name,email etc. has to be passed into Orders backend.
+    Let's talk about inputElement 'input'. We will now think what data needs to go into this. Like name, email etc.
+    So, we can then write the state in the ContactData accordingly. Now we modify state of ContactData.
