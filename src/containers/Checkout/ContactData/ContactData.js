@@ -44,14 +44,6 @@ class ContactData extends Component {
         },
         value: ""
       },
-      zipCode: {
-        elementType: "input",
-        elementConfig: {
-          placeholder: "ZipCode",
-          type: "text"
-        },
-        value: ""
-      },
       email: {
         elementType: "input",
         elementConfig: {
@@ -104,6 +96,16 @@ class ContactData extends Component {
   };
 
   render() {
+    // we need to get the orderForm into an array so that we can apply map on that and extract jsx for each <Input/>
+    const formElementsArray = [];
+    for (let key in this.state.orderForm) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.orderForm[key]
+      });
+      // console.log(formElementsArray);
+    }
+
     let form = (
       <form>
         {/* We used to have normal input buttons here till now. Now am commenting them and use the Input created in UI which is generic one for any input type (even though we have only input and textarea there for now) */}
@@ -164,26 +166,16 @@ class ContactData extends Component {
 
         {/* The above commented part is the one used before setting up the state */}
 
-        {/* The below one is the one using state elements. It's not yet complete, we will do this part in the next commit */}
-        <Input elementType="..." elementConfig="..." value="..." />
-        <Input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          inputtype="input "
-        />
-        <Input
-          type="text"
-          name="street"
-          placeholder="Street"
-          inputtype="input "
-        />
-        <Input
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-          inputtype="input "
-        />
+        {/* The below one is the one using state elements.*/}
+        {/* Each element below is in the form of - <Input elementType="..." elementConfig="..." value="..." /> */}
+        {formElementsArray.map((formElement) => (
+          <Input
+            key={formElement.id}
+            elementType={formElement.id}
+            elementConfig={formElement.config.elementConfig}
+            defaultValue={formElement.config.value} //value can be defaultValue which avoids the warning in DOM
+          />
+        ))}
 
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER

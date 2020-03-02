@@ -431,3 +431,73 @@ Set 5 Workflow as follows:
     Time to think about what customer info like name,email etc. has to be passed into Orders backend.
     Let's talk about inputElement 'input'. We will now think what data needs to go into this. Like name, email etc.
     So, we can then write the state in the ContactData accordingly. Now we modify state of ContactData.
+
+48. Now we convert orderForm in the state of ContactData into an array so that we can loop through each elementType and 
+    output jsx for each of the <Input/> elementType. To convert object into an array this is one of the examples you can 
+    refer later if you want (Video 268. Dynamically create Inputs based on JS config)
+
+    Process we used to convert orderForm state Object to array in ContactData.
+
+    * We have 
+    orderForm: {
+         name: {
+            elementType: "input",
+            elementConfig: {
+            placeholder: "Your Name",
+            type: "text"
+            },
+            value: ""
+         },
+        street: {
+            elementType: "input",
+            elementConfig: {
+            placeholder: "Your Street",
+            type: "text"
+            },
+            value: ""
+        },
+      AND SO ON ....
+        
+    }
+
+    At the end we need something like this :
+    <Input elementType = 'name' value = '' placeholder = ' Your Name' type = 'text'/>
+    The type and placeholder would be common for many inputs so we have put them in elementConfig
+
+    We could hardcode the Inputs, <Input/>, statically, but to render this dynamically we need to convert the above object of 
+    orderForm into an array like this
+
+    [  
+        id : name,
+        config : {
+            elementType: "input",
+            elementConfig: {
+            placeholder: "Your Name",
+            type: "text"
+            },
+            value: ""
+         }
+         ,
+         id : street,
+         config : {
+            elementType: "input",
+            elementConfig: {
+            placeholder: "Your Street",
+            type: "text"
+            },
+            value: ""
+         }
+    ]
+    So basically, I need id and the name of the attribute as keys. The values would be the one inside them.
+
+    * To convert obj into array
+
+    formElementsArray = []
+    for (let key in orderForm){
+        formElementsArray.push({
+            id:key,
+            config : orderForm[key]
+        })
+    }
+
+    Now we have the above filled array. This can now be looped into jsx for <Input/>
