@@ -23,6 +23,21 @@ const input = (props) => {
         />
       );
       break;
+    case "select":
+      inputElement = (
+        <select
+          className={classes.InputElement}
+          {...props.elementConfig}
+          value={props.value}
+        >
+          {props.elementConfig.options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.displayValue}
+            </option>
+          ))}
+        </select>
+      );
+      break;
     default:
       inputElement = (
         <input
@@ -34,7 +49,8 @@ const input = (props) => {
   }
   return (
     <div className={classes.Input}>
-      <label className={classes.Label}>{props.label}</label>
+      {/* <label className={classes.Label}>{props.label}</label> */}
+      {/* Label is not used anymore */}
       {/* <input />  If we use input here like this, then its not flexible and this component cannot be used for other type of inputs such as select, textarea and so on. 
             Hence we use switch case at the top and render this dynamically as per the passed prop*/}
       {inputElement}

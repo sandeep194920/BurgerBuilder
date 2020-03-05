@@ -171,7 +171,7 @@ class ContactData extends Component {
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
-            elementType={formElement.id}
+            elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             defaultValue={formElement.config.value} //value can be defaultValue which avoids the warning in DOM
           />
