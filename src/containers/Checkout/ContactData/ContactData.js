@@ -130,65 +130,6 @@ class ContactData extends Component {
 
     let form = (
       <form>
-        {/* We used to have normal input buttons here till now. Now am commenting them and use the Input created in UI which is generic one for any input type (even though we have only input and textarea there for now) */}
-
-        {/* <input
-          className={classes.Input}
-          type="text"
-          name="name"
-          placeholder="Your Name"
-        />
-        <input
-          className={classes.Input}
-          type="email"
-          name="email"
-          placeholder="Your Email"
-        />
-        <input
-          className={classes.Input}
-          type="text"
-          name="street"
-          placeholder="Street"
-        />
-        <input
-          className={classes.Input}
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-        /> */}
-
-        {/* The above commented code was used for input before */}
-
-        {/* The below commented part is the one used before setting up the state */}
-
-        {/* <Input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          inputtype="input"
-        />
-        <Input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          inputtype="input"
-        />
-        <Input
-          type="text"
-          name="street"
-          placeholder="Street"
-          inputtype="input"
-        />
-        <Input
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-          inputtype="input"
-        /> */}
-
-        {/* The above commented part is the one used before setting up the state */}
-
-        {/* The below one is the one using state elements.*/}
         {/* Each element below is in the form of - <Input elementType="..." elementConfig="..." value="..." /> */}
         {formElementsArray.map((formElement) => (
           <Input
