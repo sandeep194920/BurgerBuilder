@@ -95,6 +95,28 @@ class ContactData extends Component {
     this.props.history.replace("/");
   };
 
+  inputChangedHandler = (event, inputIdentifier) => {
+    // console.log(event.target.value);
+    // For two way binding (when the value is entered, the state needs to be updated instantly), we set the value in the state for each field
+    // For this reason, the event alone wont help as we need to know which element needs to be updated, hence we get inputIdentifier as parameter
+    // inputIdentifier can be the keys in the orderForm like name, street and so on.
+
+    // Now I need to change the value of the inputIdentifier in the state. This has to be done immutably. For this I can use json.Stringify or using spread operator of all layers like below
+    // name, street, country, email, zipcode . These are passed in as inputIdentifier and our aim is to set to value attribute
+    const updatedOrderForm = {
+      ...this.state.orderForm // This is the shallow copy of orderForm
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier] // This gives object of each key like orderForm[input], orderForm[country] and so on
+    };
+    // In updatedForm I need to now update the value. This is done immuatbly
+    updatedFormElement.value = event.target.value;
+
+    updatedFormElement[inputIdentifier] = updatedFormElement;
+
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   render() {
     // we need to get the orderForm into an array so that we can apply map on that and extract jsx for each <Input/>
     const formElementsArray = [];
@@ -170,10 +192,12 @@ class ContactData extends Component {
         {/* Each element below is in the form of - <Input elementType="..." elementConfig="..." value="..." /> */}
         {formElementsArray.map((formElement) => (
           <Input
-            key={formElement.id}
+            key={formElement.id} // name, street, country, email, zipcode . These are passed into the inputChangedHandler
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             defaultValue={formElement.config.value} //value can be defaultValue which avoids the warning in DOM
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            // changed={this.inputChangedHandler} // Just this if no parameter is passed.
           />
         ))}
 

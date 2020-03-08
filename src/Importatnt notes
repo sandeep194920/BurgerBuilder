@@ -503,3 +503,5 @@ Set 5 Workflow as follows:
     Now we have the above filled array. This can now be looped into jsx for <Input/>
 
 49. Let's take care of dropdown for deliverymethod in orderForm.
+50. Now that we have done adding all the fields in the form dynamically, lets handle the inputs onChange. 
+    This helps for form validation as well. 
