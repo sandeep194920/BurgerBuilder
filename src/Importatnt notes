@@ -507,4 +507,29 @@ Set 5 Workflow as follows:
 50. Now that we have done adding all the fields in the form dynamically, lets handle the inputs onChange. 
     This helps for form validation as well. 
 
-51. Now that we have set two way binding, we now handle form submission. 
+51. Now that we have set two way binding, we now handle form submission. We already have the orderHandler functionality
+    for form submission like this 
+
+    <form>
+        ...
+        <Button btnType="Success" clicked={this.orderHandler}>
+          ORDER
+        </Button>
+    </form>
+
+    We remove this clicked here and put this inside form tag for submission like this using onSubmit
+
+    <form onSubmit={this.orderHandler}>
+        ...
+        <Button btnType="Success" >
+          ORDER
+        </Button>
+    </form>
+
+    Also, currently we have ingredients and price being passed to backend when we order. We now need data from the 
+    orderForm.
+
+52. We are now getting formData (user data) data in the backend. However, at this point, we have a bug. On selecting 
+    option 'Fastest', we are not getting any data for this field in firebase. We fix this later.
+    
+    

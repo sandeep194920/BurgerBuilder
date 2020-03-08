@@ -75,10 +75,20 @@ class ContactData extends Component {
     // in the BurgerBuilder.
 
     this.setState({ loading: true });
+    // passing orderform data
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm) {
+      formData[formElementIdentifier] = this.state.orderForm[
+        formElementIdentifier
+      ].value;
+    }
+
     // Sending Order to backend using POST Request of axios
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price
+      price: this.props.price,
+      orderData: formData
+
       // customer data now comes from state
     };
     axios
@@ -112,7 +122,7 @@ class ContactData extends Component {
     // In updatedForm I need to now update the value. This is done immuatbly
     updatedFormElement.value = event.target.value;
 
-    updatedFormElement[inputIdentifier] = updatedFormElement;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
 
     this.setState({ orderForm: updatedOrderForm });
   };
