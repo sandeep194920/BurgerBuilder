@@ -532,4 +532,38 @@ Set 5 Workflow as follows:
 52. We are now getting formData (user data) data in the backend. However, at this point, we have a bug. On selecting 
     option 'Fastest', we are not getting any data for this field in firebase. We fix this later.
     
+53. Now we need to handle form validation. 
+
+    Steps followed here for adding validation:
+
+     * The idea is to have a check (validation) on every inputElement. The rule can be anything like - required, 
+       only numbers to be entered, min-length, max-lenght and so on.
+    *  Now let's think where to have the validation check. The best answer is - 
+       The moment I touch the (click the) inputElement field, the validation rule (any or every above mentioned)
+       should activate on that particular element. 
+    *  Though this can be done in many places in many different ways, let's take a look at ContactData's inputChangedHandler().
+    *  This is the method which is activated or called (onChange) when the user types something into the inputElement field. 
+    *  So, think this way - "The moment the user touches the inputElement and types something, the value is registered in state
+       and during this time its a good idea to also check if the user is typing as per our defined rules. If the user
+       doesnt type as we want then we can throw the message here. So, again, the place to add is - soon where we capture the value 
+       onChange".
+    *  So, the best place would be in inputChangedHandler() after the line - 'updatedFormElement.value = event.target.value;'
+    *  In the above line, we get the value entered in the box and after this line (in the next line), we can validate 
+       if the user entered the value as per the rules we defined like below:
+
+        1-------updatedFormElement.value = event.target.value; // after this line, below is the validation check
+        2-------updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation); // I will explain this in a moment
+
+    *  So, 1 says the value entered in to the inputElement and 2 validates if it is proper and returns true (if rule is met) or false (if rule not met).
+    *  Now the question is, all sounds good but where is the rule defined ? What is the second parameter passed into 2 this.checkValidity() ?
+    * Let's answer one by one. 
+    *  where is the rule defined ?
+       - The validation rule / rules can be defined in the state in each inputElement like name, state, email and so on. See ContactData. There 
+         you can find the validation object which are the rules.
+    *  What is the second parameter passed into 2 this.checkValidity() ?
+        _ This validation object from the state (deep copied object) is passed as the validation rules to check each rule is statisfied
+          in the checkValidity method. If each rule is statisfied then it returns true, and this true or false can be 
+          represented in css later for showing errors or warnings.
     
+    These are the steps followed to add validation to any form. Later we will learn formik library which makes our forms 
+    and its validation easier. We don't learn in this project though :) 

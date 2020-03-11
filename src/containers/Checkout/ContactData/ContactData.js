@@ -18,7 +18,11 @@ class ContactData extends Component {
           placeholder: "Your Name",
           type: "text"
         },
-        value: "" // value is common to any type of inputElement and hence we have it outside of elementConfig. We can have it inside of elementConfig too.
+        value: "", // value is common to any type of inputElement and hence we have it outside of elementConfig. We can have it inside of elementConfig too.
+        // in validation we write all the rules we need for this input field.
+        validation: {
+          required: true
+        }
       },
       street: {
         elementType: "input",
@@ -26,7 +30,10 @@ class ContactData extends Component {
           placeholder: "Your Street",
           type: "text"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        }
       },
       zipCode: {
         elementType: "input",
@@ -34,7 +41,12 @@ class ContactData extends Component {
           placeholder: "ZipCode",
           type: "text"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true,
+          minLength: 5,
+          maxLength: 5
+        }
       },
       country: {
         elementType: "input",
@@ -42,7 +54,10 @@ class ContactData extends Component {
           placeholder: "Country",
           type: "text"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        }
       },
       email: {
         elementType: "input",
@@ -50,7 +65,10 @@ class ContactData extends Component {
           placeholder: "Email",
           type: "email"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        }
       },
       deliveryMethod: {
         elementType: "select",
@@ -105,6 +123,30 @@ class ContactData extends Component {
     this.props.history.replace("/");
   };
 
+  checkValidity(value, rules) {
+    // if this method returns true then the field on the form is valid else not
+    let isValid = false;
+
+    // All the rules in the validation object (for inputElement) is validated here and returned as true or false
+    if (rules.required) {
+      isValid = value.trim() !== "";
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength; // Zipcode has a minLenth rule here so this would be applied for that
+    }
+
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength; // Zipcode has a maxLenth rule here so this would be applied for that
+    }
+    //WE HAVE A FLAW IN THIS APPROACH FOR minLenght and maxLength. You see what? Always the maxLength is checked at last
+    // and the isValid is modified at this line. I mean minLength result of true or false could be overridden while checking for maxLength.
+    // We would fix this next
+
+    console.log(isValid);
+
+    return isValid;
+  }
+
   inputChangedHandler = (event, inputIdentifier) => {
     // console.log(event.target.value);
     // For two way binding (when the value is entered, the state needs to be updated instantly), we set the value in the state for each field
@@ -120,10 +162,13 @@ class ContactData extends Component {
       ...updatedOrderForm[inputIdentifier] // This gives object of each key like orderForm[input], orderForm[country] and so on
     };
     // In updatedForm I need to now update the value. This is done immuatbly
-    updatedFormElement.value = event.target.value;
+    updatedFormElement.value = event.target.value; // updatedFormElement may be name, email and so on
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    );
 
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-
     this.setState({ orderForm: updatedOrderForm });
   };
 
