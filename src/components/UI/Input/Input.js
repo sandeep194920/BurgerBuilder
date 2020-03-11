@@ -4,11 +4,23 @@ import classes from "./Input.module.css";
 const input = (props) => {
   let inputElement = null;
 
+  // We are using classes.InputElement on each input which is fine until we use validation. If we have a validation check and
+  // it fails then we need to change the color of the inputElement and for this we need to add another class. So let's do
+  // that dynamically now.
+
+  // Code below responsible for adding dynamic class for showing error (red color on the inputElement) if validation fails
+  const inputClasses = [classes.InputElement];
+  if (props.invalid && props.shouldValidate) {
+    inputClasses.push(classes.Invalid);
+  }
+
+  // Code above responsible for adding dynamic class for showing error (red color on the inputElement) if validation fails
+
   switch (props.elementType) {
     case "input":
       inputElement = (
         <input
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -18,7 +30,7 @@ const input = (props) => {
     case "textarea":
       inputElement = (
         <textarea
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -28,7 +40,7 @@ const input = (props) => {
     case "select":
       inputElement = (
         <select
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -44,7 +56,7 @@ const input = (props) => {
     default:
       inputElement = (
         <input
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}

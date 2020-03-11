@@ -22,7 +22,8 @@ class ContactData extends Component {
         // in validation we write all the rules we need for this input field.
         validation: {
           required: true
-        }
+        },
+        valid: false // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
       },
       street: {
         elementType: "input",
@@ -136,11 +137,13 @@ class ContactData extends Component {
     }
 
     if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength; // Zipcode has a maxLenth rule here so this would be applied for that
+      isValid = value.length <= rules.maxLength && isValid; // Zipcode has a maxLenth rule here so this would be applied for that
     }
-    //WE HAVE A FLAW IN THIS APPROACH FOR minLenght and maxLength. You see what? Always the maxLength is checked at last
-    // and the isValid is modified at this line. I mean minLength result of true or false could be overridden while checking for maxLength.
-    // We would fix this next
+    // The bug of minLength and maxLength has now been fixed by adding && isValid. You are also considering the minLength
+    // result for maxLength validation so that both has to be true for the result to be true. That solves the problem.
+
+    // The other ways is by turining isValid initially defined to true and including that in every check. Max does take
+    // this approach but I am leaving mine here for now. We can come back to this if my rule doesn't work as expected.
 
     console.log(isValid);
 
@@ -193,6 +196,8 @@ class ContactData extends Component {
             elementConfig={formElement.config.elementConfig}
             defaultValue={formElement.config.value} //value can be defaultValue which avoids the warning in DOM
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation} // This exists because - In the Input component, we can use invalid prop (if condition) to see if the validation is success or not. But what if we dont need to validate a filed like drop-down, then this comes handy. So in the Input comp, we see if this is set to true then only we validate, else no. If we dont have this, then even drop-down looks red which means its not validated which is meaningless.
             // changed={this.inputChangedHandler} // Just this if no parameter is passed.
           />
         ))}

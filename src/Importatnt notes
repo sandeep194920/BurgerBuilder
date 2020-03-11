@@ -567,3 +567,10 @@ Set 5 Workflow as follows:
     
     These are the steps followed to add validation to any form. Later we will learn formik library which makes our forms 
     and its validation easier. We don't learn in this project though :) 
+
+54. Now that we have added validation rules, we need to use this to give feedback to the user if the value entered in inputElement doesn't 
+    match the rule. So we are going to add a new Css class for this in the Input component to give a red colored look 
+    for the inputElement which is not validated. We have completed this part but now there is a problem. The problem is that, now
+    we have all fields red colored right from the time we see the form which is not a good user experience. Instead, we 
+    want the user to see red colored (as a sign of not validated - meaning not inputted as per rule) only when the user 
+    clicks on that particular inputElement atleast once.  We will do this next.
