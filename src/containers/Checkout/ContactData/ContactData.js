@@ -23,7 +23,8 @@ class ContactData extends Component {
         validation: {
           required: true
         },
-        valid: false // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
+        valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
+        touched: false
       },
       street: {
         elementType: "input",
@@ -34,7 +35,8 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true
-        }
+        },
+        touched: false
       },
       zipCode: {
         elementType: "input",
@@ -47,7 +49,8 @@ class ContactData extends Component {
           required: true,
           minLength: 5,
           maxLength: 5
-        }
+        },
+        touched: false
       },
       country: {
         elementType: "input",
@@ -58,7 +61,8 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true
-        }
+        },
+        touched: false
       },
       email: {
         elementType: "input",
@@ -69,7 +73,8 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true
-        }
+        },
+        touched: false
       },
       deliveryMethod: {
         elementType: "select",
@@ -166,6 +171,11 @@ class ContactData extends Component {
     };
     // In updatedForm I need to now update the value. This is done immuatbly
     updatedFormElement.value = event.target.value; // updatedFormElement may be name, email and so on
+
+    // As soon as this is touched (user places cursor on this inputElement), the touched property of state (if exisits for this input) should become true.
+    // This helps to display error only on this inputElement if user enters unexpected input (violates the validation rules)
+    updatedFormElement.touched = true;
+
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
@@ -197,6 +207,7 @@ class ContactData extends Component {
             defaultValue={formElement.config.value} //value can be defaultValue which avoids the warning in DOM
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
             invalid={!formElement.config.valid}
+            touched={formElement.config.touched} // Used to track if the inputElement was touched - to show the error if value not entered as per validation rule
             shouldValidate={formElement.config.validation} // This exists because - In the Input component, we can use invalid prop (if condition) to see if the validation is success or not. But what if we dont need to validate a filed like drop-down, then this comes handy. So in the Input comp, we see if this is set to true then only we validate, else no. If we dont have this, then even drop-down looks red which means its not validated which is meaningless.
             // changed={this.inputChangedHandler} // Just this if no parameter is passed.
           />

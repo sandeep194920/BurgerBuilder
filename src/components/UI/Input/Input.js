@@ -10,7 +10,7 @@ const input = (props) => {
 
   // Code below responsible for adding dynamic class for showing error (red color on the inputElement) if validation fails
   const inputClasses = [classes.InputElement];
-  if (props.invalid && props.shouldValidate) {
+  if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
   }
 

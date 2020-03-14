@@ -574,3 +574,5 @@ Set 5 Workflow as follows:
     we have all fields red colored right from the time we see the form which is not a good user experience. Instead, we 
     want the user to see red colored (as a sign of not validated - meaning not inputted as per rule) only when the user 
     clicks on that particular inputElement atleast once.  We will do this next.
+
+55. When we touch the inputElement atleast once we need to apply red color css (apply validation rules).
