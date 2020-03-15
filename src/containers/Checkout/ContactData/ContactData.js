@@ -136,6 +136,10 @@ class ContactData extends Component {
   };
 
   checkValidity(value, rules) {
+    // This is required if rules is undefined for a particular type of inputElement. In this case we have deliveryMethod for which we dont have any validation.
+    if (!rules) {
+      return true;
+    }
     console.log("The value is " + value + " and the rules is ");
     // if this method returns true then the field on the form is valid else not
     let isValid = false;

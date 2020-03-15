@@ -588,4 +588,14 @@ Set 5 Workflow as follows:
     validation object which is not present in the deliverymethod (which is not required as I said) and hence, this when 
     changed to Cheapest, the rules is set to undefined and hence we get the error.
     Let's solve this in next commit.
-    
+
+57. The fix is simple. Let's understand why we get the error for deliverymethod drop-down. The rules (validation) is not 
+    defined. In this case it will faile at line - if(rules.required) becuse there is not rules at all (validation) in the 
+    deliverymethod inputElement to check for the required property. Hence we simply add an if at the beginning in the 
+    checkValidity(value,rules) like so,
+
+        if(!rules){
+            return true;
+        }
+    That solves the problem of deliverymethod drop-down validation. However, there is a small bug though and we will fix 
+    this in next commit.
