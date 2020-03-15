@@ -89,7 +89,7 @@ class ContactData extends Component {
           ]
         },
         valid: true, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        value: ""
+        value: "fastest" // this should be the default value
       }
     },
     loading: false,

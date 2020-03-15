@@ -599,3 +599,6 @@ Set 5 Workflow as follows:
         }
     That solves the problem of deliverymethod drop-down validation. However, there is a small bug though and we will fix 
     this in next commit.
+
+58. We forgot to enter the default value for deliverymethod and I entered in this commit as fastest. This helps in registering the
+    value of deliverymethod as fastest in the backend if we dont touch the dropdown.
