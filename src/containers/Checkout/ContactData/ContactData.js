@@ -36,6 +36,7 @@ class ContactData extends Component {
         validation: {
           required: true
         },
+        valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
         touched: false
       },
       zipCode: {
@@ -50,6 +51,7 @@ class ContactData extends Component {
           minLength: 5,
           maxLength: 5
         },
+        valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
         touched: false
       },
       country: {
@@ -62,6 +64,7 @@ class ContactData extends Component {
         validation: {
           required: true
         },
+        valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
         touched: false
       },
       email: {
@@ -74,6 +77,7 @@ class ContactData extends Component {
         validation: {
           required: true
         },
+        valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
         touched: false
       },
       deliveryMethod: {
@@ -84,10 +88,12 @@ class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" }
           ]
         },
+        valid: true, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
         value: ""
       }
     },
-    loading: false
+    loading: false,
+    formIsValid: false // this helps to check if the overall form is valid so that we can continue futher
   };
 
   orderHandler = (event) => {
@@ -130,6 +136,7 @@ class ContactData extends Component {
   };
 
   checkValidity(value, rules) {
+    console.log("The value is " + value + " and the rules is ");
     // if this method returns true then the field on the form is valid else not
     let isValid = false;
 
@@ -150,7 +157,7 @@ class ContactData extends Component {
     // The other ways is by turining isValid initially defined to true and including that in every check. Max does take
     // this approach but I am leaving mine here for now. We can come back to this if my rule doesn't work as expected.
 
-    console.log(isValid);
+    // console.log(isValid);
 
     return isValid;
   }
@@ -182,7 +189,15 @@ class ContactData extends Component {
     );
 
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    this.setState({ orderForm: updatedOrderForm });
+
+    // Checking overall form validity. For this, I have added isFormValid property to state and initially set to false
+    let formIsValid = true; // let this be true initially and this changes on every iteration below because the this.state.orderForm[inputElement].valid below could be false.
+    for (let inputElement in this.state.orderForm) {
+      formIsValid = formIsValid && this.state.orderForm[inputElement].valid;
+    }
+    console.log(formIsValid);
+
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 
   render() {
@@ -213,7 +228,11 @@ class ContactData extends Component {
           />
         ))}
 
-        <Button btnType="Success" clicked={this.orderHandler}>
+        <Button
+          btnType="Success"
+          clicked={this.orderHandler}
+          disabled={!this.state.formIsValid}
+        >
           ORDER
         </Button>
       </form>

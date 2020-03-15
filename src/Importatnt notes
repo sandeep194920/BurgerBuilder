@@ -576,3 +576,16 @@ Set 5 Workflow as follows:
     clicks on that particular inputElement atleast once.  We will do this next.
 
 55. When we touch the inputElement atleast once we need to apply red color css (apply validation rules).
+
+56. Now that we have tested individual inputElement for validation, now we need to check if the overall form is valid, and if yes, then we should 
+    be able to continue. This we do it by checking individual elements in the for in loop for validity inside inputChangedHandler(). 
+    Once everything is validated to true then the overall form will be valid and hence we can continue to order (click order btn).
+    Though we did everything required in the validation part, we have one glitch here. That is the deliverymethod. If you 
+    don't change the deliverymethod and leave it in Fastest (default) you wont get an error but when it is changed to 
+    Cheapest, we get the error. 
+    This is because the validation (validation rules) on the deliverymethod is not defined 
+    which is not required, but this creates a problem during checkValidity(value,rules) call where the rules are basically the
+    validation object which is not present in the deliverymethod (which is not required as I said) and hence, this when 
+    changed to Cheapest, the rules is set to undefined and hence we get the error.
+    Let's solve this in next commit.
+    

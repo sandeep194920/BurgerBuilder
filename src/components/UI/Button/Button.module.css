@@ -23,4 +23,9 @@
 .Danger {
   color: #944317;
 }
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
 /* Added above CSS for Button from the Max's resouces file */
