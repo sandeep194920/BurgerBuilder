@@ -602,3 +602,17 @@ Set 5 Workflow as follows:
 
 58. We forgot to enter the default value for deliverymethod and I entered in this commit as fastest. This helps in registering the
     value of deliverymethod as fastest in the backend if we dont touch the dropdown.
+
+ FYI : There is another bug which I came across, which I am not going to solve here, and also not addressed in the Max's lectures. 
+       The bug is, in the ContactData form validation (overall form validation), everything seems to work fine when the data
+       is entered manually into each inputElement and once all the inputElements are done, the ORDER button turns green from 
+       gray indicating formIsValid is true now, meaning overall form is valid (each element validated successfully and now ready to proceed).
+       However, when entering a data in the name field, it gives some suggestions to fill all the fields (all inputElements) 
+       with some cached data of form. When I click the prepopulated data, all the fields are filled but the ORDER btn doesnt immediately turn 
+       green. 
+       The reason (my assumption) is, I have used {valid:false} and the logic to turn this true for each inputElement, where it says each element 
+       when touched turns up the valid property to true and the overall form will be valid if and only if the individual elements are valid:true. 
+       In case of autopopulated data, though all the fields will be filled, the fields individually won't be touched by user and that can still 
+       keep the individual inputElement valid : false. This is the reason why sometimes the overall form, formIsValid, is false and the ORDER btn doesnt 
+       turn green. 
+       I guess this problem doesnt occur if we use formik library, but not sure since I havent used it yet.
