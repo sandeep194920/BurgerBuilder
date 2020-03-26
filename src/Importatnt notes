@@ -657,3 +657,13 @@ Set 6 Workflow as follows:
     
       * Orders.js state has orders =[] where the orders are coming from backend. We do this part later in advanced redux part
         as this is async part of redux. orders need to be fetched asynchronously from firebase. 
+  
+  60. Installing redux and react-redux. 
+      npm install --save redux react-redux
+      Let's start by creating store folder in src and adding actions.js and reducer.js as learnt in the redux-counter project.
+      
+      * Where to start from?
+      ** Let's start with BurgerBuilder. As I told, we will be dealing with ingredients and totalPrice. First ingredients.
+         So we can see we have handlers addIngredientHandler and removeIngredientHandler related to the ingredients. These are good fit to go into the 
+         actions. Remember, the handlers could be most likely the actions, because in the handlers we change somethings in 
+         state and that is what we generally do in actions to update the store. After this, we can update the store accordingly.
