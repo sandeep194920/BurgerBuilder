@@ -667,3 +667,5 @@ Set 6 Workflow as follows:
          So we can see we have handlers addIngredientHandler and removeIngredientHandler related to the ingredients. These are good fit to go into the 
          actions. Remember, the handlers could be most likely the actions, because in the handlers we change somethings in 
          state and that is what we generally do in actions to update the store. After this, we can update the store accordingly.
+  
+  61. Connecting react with redux. 
