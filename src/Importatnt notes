@@ -616,3 +616,44 @@ Set 5 Workflow as follows:
        keep the individual inputElement valid : false. This is the reason why sometimes the overall form, formIsValid, is false and the ORDER btn doesnt 
        turn green. 
        I guess this problem doesnt occur if we use formik library, but not sure since I havent used it yet.
+
+* * * Tag v2-release - completed - DONE WITH CHECKOUT FORM. NEED TO MOVE TO REDUX NOW.
+
+Set 6 Workflow as follows:
+
+* Adding basic and advanced REDUX
+ 
+  Note: All the basics and advanced REDUX concepts have been explained in https://github.com/sandeep194920/react-counter-with-redux
+  
+  59. First, we need to look at which all components have state (containers) and which parts of those states need to be 
+      put into redux store. Let's see some of the containers and its state and decide which could be a better candidate 
+      to go into the redux store.
+
+      * BurgerBuilder state
+
+        state = {
+            ingredients: null, 
+            totalPrice: 4, 
+            purchasable: false,
+            purchasing: false,
+            loading: false,
+            error: false 
+        };
+
+        ** We have these attributes in state. Only ingredients and totalPrice would be carried from one component to 
+           another but the other attributes like purchasable, purchasing etc are used for UI change purpose. For example,
+           loading:false is used because at some point we need to turn loading to true or false to change the UI. Hence this 
+           type of attributes doesn't required to be put into store.
+
+      * Checkout state 
+
+        state = {
+            ingredients: {},
+            totalPrice: 0
+        };
+
+        ** This we discussed for BurgerBuilder state above. We can already see the usecase of using ingredients and totalPrice
+           from store so we don't need query params to pass them as arguments. 
+    
+      * Orders.js state has orders =[] where the orders are coming from backend. We do this part later in advanced redux part
+        as this is async part of redux. orders need to be fetched asynchronously from firebase. 
