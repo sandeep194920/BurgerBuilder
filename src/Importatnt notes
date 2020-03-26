@@ -669,3 +669,7 @@ Set 6 Workflow as follows:
          state and that is what we generally do in actions to update the store. After this, we can update the store accordingly.
   
   61. Connecting react with redux. 
+  62. Now that we have created store in index.js, let's implement two actions ADD_INGREDIENT and REMOVE_INGREDIENT in the reducer.
+      Note : In the BurgerBuilder state, we have ingredients as null because we get the components from firebase in ComponentDidMount.
+      We will add this functionality of getting from backend into redux store later (async action - advanced redux) but for now we 
+      will hardcode ingredients in redux.
