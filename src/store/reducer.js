@@ -10,21 +10,23 @@ const initialState = {
   totalPrice: 4
 };
 const reducer = (state = initialState, action) => {
-  switch (action) {
+  switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
       return {
         ...state,
-        ingredient: {
+        ingredients: {
           ...state.ingredients,
           [action.ingredientName]: state.ingredients[action.ingredientName] + 1
         }
       };
     case actionTypes.REMOVE_INGREDIENT:
+      console.log("REACHED REDUCER" + action.ingredientName);
+
       return {
         ...state,
-        ingredient: {
+        ingredients: {
           ...state.ingredients,
-          [action.ingredientName]: ingredients[ingredientName] - 1
+          [action.ingredientName]: state.ingredients[action.ingredientName] - 1
         }
       };
     default:

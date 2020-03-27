@@ -7,6 +7,8 @@ import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import { connect } from "react-redux";
+import * as actionTypes from "../../store/actions";
 
 // Creating global constant for Ingredient prices
 const INGREDIENT_PRICES = {
@@ -21,7 +23,7 @@ class BurgerBuilder extends Component {
   // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
 
   state = {
-    ingredients: null, // this was initially set to ingredients object,
+    //ingredients: null, // this was initially set to ingredients object,       // This is not used now as redux props is used
     // but now we fetch this from firebase backend. Due to this being null, the parts of app will fail like OrderSummary and others which depend on this.
     // Hence we conditionally render them once this is available
     totalPrice: 4, // default price without any ingredients
@@ -182,8 +184,8 @@ class BurgerBuilder extends Component {
     // We need to convert them to string like salad=1&bacon=2 and so on.
 
     const queryParams = [];
-    for (let i in this.state.ingredients) {
-      queryParams.push(encodeURIComponent(i) + "=" + this.state.ingredients[i]);
+    for (let i in this.props.ingredients) {
+      queryParams.push(encodeURIComponent(i) + "=" + this.props.ingredients[i]);
       // encodeURIComponent is provided by javascript which is a helper method that removes whitespace and so on, but is not required in this case
     }
     // This for loop created queryParams = [salad=1,bacon=2,meat=1,cheese=2]
@@ -214,7 +216,7 @@ class BurgerBuilder extends Component {
 
   render() {
     // Max's way of adding disabled ingredient button functionality
-    const disabledInfo = { ...this.state.ingredients };
+    const disabledInfo = { ...this.props.ingredients };
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0; // This check produces true/false for each ingredient like {salad: true,meat:false...}
     }
@@ -232,13 +234,14 @@ class BurgerBuilder extends Component {
     ) : (
       <Spinner />
     );
-    if (this.state.ingredients) {
+    if (this.props.ingredients) {
+      console.log(this.props.ingredients);
       burger = (
         <Aux>
-          <Burger ingredients={this.state.ingredients} />
+          <Burger ingredients={this.props.ingredients} />
           <BuildControls
-            ingredientAdded={this.addIngredientHanlder}
-            ingredientRemoved={this.removeIngredientHanlder}
+            ingredientAdded={this.props.onIngredientAdded}
+            ingredientRemoved={this.props.onIngredientRemoved}
             disabled={disabledInfo}
             price={this.state.totalPrice}
             purchasable={this.state.purchasable}
@@ -250,7 +253,7 @@ class BurgerBuilder extends Component {
         <OrderSummary
           purchaseCancelled={this.purchaseCancelHandler}
           purchaseContinued={this.purchaseContinueHandler}
-          ingredients={this.state.ingredients}
+          ingredients={this.props.ingredients}
           price={this.state.totalPrice}
         />
       );
@@ -272,4 +275,23 @@ class BurgerBuilder extends Component {
     );
   }
 }
-export default withErrorHandler(BurgerBuilder, axios);
+
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.ingredients
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onIngredientAdded: (ingName) =>
+      dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
+    onIngredientRemoved: (ingName) =>
+      dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(BurgerBuilder, axios));

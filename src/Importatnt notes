@@ -672,4 +672,8 @@ Set 6 Workflow as follows:
   62. Now that we have created store in index.js, let's implement two actions ADD_INGREDIENT and REMOVE_INGREDIENT in the reducer.
       Note : In the BurgerBuilder state, we have ingredients as null because we get the components from firebase in ComponentDidMount.
       We will add this functionality of getting from backend into redux store later (async action - advanced redux) but for now we 
-      will hardcode ingredients in redux.
+      will hardcode ingredients in redux. 
+
+  63. Now that we have implemented ADD_INGREDIENT and REMOVE_INGREDIENT reducers, let's connect BurgerBuilder with store.
+      We have already added Provider in the index.js and passed store into that, let's now receive it in BurgerBuilder with 
+      the help of connect(), the function that returns hoc.
