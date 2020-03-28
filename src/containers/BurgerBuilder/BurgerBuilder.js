@@ -4,11 +4,12 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actions/index";
+import axios from "../../axios-orders";
+
 // import {
 //   addIngredient,
 //   removeIngredient
@@ -19,9 +20,10 @@ class BurgerBuilder extends Component {
   // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
 
   state = {
-    purchasing: false,
-    loading: false,
-    error: false // Used for ingredients fetching in componentDidMount; if ingredients fail then this will be used to display error message
+    purchasing: false
+    // loading: false, // this is not used anymore because the logic which was in cdm to get the ingredients from backend has been moved to the action creator - burgerBuilder.js
+    // error: false // Used for ingredients fetching in componentDidMount; if ingredients fail then this will be used to display error message
+    // This error is now fetched from reducer -burgerBuilder.js
   };
 
   // MY WAY COMMENTED BELOW
@@ -121,6 +123,9 @@ class BurgerBuilder extends Component {
     //   .get("/ingredients.json")
     //   .then((response) => this.setState({ ingredients: response.data }))
     //   .catch((error) => this.setState({ error: true }));
+
+    // The above commented code has been moved to action creator - burgerBuilder.js
+    this.props.onInitIngredients(); // this calls the action creator - burgerBuilder.js to initialize ingredients
   }
 
   render() {
@@ -138,13 +143,12 @@ class BurgerBuilder extends Component {
     // So we conditionally render them. (Note that OrderSummary was enclosed with other if else loop above,
     // but now is included here)
     let orderSummary = null;
-    let burger = this.state.error ? ( //If the error is set, which means if ingredients in not loaded by anychance from firebase
+    let burger = this.props.error ? ( //If the error is set, which means if ingredients in not loaded by anychance from firebase
       <p>Failed to load ingredients</p>
     ) : (
       <Spinner />
     );
     if (this.props.ingredients) {
-      console.log(this.props.ingredients);
       burger = (
         <Aux>
           <Burger ingredients={this.props.ingredients} />
@@ -166,9 +170,6 @@ class BurgerBuilder extends Component {
           price={this.props.totalPrice}
         />
       );
-      if (this.state.loading) {
-        orderSummary = <Spinner />;
-      }
     }
 
     return (
@@ -188,7 +189,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = (state) => {
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    error: state.error
   };
 };
 
@@ -197,7 +199,8 @@ const mapDispatchToProps = (dispatch) => {
     onIngredientAdded: (ingName) =>
       dispatch(actionTypes.addIngredient(ingName)),
     onIngredientRemoved: (ingName) =>
-      dispatch(actionTypes.removeIngredient(ingName))
+      dispatch(actionTypes.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(actionTypes.initIngredients())
   };
 };
 
