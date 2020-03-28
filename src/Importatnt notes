@@ -742,3 +742,7 @@ Set 6 Workflow as follows:
   71. We now will fetch async ingredients from backend. This is done in BurgerBuilder action creator in store/actions/BurgerBuilder.js.
       We don't need loading state in BurgerBuilder because we are not using ingredients fetch from backend in CDM of BurgerBuilder
       anymore. We do this in burgerBuilder.js action creator. Also, the error in the state of BurgerBuilder is been handled in reducer- burgerBuilder.
+
+  72. I forgot to set ingredients to null in the last commit in the reducer - burgerBuilder.js. Also, I noticed that 
+      the order of ingredients varies (salad comes at bottom) as per alphabetical order in backend. We can fix that by 
+      manually setting each backend ingredient to the same ingredient in the reducer - burgerBuilder.js

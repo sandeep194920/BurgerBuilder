@@ -8,12 +8,7 @@ const INGREDIENT_PRICES = {
 };
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0
-  },
+  ingredients: null,
   totalPrice: 4,
   error: false
 };
@@ -40,7 +35,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_INGREDIENTS:
       return {
         ...state,
-        ingredients: action.ingredients,
+        ingredients: {
+          salad: action.ingredients.salad,
+          bacon: action.ingredients.bacon,
+          meat: action.ingredients.meat,
+          cheese: action.ingredients.cheese
+        },
         error: false // this is important bcoz if we had error before then this clears it out
       };
     case actionTypes.FETCH_INGREDIENTS_FAILED:
