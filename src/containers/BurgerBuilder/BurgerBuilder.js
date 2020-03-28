@@ -100,60 +100,14 @@ class BurgerBuilder extends Component {
 
   // When Continue button is clicked in the OrderSummary, it closes the modal and the backdrop (Backdrop has been put inside Modal)
   purchaseContinueHandler = () => {
-    // Commented code below sends order to backend. We don't need this feature now but later once the checkout form is filled we need it then
-
-    // this.setState({ loading: true });
-    // // Sending Order to backend using POST Request of axios
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   // Dummy data fields below for now
-    //   customer: {
-    //     name: "Sandeep",
-    //     country: "India"
-    //   }
-    // };
-    // axios
-    //   .post("/orders.json", order)
-    //   .then((response) => {
-    //     this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     this.setState({ loading: false, purchasing: false }); // purchasing is the prop which shows modal, so we set it to false once the purchasing is done to close the modal.
-    //   });
-
-    // Commented code above sends order to backend. We don't need this feature now but later once the checkout form is filled we need it then
-    console.log(this.props);
+    // No need of queryparams after introducing redux, hence commenting below part
 
     // this.props.history.push({
     //   pathname: "/checkout",
-    //   search: "?ingredients=" + this.state.ingredients
+    //   search: "?" + queryString
     // });
-    // The above search is not possible because ingredients is not a variable but is an object and can't be passed directly.
-    // We need to convert them to string like salad=1&bacon=2 and so on.
 
-    const queryParams = [];
-    for (let i in this.props.ingredients) {
-      queryParams.push(encodeURIComponent(i) + "=" + this.props.ingredients[i]);
-      // encodeURIComponent is provided by javascript which is a helper method that removes whitespace and so on, but is not required in this case
-    }
-    // This for loop created queryParams = [salad=1,bacon=2,meat=1,cheese=2]
-    // We also need price
-    queryParams.push("price=" + this.state.totalPrice);
-    // Now we have queryParams = [salad=1,bacon=2,meat=1,cheese=2,price=4] --> random values
-    // Now we need to join & sign at the end of each ingredient value like salad=1&bacon=2&.... and return a string. This is done by .join on array of queryParams
-    const queryString = queryParams.join("&");
-    // queryString will be something like salad=1&bacon=2&meat=1&cheese=3&price=4
-
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString
-    });
-
-    // So the url will be like localhost:3000/checkout?salad=1&bacon=2&meat=1&cheese=3&price=4
-    // In the checkout component we have to extract this
+    this.props.history.push("/checkout");
   };
 
   // getting ingredients from firebase (previously we had it in local state)

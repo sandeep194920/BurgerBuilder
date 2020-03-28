@@ -693,3 +693,11 @@ Set 6 Workflow as follows:
             loading: false,
             error: false 
         };
+
+  66. We now think of checkout component. The BurgerBuilder used to pass queryparams for the reason explained in point number 38. 
+      above to the checkout component. The checkout component then uses this queryParams to build the ingredients in its 
+      local state. Now we don't need queryparams passing and receiving hassle anymore as we use redux now. Let's adjust the 
+      code in both the components accordingly. 
+      Let's also look at ContactData component. The Checkout component passes ingredients and totalPrice to the ContactData
+      hence we can use redux there as well. 
+     
