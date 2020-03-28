@@ -6,13 +6,13 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 //connecting react to redux
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "./store/reducer/burgerBuilder";
+import thunk from "redux-thunk"; // the import name can be anything which is thunk here
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // without middleware for sync actions
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
   // Note that Provider will wrap everything hence we have Provider on the outer level

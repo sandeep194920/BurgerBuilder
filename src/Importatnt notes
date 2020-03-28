@@ -724,4 +724,17 @@ Set 6 Workflow as follows:
             
             import * as something from 'src/xyz'
 
-            then it automatically imports index.js (This facility exists only for index.js). 
+            then it automatically imports index.js (This facility exists only for index.js).
+
+  70. Let's now work on async action creators. i.e fetching data from backend (ingredients and orders). Though we
+      do this from next commit, lets setup devtools advanced in this commit. We have ingredients fetching code from the 
+      backend in BurgerBuilder's ComponentDidMount (which is not being used currently). We can take two approaches now to get the code from backend and use in reducer.
+      
+      Approaches:
+      * The first approach is to use the code already present in CDM of BurgerBuilder, then get the response from backend
+        and then dispatch this data as payload into the reducer and inject into store.
+        This approach, even though it is async, it is not truly considered as async. The real async is using redux thunk 
+        middleware to fetch data from backend.
+      * The second approach is to use redux-thunk as I said above. This is what we will use.
+        npm install --save redux-thunk
+        Also, we use devtools advanced now countering the point mentioned in 67. above.
