@@ -718,3 +718,10 @@ Set 6 Workflow as follows:
 
   68. Let's modify the folder structure a bit. We can create folders for reducer and actions inside store and convert
       actions.js to actionTypes.js since it is only used to define the constants. 
+  
+  69. Let's now create some action creators and rename the existing actions and reducers accordingly. 
+      NOTE : If I have a folder structure src/xyz/index.js, and if I 
+            
+            import * as something from 'src/xyz'
+
+            then it automatically imports index.js (This facility exists only for index.js). 
