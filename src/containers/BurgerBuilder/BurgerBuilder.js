@@ -10,23 +10,11 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actions";
 
-// Creating global constant for Ingredient prices
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.7
-};
-
 class BurgerBuilder extends Component {
   // Passing ingredients from here would be appropriate for BurgerIngredient component instead of hardcoding in there.
   // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
 
   state = {
-    //ingredients: null, // this was initially set to ingredients object,       // This is not used now as redux props is used
-    // but now we fetch this from firebase backend. Due to this being null, the parts of app will fail like OrderSummary and others which depend on this.
-    // Hence we conditionally render them once this is available
-    totalPrice: 4, // default price without any ingredients
     purchasable: false, // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
     purchasing: false,
     loading: false,
@@ -98,43 +86,6 @@ class BurgerBuilder extends Component {
 
     // The above if loop can be simply written as
     this.setState({ purchasable: totalIngredients > 0 });
-  };
-
-  addIngredientHanlder = (type) => {
-    // process of updating ingredients
-    const oldCount = this.state.ingredients[type];
-    const updatedCount = oldCount + 1;
-    const updatedIngredients = {
-      ...this.state.ingredients
-    };
-    updatedIngredients[type] = updatedCount;
-
-    // process of updating price
-    const priceAddition = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice + priceAddition;
-    this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
-    this.updatePurchaseState(updatedIngredients);
-  };
-  removeIngredientHanlder = (type) => {
-    // process of updating ingredients
-    const oldCount = this.state.ingredients[type];
-    if (oldCount <= 0) {
-      // In my way, I made use of countIngredients method (commented above) which I feel unnecessary. This if statement would do
-      return;
-    }
-    const updatedCount = oldCount - 1;
-    const updatedIngredients = {
-      ...this.state.ingredients
-    };
-    updatedIngredients[type] = updatedCount;
-
-    // process of updating price
-    const priceDeduction = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice - priceDeduction;
-    this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
-    this.updatePurchaseState(updatedIngredients);
   };
 
   // When Order Now is clicked, it opens modal and the backdrop (Backdrop has been put inside Modal)
@@ -243,7 +194,7 @@ class BurgerBuilder extends Component {
             ingredientAdded={this.props.onIngredientAdded}
             ingredientRemoved={this.props.onIngredientRemoved}
             disabled={disabledInfo}
-            price={this.state.totalPrice}
+            price={this.props.totalPrice}
             purchasable={this.state.purchasable}
             ordered={this.purchaseHandler}
           />
@@ -254,7 +205,7 @@ class BurgerBuilder extends Component {
           purchaseCancelled={this.purchaseCancelHandler}
           purchaseContinued={this.purchaseContinueHandler}
           ingredients={this.props.ingredients}
-          price={this.state.totalPrice}
+          price={this.props.totalPrice}
         />
       );
       if (this.state.loading) {
@@ -278,7 +229,8 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice
   };
 };
 

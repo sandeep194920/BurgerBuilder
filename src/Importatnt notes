@@ -677,3 +677,7 @@ Set 6 Workflow as follows:
   63. Now that we have implemented ADD_INGREDIENT and REMOVE_INGREDIENT reducers, let's connect BurgerBuilder with store.
       We have already added Provider in the index.js and passed store into that, let's now receive it in BurgerBuilder with 
       the help of connect(), the function that returns hoc.
+
+  64. Let's work on totalPrice and move it into the reducer from BurgerBuilder. Also, we will take a look at the disabled order button
+      in the next commit .We can now delete addIngredientHanlder() and removeIngredientHanlder() in BurgerBuilder as we are handling them in 
+      reducer.js.  
