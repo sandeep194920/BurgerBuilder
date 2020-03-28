@@ -15,7 +15,6 @@ class BurgerBuilder extends Component {
   // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
 
   state = {
-    purchasable: false, // this is updated to true if atleast one ingredient is added to the burger. It's updated in updatePurchaseState() called in addIngredientHandler and removeIngredientHandler
     purchasing: false,
     loading: false,
     error: false // Used for ingredients fetching in componentDidMount; if ingredients fail then this will be used to display error message
@@ -85,7 +84,8 @@ class BurgerBuilder extends Component {
     // }
 
     // The above if loop can be simply written as
-    this.setState({ purchasable: totalIngredients > 0 });
+    // this.setState({ purchasable: totalIngredients > 0 }); // This was used when state property purchasable was used. Now redux is used hence this is not used to set state but directly returned in next line.
+    return totalIngredients > 0;
   };
 
   // When Order Now is clicked, it opens modal and the backdrop (Backdrop has been put inside Modal)
@@ -195,7 +195,7 @@ class BurgerBuilder extends Component {
             ingredientRemoved={this.props.onIngredientRemoved}
             disabled={disabledInfo}
             price={this.props.totalPrice}
-            purchasable={this.state.purchasable}
+            purchasable={this.updatePurchaseState(this.props.ingredients)} //Ne need of argument here as this ingredients can be directly used in updatePurchaseState() method
             ordered={this.purchaseHandler}
           />
         </Aux>

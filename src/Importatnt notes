@@ -681,3 +681,15 @@ Set 6 Workflow as follows:
   64. Let's work on totalPrice and move it into the reducer from BurgerBuilder. Also, we will take a look at the disabled order button
       in the next commit .We can now delete addIngredientHanlder() and removeIngredientHanlder() in BurgerBuilder as we are handling them in 
       reducer.js.  
+
+  65. We now work on enabling order button in BurgerBuilder. updatePurchaseState() method is the one which used to update
+      purchasable property of state of BurgerBuilder till now. But now, we can remove purchasable property from state 
+      and we can call updatePurchaseState() directly in BurgerBuilder's BuildControls component call in render method.
+      Now if you see the state of BurgerBuilder, we have only 3 properties mentioned below - all related to UI of this 
+      particular component only, so it makes sense to be in this state itself.
+
+        state = {
+            purchasing: false,
+            loading: false,
+            error: false 
+        };
