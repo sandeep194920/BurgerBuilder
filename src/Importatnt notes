@@ -715,3 +715,6 @@ Set 6 Workflow as follows:
       Link - https://github.com/zalmoxisus/redux-devtools-extension
       In this link we use 1.3 Advanced Store Setup later for async actions done using redux middleware, but for now, for 
       sync actions let's use Basic setup, 1.1 Basic Store, in the index.js.
+
+  68. Let's modify the folder structure a bit. We can create folders for reducer and actions inside store and convert
+      actions.js to actionTypes.js since it is only used to define the constants. 
