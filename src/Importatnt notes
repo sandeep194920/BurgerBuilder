@@ -703,3 +703,15 @@ Set 6 Workflow as follows:
 
 * * * Tag v2.1 - completed - redux part for sync part (ingredients and totalPrice) in BurgerBuilder, Checkout and ContactData components. 
                              Need to move to async part next (fetching orders and ingredients from backend)
+  
+  Set 7 Workflow as follows:
+
+  * In this workflow we implement advanced redux features of getting orders from Backend
+  * We first setup redux devtools
+  * Get ingredients from backend
+  * Setup proper file structure for actions and reducers as learnt in react counter project 
+
+  67. Let's first setup redux devtools.
+      Link - https://github.com/zalmoxisus/redux-devtools-extension
+      In this link we use 1.3 Advanced Store Setup later for async actions done using redux middleware, but for now, for 
+      sync actions let's use Basic setup, 1.1 Basic Store, in the index.js.
