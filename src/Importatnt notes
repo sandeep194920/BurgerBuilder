@@ -700,4 +700,6 @@ Set 6 Workflow as follows:
       code in both the components accordingly. 
       Let's also look at ContactData component. The Checkout component passes ingredients and totalPrice to the ContactData
       hence we can use redux there as well. 
-     
+
+* * * Tag v2.1 - completed - redux part for sync part (ingredients and totalPrice) in BurgerBuilder, Checkout and ContactData components. 
+                             Need to move to async part next (fetching orders and ingredients from backend)
