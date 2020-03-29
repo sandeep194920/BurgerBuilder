@@ -6,6 +6,8 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import { withRouter } from "react-router-dom";
 import Input from "../../../components/UI/Input/Input";
 import { connect } from "react-redux";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
+import * as actions from "../../../store/actions/index";
 
 class ContactData extends Component {
   state = {
@@ -93,7 +95,6 @@ class ContactData extends Component {
         value: "fastest" // this should be the default value
       }
     },
-    loading: false,
     formIsValid: false // this helps to check if the overall form is valid so that we can continue futher
   };
 
@@ -105,7 +106,7 @@ class ContactData extends Component {
     // We place the code below responsible for sending order to the backend. We can use the code we initally used in the purchaseContinueHandler
     // in the BurgerBuilder.
 
-    this.setState({ loading: true });
+    // this.setState({ loading: true }); // in redux, this should be dispatched in order.js in action
     // passing orderform data
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
@@ -122,18 +123,25 @@ class ContactData extends Component {
 
       // customer data now comes from state
     };
-    axios
-      .post("/orders.json", order)
-      .then((response) => {
-        this.setState({ loading: false }); // we removed purchasing:false here since we no longer need that which was initially necessary to show and hide modal. However, loading can be used to show Spinner as before during ordering
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        this.setState({ loading: false }); // we removed purchasing:false here since we no longer need that which was initially necessary to show and hide modal. However, loading can be used to show Spinner as before during ordering
-      });
-    console.log(this.props);
-    this.props.history.replace("/");
+
+    // Below commented block was used before redux async was introduced. Now this logic is used in actions/order.js
+
+    // axios
+    //   .post("/orders.json", order)
+    //   .then((response) => {
+    //     this.setState({ loading: false }); // we removed purchasing:false here since we no longer need that which was initially necessary to show and hide modal. However, loading can be used to show Spinner as before during ordering
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     this.setState({ loading: false }); // we removed purchasing:false here since we no longer need that which was initially necessary to show and hide modal. However, loading can be used to show Spinner as before during ordering
+    //   });
+    // console.log(this.props);
+    // this.props.history.replace("/");  // after redux, this is not used anymore
+
+    // Above commented block was used before redux async was introduced. Now this logic is used in actions/order.js
+
+    this.props.onOrderBurger(order);
   };
 
   checkValidity(value, rules) {
@@ -242,7 +250,7 @@ class ContactData extends Component {
         </Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
     return (
@@ -257,8 +265,17 @@ class ContactData extends Component {
 const mapStateToProps = (state) => {
   return {
     ingredients: state.ingredients,
-    price: state.totalPrice
+    price: state.totalPrice,
+    loading: state.loading
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
   };
 };
 
-export default connect(mapStateToProps)(withRouter(ContactData));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(withRouter(ContactData), axios));

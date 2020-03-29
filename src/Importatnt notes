@@ -746,3 +746,8 @@ Set 6 Workflow as follows:
   72. I forgot to set ingredients to null in the last commit in the reducer - burgerBuilder.js. Also, I noticed that 
       the order of ingredients varies (salad comes at bottom) as per alphabetical order in backend. We can fix that by 
       manually setting each backend ingredient to the same ingredient in the reducer - burgerBuilder.js
+
+  73. Now that we got ingredients from backend in action creator - burgerBuilder.js (async), let's now work on orders.  
+      using same async technique. The logic for posting order to backend is in orderHandler() in ContactData. This should 
+      now be dispatched in an action.
+      We need actionTypes for order success and failure. Also, we work on order reducer.
