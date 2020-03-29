@@ -6,13 +6,22 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 //connecting react to redux
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import reducer from "./store/reducer/burgerBuilder";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk"; // the import name can be anything which is thunk here
+// combining reducers
+import orderReducer from "./store/reducer/order";
+import burgerBuilderReducer from "./store/reducer/burgerBuilder";
+
+const rootReducer = combineReducers({
+  burgerBuilder: burgerBuilderReducer,
+  order: orderReducer
+});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 const app = (
   // Note that Provider will wrap everything hence we have Provider on the outer level

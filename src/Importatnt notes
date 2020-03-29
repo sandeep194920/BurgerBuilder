@@ -751,3 +751,9 @@ Set 6 Workflow as follows:
       using same async technique. The logic for posting order to backend is in orderHandler() in ContactData. This should 
       now be dispatched in an action.
       We need actionTypes for order success and failure. Also, we work on order reducer.
+  
+  74. We have two reducers now, burgerBuilder and order. Let's combine them in the index.js and modify our components 
+      which use them.
+      Before this, let's fix a bug we have now. If you are on localhost:3000/checkout, it gives an error as the it uses
+      ingredients Initially which is null. Hence, if the ingredients is null, we choose to redirect to homepage here.
+      Let's implement these two functionalities here (this bug and reducers combining).

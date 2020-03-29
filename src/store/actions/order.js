@@ -36,7 +36,7 @@ export const purchaseBurger = (orderData) => {
       .post("/orders.json", orderData)
       .then((response) => {
         //this.setState({ loading: false }); // This was used in ContactData orderHandler()
-        dispatch(purchaseBurgerSuccess(response.data, orderData));
+        dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
       .catch((error) => {
         // this.setState({ loading: false });

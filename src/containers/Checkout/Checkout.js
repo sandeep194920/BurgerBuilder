@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
 import { connect } from "react-redux";
 
@@ -15,30 +15,29 @@ class Checkout extends Component {
     this.props.history.replace("/checkout/contact-data");
   };
   render() {
-    return (
-      <div>
-        {/* Temporary ingredients passing here from this state. It actually will come from BurgerBuilder later */}
-        <CheckoutSummary
-          ingredients={this.props.ingredients}
-          checkoutCancelled={this.checkoutCancelledHandler}
-          checkoutContinued={this.checkoutContinuedHandler}
-        />
-        {/* The below ContactData component is the nested route (Route rendered inside Route and the main Route is checkout) */}
-
-        {/* this.props.match.path gives the existing url + contact-data. If this is not added then the contact-data will not be appended to the current url but will be appended to the checkout since this Route is 
-        rendered from within the checkout */}
-        <Route
-          path={this.props.match.path + "/contact-data"}
-          component={ContactData}
-        />
-      </div>
-    );
+    let summary = <Redirect to="/" />; // used when props.ingredients is null.
+    if (this.props.ingredients) {
+      summary = (
+        <div>
+          <CheckoutSummary
+            ingredients={this.props.ingredients} // This gives an error if directly navigated to localhost:3000/contactData because this will be null. Hence creating summary variable above and redirecting if props.ingredients is null
+            checkoutCancelled={this.checkoutCancelledHandler}
+            checkoutContinued={this.checkoutContinuedHandler}
+          />
+          <Route
+            path={this.props.match.path + "/contact-data"}
+            component={ContactData}
+          />
+        </div>
+      );
+    }
+    return summary;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients
+    ingredients: state.burgerBuilder.ingredients
   };
 };
 

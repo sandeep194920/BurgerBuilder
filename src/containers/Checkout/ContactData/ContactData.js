@@ -149,7 +149,6 @@ class ContactData extends Component {
     if (!rules) {
       return true;
     }
-    console.log("The value is " + value + " and the rules is ");
     // if this method returns true then the field on the form is valid else not
     let isValid = false;
 
@@ -208,8 +207,6 @@ class ContactData extends Component {
     for (let inputElement in this.state.orderForm) {
       formIsValid = formIsValid && this.state.orderForm[inputElement].valid;
     }
-    console.log(formIsValid);
-
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 
@@ -264,9 +261,9 @@ class ContactData extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    price: state.totalPrice,
-    loading: state.loading
+    ingredients: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    loading: state.order.loading
   };
 };
 const mapDispatchToProps = (dispatch) => {
