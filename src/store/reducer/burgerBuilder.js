@@ -41,7 +41,8 @@ const reducer = (state = initialState, action) => {
           meat: action.ingredients.meat,
           cheese: action.ingredients.cheese
         },
-        error: false // this is important bcoz if we had error before then this clears it out
+        error: false, // this is important bcoz if we had error before then this clears it out
+        totalPrice: 4 // this helps when redirecting to homepage after redirection after first order is been placed
       };
     case actionTypes.FETCH_INGREDIENTS_FAILED:
       return {

@@ -17,8 +17,12 @@ class Checkout extends Component {
   render() {
     let summary = <Redirect to="/" />; // used when props.ingredients is null.
     if (this.props.ingredients) {
+      const purchasedRedirect = this.props.purchased ? (
+        <Redirect to="/" />
+      ) : null;
       summary = (
         <div>
+          {purchasedRedirect}
           <CheckoutSummary
             ingredients={this.props.ingredients} // This gives an error if directly navigated to localhost:3000/contactData because this will be null. Hence creating summary variable above and redirecting if props.ingredients is null
             checkoutCancelled={this.checkoutCancelledHandler}
@@ -37,7 +41,8 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.burgerBuilder.ingredients
+    ingredients: state.burgerBuilder.ingredients,
+    purchased: state.order.purchased
   };
 };
 

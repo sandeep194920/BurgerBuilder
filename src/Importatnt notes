@@ -757,3 +757,19 @@ Set 6 Workflow as follows:
       Before this, let's fix a bug we have now. If you are on localhost:3000/checkout, it gives an error as the it uses
       ingredients Initially which is null. Hence, if the ingredients is null, we choose to redirect to homepage here.
       Let's implement these two functionalities here (this bug and reducers combining).
+
+  75. Let's fix redirecting to homepage after placing order which was used in orderHandler() through history props before. 
+      We could use this by passing props into redux but let's do this redux way by creating action PURCHASE_INIT. 
+      (This part can be done in numerous ways. Max has used one of the ways in 313. Handling Purchases and update UI)
+
+      How it is redirected here to homepage after checkout ? 
+      * We have the action PURCHASE_BURGER_SUCCESS which when dispatched, the purchased property is set to true in the 
+        this action in order.js reducer
+      * Then we check if purchased is true (which is set above in reducer - order.js) in Checkout component (render method) and if it is, then 
+        we redirect to homepage, localhost:3000/
+      * Now, since we have set purchased to true in reducer - order.js, it should be set to false because next time after 
+        reaching homepage by redirect this should work as before, so we need to set this purchased to false.
+      * We set this to false in BurgerBuilder purchaseContinueHandler(). 
+
+      Also, after ordering the first time and redirected back to the homepage, we see the price is still not adjusted back to 
+      default. We will reset this in burgerBuilder reducer in SET_INGREDIENTS case.

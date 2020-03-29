@@ -44,3 +44,10 @@ export const purchaseBurger = (orderData) => {
       });
   };
 };
+
+// sync action - This is used to redirect to homepage localhost:3000/ in checkout page
+export const purchaseInit = () => {
+  return {
+    type: actionTypes.PURCHASE_INIT
+  };
+};
