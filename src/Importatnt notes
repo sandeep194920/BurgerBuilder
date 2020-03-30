@@ -773,3 +773,6 @@ Set 6 Workflow as follows:
 
       Also, after ordering the first time and redirected back to the homepage, we see the price is still not adjusted back to 
       default. We will reset this in burgerBuilder reducer in SET_INGREDIENTS case.
+  
+  76. We have posted the ingredients in the last commit. Now it's time to work on getting the orders from backend via redux. 
+      We currently have this logic in Orders.js ComponentDidMount.

@@ -10,3 +10,8 @@ export const PURCHASE_BURGER_START = "PURCHASE_BURGER_START";
 
 // This is used to redirect to homepage localhost:3000/ in checkout page
 export const PURCHASE_INIT = "PURCHASE_INIT";
+
+// fetching orders from backend
+export const FETCH_ORDERS_START = "FETCH_ORDERS_START";
+export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
+export const FETCH_ORDERS_FAIL = "FETCH_ORDERS_FAIL";
