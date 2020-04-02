@@ -782,3 +782,5 @@ Set 6 Workflow as follows:
 
   78. Let's now reduce the Switch cases even more leaner by using an internal function in the reducer. This is not necessary 
       but optional if you want to see one line return statement in each case statement of reducer.
+
+* * * Tag v3.0-release - completed - DONE WITH REDUX ADVANCED. NEED TO MOVE TO AUTHENTICATION PART NOW.
