@@ -776,3 +776,6 @@ Set 6 Workflow as follows:
   
   76. We have posted the ingredients in the last commit. Now it's time to work on getting the orders from backend via redux. 
       We currently have this logic in Orders.js ComponentDidMount.
+
+  77. Now that we have all we want with redux in place, let's work on making our reducer Switch case statements bit more 
+      leaner by outsourcing the cases to updateObject method (utility.js in the store folder)
