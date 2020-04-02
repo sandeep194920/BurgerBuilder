@@ -778,4 +778,7 @@ Set 6 Workflow as follows:
       We currently have this logic in Orders.js ComponentDidMount.
 
   77. Now that we have all we want with redux in place, let's work on making our reducer Switch case statements bit more 
-      leaner by outsourcing the cases to updateObject method (utility.js in the store folder)
+      leaner by outsourcing the cases to updateObject method (utility.js in the store folder).
+
+  78. Let's now reduce the Switch cases even more leaner by using an internal function in the reducer. This is not necessary 
+      but optional if you want to see one line return statement in each case statement of reducer.
