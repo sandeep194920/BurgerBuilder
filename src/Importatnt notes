@@ -784,3 +784,32 @@ Set 6 Workflow as follows:
       but optional if you want to see one line return statement in each case statement of reducer.
 
 * * * Tag v3.0-release - completed - DONE WITH REDUX ADVANCED. NEED TO MOVE TO AUTHENTICATION PART NOW.
+
+  Set 8 Workflow as follows:
+
+  * Adding authentication page
+  * Adding form for registration and login in the authentication page
+  * Implementing login and register functionalities
+  * Also redirecting into different pages based on authentication status.
+
+  79. How authentication works in Single Page Applications ?
+
+      1. To login and get token
+                                Auth-->
+                               _ _ _ _ _ _ _
+                           SPA              Server
+                               _ _ _ _ _ _ _
+                                    <--Token (This token is a json and is stored on the client in local storage)
+    
+    * The Single Page App sends the authentication details like username/email and a password to the server.
+    * The server then responds back with a token (JSON Object) which is then stored in local on SPA (redux store generally).
+    * Note that the token will be lost in local whenever the user refreshes the page. We need to take care of this which we will in this module.
+
+     2. Once logged in, to get the access to a page or a resource
+
+                                    Token--> Here we send the same token to the backend which we received from server to gain access to a resource
+                               _ _ _ _ _ _ _
+                           SPA              Server
+                               _ _ _ _ _ _ _
+                                    <--Token (This token is a json and is stored on the client in local storage)
+    
