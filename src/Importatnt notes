@@ -816,3 +816,11 @@ Set 6 Workflow as follows:
 
    80. Let's start by creating authentication form and add a new page for /auth. Also, we create validation logic here for the 
        auth form similar to the ContactData form.
+    
+   81. Let's create an action creator for the Submit button in the auth form in Auth.js component. This will be created in actions/auth.js in store folder.
+       The idea is we create the authStart,authSuccess,authFail and auth (async) action creators for this. We will confirm if 
+       this works by creating these action creators and then connecting it with Auth component using connect. Once this 
+       is done we can first dispatch authStart (no need to reach reducer yet) which is inside auth and when we click submit button in Auth component,
+       the submitHandler() is called and there the preventDefault is used to avoid page refresh. After that the onAuth action is dispatched 
+       which calls auth - async action that intern calls authStart - sync action. We can see this in redux devtools in chrome 
+       browser to check if this works.
