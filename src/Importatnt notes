@@ -824,3 +824,6 @@ Set 6 Workflow as follows:
        the submitHandler() is called and there the preventDefault is used to avoid page refresh. After that the onAuth action is dispatched 
        which calls auth - async action that intern calls authStart - sync action. We can see this in redux devtools in chrome 
        browser to check if this works.
+
+   82. The goal is now to signup the user(register the user in backend) and also get the token from backend.
+       You can watch video 326 - Getting a token from backend to know this.
