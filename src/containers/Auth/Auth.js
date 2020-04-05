@@ -14,16 +14,16 @@ class Auth extends Component {
         // For example for elementType input, <input type="text" placeholder="Name" />, type and placeholder will be elementConfig
         elementConfig: {
           placeholder: "E-Mail Address",
-          type: "email"
+          type: "email",
         },
         value: "", // value is common to any type of inputElement and hence we have it outside of elementConfig. We can have it inside of elementConfig too.
         // in validation we write all the rules we need for this input field.
         validation: {
           required: true,
-          isEmail: true // for validation like we the one used in ContactData.js checkValidity().
+          isEmail: true, // for validation like we the one used in ContactData.js checkValidity().
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
+        touched: false,
       },
 
       password: {
@@ -32,18 +32,19 @@ class Auth extends Component {
         // For example for elementType input, <input type="text" placeholder="Name" />, type and placeholder will be elementConfig
         elementConfig: {
           placeholder: "Password",
-          type: "password"
+          type: "password",
         },
         value: "", // value is common to any type of inputElement and hence we have it outside of elementConfig. We can have it inside of elementConfig too.
         // in validation we write all the rules we need for this input field.
         validation: {
           required: true,
-          minLength: 6 // for validation like we the one used in ContactData.js checkValidity(). - 6 minLength is required  by firebase. Other apps can be adjusted as per their backend
+          minLength: 6, // for validation like we the one used in ContactData.js checkValidity(). - 6 minLength is required  by firebase. Other apps can be adjusted as per their backend
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
-      }
-    }
+        touched: false,
+      },
+    },
+    isSignup: true, // This is for signup and signin which changes in switchAuthModeHandler when the SWITCH TO SIGNIN/SIGNUP btn is clicked
   };
 
   checkValidity(value, rules) {
@@ -86,8 +87,8 @@ class Auth extends Component {
           event.target.value,
           this.state.controls[controlName].validation
         ),
-        touched: true
-      }
+        touched: true,
+      },
     };
     this.setState({ controls: updatedControls });
   };
@@ -96,8 +97,17 @@ class Auth extends Component {
     event.preventDefault();
     this.props.onAuth(
       this.state.controls.email.value,
-      this.state.controls.password.value
+      this.state.controls.password.value,
+      this.state.isSignup
     );
+  };
+
+  switchAuthModeHandler = () => {
+    this.setState((prevState) => {
+      return {
+        isSignup: !prevState.isSignup,
+      };
+    });
   };
 
   render() {
@@ -106,7 +116,7 @@ class Auth extends Component {
     for (let key in this.state.controls) {
       formElementsArray.push({
         id: key,
-        config: this.state.controls[key]
+        config: this.state.controls[key],
       });
     }
 
@@ -128,6 +138,9 @@ class Auth extends Component {
           {form}
           <Button btnType="Success">SUBMIT</Button>
         </form>
+        <Button btnType="Danger" clicked={this.switchAuthModeHandler}>
+          SWITCH TO {this.state.isSignup ? "SIGNIN" : "SIGNUP"}
+        </Button>
       </div>
     );
   }
@@ -135,7 +148,8 @@ class Auth extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password))
+    onAuth: (email, password, isSignup) =>
+      dispatch(actions.auth(email, password, isSignup)),
   };
 };
 

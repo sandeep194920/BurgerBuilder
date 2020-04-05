@@ -820,10 +820,18 @@ Set 6 Workflow as follows:
    81. Let's create an action creator for the Submit button in the auth form in Auth.js component. This will be created in actions/auth.js in store folder.
        The idea is we create the authStart,authSuccess,authFail and auth (async) action creators for this. We will confirm if 
        this works by creating these action creators and then connecting it with Auth component using connect. Once this 
-       is done we can first dispatch authStart (no need to reach reducer yet) which is inside auth and when we click submit button in Auth component,
+       is done we can first dispatch authStart (no need to reach reducer here because we dont implement this is reducer. 
+       This directly goes to backend with the given url for signup and signin) which is inside auth and when we click submit button in Auth component,
        the submitHandler() is called and there the preventDefault is used to avoid page refresh. After that the onAuth action is dispatched 
        which calls auth - async action that intern calls authStart - sync action. We can see this in redux devtools in chrome 
        browser to check if this works.
 
    82. The goal is now to signup the user(register the user in backend) and also get the token from backend.
        You can watch video 326 - Getting a token from backend to know this.
+   
+   83. Now that we have signup process in place, let's work on login process. I will add another button below Signup to switch to Signin.
+       Note that, in the authentication process (both in signin and signup), we dont need our action creator to reach reducer unless 
+       we need our token to be passed and stored in the store. What I mean is, we can successfully register and login only
+       with the help of action creator auth and no need of reducer. Reducer comes in to picture only when we need to store our 
+       token after logging in. In the next step lets store token in backend which we receive after login. Note that we also receive this 
+       token after signup as well.
