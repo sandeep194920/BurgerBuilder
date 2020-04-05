@@ -838,5 +838,10 @@ Set 6 Workflow as follows:
 
    84. Signin is complete. When we signin we have the access to get the token. Let's store that token in our reducers to 
        access the sources in the future which are protected. For this let's create a reducer auth.js. 
-       
+
+   85. Now that we are getting token and userId in the reducer, let's show spinner (using loading:true - authStart) in Auth 
+       page when we click on login or signup button. Let's also show the error (using error:true - authFail) in the Auth 
+       page when we click on login (providing wrong password). Note that we are going to use (show) the error message given 
+       by firebase backend. By using the error message, during signin when we type wrong password we get the error message
+       INVALID_PASSWORD and during signup if we try to use the email id which already exists we get EMAIL_EXISTS.
    
