@@ -10,10 +10,11 @@ export const authStart = () => {
 };
 
 // sync action sent to reducer
-export const authSuccess = (authData) => {
+export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData: authData,
+    idToken: token,
+    userId: userId,
   };
 };
 
@@ -49,7 +50,7 @@ export const auth = (email, password, isSignup) => {
       .then((response) => {
         // here in response.data which is dipatched below, we get the token. This is dispatched in authSuccess() below and stored in reducer
         console.log(response);
-        dispatch(authSuccess(response.data));
+        dispatch(authSuccess(response.data.idToken, response.data.localId));
       })
       .catch((error) => {
         console.log(error);

@@ -835,3 +835,8 @@ Set 6 Workflow as follows:
        with the help of action creator auth and no need of reducer. Reducer comes in to picture only when we need to store our 
        token after logging in. In the next step lets store token in backend which we receive after login. Note that we also receive this 
        token after signup as well.
+
+   84. Signin is complete. When we signin we have the access to get the token. Let's store that token in our reducers to 
+       access the sources in the future which are protected. For this let's create a reducer auth.js. 
+       
+   

@@ -11,10 +11,12 @@ import thunk from "redux-thunk"; // the import name can be anything which is thu
 // combining reducers
 import orderReducer from "./store/reducer/order";
 import burgerBuilderReducer from "./store/reducer/burgerBuilder";
+import authReducer from "./store/reducer/auth";
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
-  order: orderReducer
+  order: orderReducer,
+  auth: authReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
