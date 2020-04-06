@@ -19,83 +19,83 @@ class ContactData extends Component {
         // For example for elementType input, <input type="text" placeholder="Name" />, type and placeholder will be elementConfig
         elementConfig: {
           placeholder: "Your Name",
-          type: "text"
+          type: "text",
         },
         value: "", // value is common to any type of inputElement and hence we have it outside of elementConfig. We can have it inside of elementConfig too.
         // in validation we write all the rules we need for this input field.
         validation: {
-          required: true
+          required: true,
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
+        touched: false,
       },
       street: {
         elementType: "input",
         elementConfig: {
           placeholder: "Your Street",
-          type: "text"
+          type: "text",
         },
         value: "",
         validation: {
-          required: true
+          required: true,
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
+        touched: false,
       },
       zipCode: {
         elementType: "input",
         elementConfig: {
           placeholder: "ZipCode",
-          type: "text"
+          type: "text",
         },
         value: "",
         validation: {
           required: true,
           minLength: 5,
-          maxLength: 5
+          maxLength: 5,
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
+        touched: false,
       },
       country: {
         elementType: "input",
         elementConfig: {
           placeholder: "Country",
-          type: "text"
+          type: "text",
         },
         value: "",
         validation: {
-          required: true
+          required: true,
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
+        touched: false,
       },
       email: {
         elementType: "input",
         elementConfig: {
           placeholder: "Email",
-          type: "email"
+          type: "email",
         },
         value: "",
         validation: {
-          required: true
+          required: true,
         },
         valid: false, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        touched: false
+        touched: false,
       },
       deliveryMethod: {
         elementType: "select",
         elementConfig: {
           options: [
             { value: "fastest", displayValue: "Fastest" },
-            { value: "cheapest", displayValue: "Cheapest" }
-          ]
+            { value: "cheapest", displayValue: "Cheapest" },
+          ],
         },
         valid: true, // valid is used to check if this inputElement (name) is valid or not after validation check. This is then passed as a prop in invalid prop to the Input component
-        value: "fastest" // this should be the default value
-      }
+        value: "fastest", // this should be the default value
+      },
     },
-    formIsValid: false // this helps to check if the overall form is valid so that we can continue futher
+    formIsValid: false, // this helps to check if the overall form is valid so that we can continue futher
   };
 
   orderHandler = (event) => {
@@ -119,7 +119,7 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      orderData: formData
+      orderData: formData,
 
       // customer data now comes from state
     };
@@ -141,7 +141,7 @@ class ContactData extends Component {
 
     // Above commented block was used before redux async was introduced. Now this logic is used in actions/order.js
 
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   };
 
   checkValidity(value, rules) {
@@ -183,10 +183,10 @@ class ContactData extends Component {
     // Now I need to change the value of the inputIdentifier in the state. This has to be done immutably. For this I can use json.Stringify or using spread operator of all layers like below
     // name, street, country, email, zipcode . These are passed in as inputIdentifier and our aim is to set to value attribute
     const updatedOrderForm = {
-      ...this.state.orderForm // This is the shallow copy of orderForm
+      ...this.state.orderForm, // This is the shallow copy of orderForm
     };
     const updatedFormElement = {
-      ...updatedOrderForm[inputIdentifier] // This gives object of each key like orderForm[input], orderForm[country] and so on
+      ...updatedOrderForm[inputIdentifier], // This gives object of each key like orderForm[input], orderForm[country] and so on
     };
     // In updatedForm I need to now update the value. This is done immuatbly
     updatedFormElement.value = event.target.value; // updatedFormElement may be name, email and so on
@@ -216,7 +216,7 @@ class ContactData extends Component {
     for (let key in this.state.orderForm) {
       formElementsArray.push({
         id: key,
-        config: this.state.orderForm[key]
+        config: this.state.orderForm[key],
       });
       // console.log(formElementsArray);
     }
@@ -263,12 +263,14 @@ const mapStateToProps = (state) => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+    onOrderBurger: (orderData, token) =>
+      dispatch(actions.purchaseBurger(orderData, token)),
   };
 };
 

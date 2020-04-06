@@ -859,3 +859,16 @@ Set 6 Workflow as follows:
        * checkAuthTimeout calls/dispatches logout after 60 minutes to deactivate the token by using setTimeout hence this is async action
        * Note that we have implemented an auto logout after one hour now but we still haven't implemented manual logout which we will do it later.
 
+   87. Now that we have implemented autologout after 60 minutes functionality (we'll do manual logout later), let's 
+       use the token we got to make requests to protected resources. What I mean is, if you see in our app now, the user 
+       has access to all the URLs. The idea is only logged in users should have access to certain URLs (specially orders). Let's adjust the 
+       Rules in the backend (firebase accordingly). Watch the video 331. Accessing protected resources, for the adjustments need to be 
+       made in the backend. After adjusting the Rules in the database, now all the users can access ingredients as before 
+       but only loggedin users can access orders page.
+
+       NOTE THIS IS IMPORTANT : After adjusting the backend for orders, we can't get to orders page and it gives 401 error.
+       Now the question is, can we get to the orders page if we login without adjusting our code? 
+       The answer is NO NO. Because, remember that if we restrict access to some page and say we need to have access to this 
+       if we have token, then we need to pass that token with the URL. For example the token needs to be attached to the 
+       orders URL to get access to that page. So, let me change the code in the fetchOrders() and purchaseBurger() 
+       actions (basically wherever we use the orders URL) to receive token. 

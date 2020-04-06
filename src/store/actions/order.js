@@ -7,7 +7,7 @@ export const purchaseBurgerSuccess = (id, orderData) => {
   return {
     type: actionTypes.PURCHASE_BURGER_SUCCESS,
     orderID: id,
-    orderData: orderData
+    orderData: orderData,
   };
 };
 
@@ -16,7 +16,7 @@ export const purchaseBurgerFail = (error) => {
   // we might get error in the purchaseBurger if we are not able to place the order to backend
   return {
     type: actionTypes.PURCHASE_BURGER_FAIL,
-    error: error
+    error: error,
   };
 };
 
@@ -24,16 +24,16 @@ export const purchaseBurgerFail = (error) => {
 // Hence, this needs to be dispatched during purchaseBurger async action below similar to functionality used to be in orderHandler() in ContactData.
 export const purchaseBurgerStart = () => {
   return {
-    type: actionTypes.PURCHASE_BURGER_START //this is dispatched in purchaseBurger below
+    type: actionTypes.PURCHASE_BURGER_START, //this is dispatched in purchaseBurger below
   };
 };
 
 // async action which puts our order into backend
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
   return (dispatch) => {
     dispatch(purchaseBurgerStart()); // this is dispatched to set loading to true in reducer - order.js
     axios
-      .post("/orders.json", orderData)
+      .post("/orders.json?auth=" + token, orderData)
       .then((response) => {
         //this.setState({ loading: false }); // This was used in ContactData orderHandler()
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
@@ -48,7 +48,7 @@ export const purchaseBurger = (orderData) => {
 // sync action - This is used to redirect to homepage localhost:3000/ in checkout page
 export const purchaseInit = () => {
   return {
-    type: actionTypes.PURCHASE_INIT
+    type: actionTypes.PURCHASE_INIT,
   };
 };
 
@@ -57,29 +57,29 @@ export const purchaseInit = () => {
 // sync action - fetchOrderStart is used to set loading to true initially before the orders are fetched completely. This is used in fetchOrder
 export const fetcheOrderStart = () => {
   return {
-    type: actionTypes.FETCH_ORDERS_START
+    type: actionTypes.FETCH_ORDERS_START,
   };
 };
 // sync action - dispatched to reducer and puts the order in to order.js store
 export const fetchOrderSuccess = (orders) => {
   return {
     type: actionTypes.FETCH_ORDERS_SUCCESS,
-    orders: orders
+    orders: orders,
   };
 };
 // sync action - dispatched to reducer
 export const fetchOrderFail = (error) => {
   return {
     type: actionTypes.FETCH_ORDERS_FAIL,
-    error: error
+    error: error,
   };
 };
-
-export const fetchOrders = () => {
+// async action
+export const fetchOrders = (token) => {
   return (dispatch) => {
     dispatch(fetcheOrderStart());
     axios
-      .get("/orders.json")
+      .get("/orders.json?auth=" + token) // the token needs to be passed as it is a secured URL which doesnt work without it. That means, the user needs to be logged in to access this. Also not that this must be ?auth and nothing else
       .then(
         // The response.data we get back is objects and we need to convert that to an array to get orders so that we can map on it.
         (response) => {
@@ -89,7 +89,7 @@ export const fetchOrders = () => {
             // orders.push(response.data[key]);    // I can do this but the problem is we don't get the unique identifier that can be used later in the map function as key. So I will retain the key as well
             orders.push({
               id: key,
-              ...response.data[key]
+              ...response.data[key],
             });
           }
           // this.setState({ orders: orders, loading: false }); // This was used in CDM of Order.js to fetch the orders from backend before redux

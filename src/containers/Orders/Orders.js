@@ -31,7 +31,7 @@ class Orders extends Component {
     // Above commented code has been moved to redux - order.js action and reducer
 
     // Action creator in - orders.js - redux to do the same above task through redux
-    this.props.onFetchOrders();
+    this.props.onFetchOrders(this.props.token);
   }
 
   render() {
@@ -54,13 +54,14 @@ class Orders extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchOrders: () => dispatch(actions.fetchOrders())
+    onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
   };
 };
 
