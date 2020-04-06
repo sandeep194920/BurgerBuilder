@@ -888,3 +888,11 @@ Set 6 Workflow as follows:
     hence using redux store isAuthenticated in Layout and passing it on to NavigationItem. 
     Now we have implemented the logic for showing Logout when the user is authenticated but we still don't logout when we click that. 
     Let's do this next.
+
+   89. Now what should happend if I click on logout button (Manual logout functionality Implementation) ? It should clear the token obviously
+       in the reducer and then redirect back to home page. This can be done in multiple ways but let's create a Logout container 
+       and then dispatch the action there. The reason we cannot directly dispatch in the NavigationItem is its the functional component
+       as told above in 88.
+       Here I've used CDM in Logout to dispatch the logout action and in the render of Logout we Redirect to /, homepage.
+       Here I got a doubt; If I redirect in render then will it reach CDM ? 
+       To confirm this, I added console.log both in render and CDM and it worked. Even though we redirect, the CDM is reached after redirecting to / in Logout.
