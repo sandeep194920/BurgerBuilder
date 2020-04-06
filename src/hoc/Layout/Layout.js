@@ -3,6 +3,7 @@ import Aux from "../Aux/Aux";
 import classes from "./Layout.module.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import Sidedrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import { connect } from "react-redux";
 
 class Layout extends Component {
   // The click listener of the backdrop component of SideDrawer is handled here because this is the common component
@@ -11,7 +12,7 @@ class Layout extends Component {
 
   // state has been primarily added for the above mentioned reasons. This component initially was a functional based
   state = {
-    showSideDrawer: false
+    showSideDrawer: false,
   };
 
   sidDrawerClosedHandler = () => {
@@ -24,7 +25,7 @@ class Layout extends Component {
 
   sidDrawerToggleHandler = () => {
     this.setState((prevState) => ({
-      showSideDrawer: !prevState.showSideDrawer
+      showSideDrawer: !prevState.showSideDrawer,
     }));
   };
 
@@ -32,7 +33,10 @@ class Layout extends Component {
     return (
       <Aux>
         {/* <div>Toolbar, Sidedrawer,Backdrop</div> */}
-        <Toolbar drawerToggleClicked={this.sidDrawerToggleHandler} />
+        <Toolbar
+          isAuth={this.props.isAuthenticated}
+          drawerToggleClicked={this.sidDrawerToggleHandler}
+        />
         {/* Instead of sideDrawerToggleHandler above in the toolbar, we could have used sidDrawerOpenHandler because
         we are using this button just to open the sideDrawer. However, it might help us in future just in case */}
         <Sidedrawer
@@ -45,4 +49,10 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null, // passed into the toolbar so that we can access this in NavigationItem. Directly not using this in NavigationItem as this is a functional comp. Ofcourse, react hooks can be used on a sidenote
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

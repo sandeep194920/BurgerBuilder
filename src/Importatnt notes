@@ -872,3 +872,19 @@ Set 6 Workflow as follows:
        if we have token, then we need to pass that token with the URL. For example the token needs to be attached to the 
        orders URL to get access to that page. So, let me change the code in the fetchOrders() and purchaseBurger() 
        actions (basically wherever we use the orders URL) to receive token. 
+  
+   88. Let's update UI a bit. Now even after logging in, we see Authenticate navigation item. Let's change that to Logout if 
+       we are authenticated. This needs to be done in NavigationItem component but the problem is we cannot use connect here 
+       since this is a functional component. Ofcourse react hooks can be used or this can be turned into class based component
+       but we'll take a different approach. Let's find the suitable class based component close to NavigationItem and we can 
+       implement this there. Layout is such component which is close to the NavigationItem so let's use that. 
+
+                 __ Toolbar---\
+                |              |
+       Layout---|              |-----NavigationItems --- NavigationItem
+ (connect used) |___ SidDrawer /
+
+    All the components except Layout are functional and connect can't be used (though it can be used through react-hooks or these can be turned to class based),
+    hence using redux store isAuthenticated in Layout and passing it on to NavigationItem. 
+    Now we have implemented the logic for showing Logout when the user is authenticated but we still don't logout when we click that. 
+    Let's do this next.
