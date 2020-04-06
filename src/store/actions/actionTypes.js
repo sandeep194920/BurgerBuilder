@@ -17,6 +17,9 @@ export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
 export const FETCH_ORDERS_FAIL = "FETCH_ORDERS_FAIL";
 
 // authenticated related actions
+// Signup and login related
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
+// logout related
+export const AUTH_LOGOUT = "AUTH_LOGOUT";

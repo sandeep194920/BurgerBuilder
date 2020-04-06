@@ -845,3 +845,17 @@ Set 6 Workflow as follows:
        by firebase backend. By using the error message, during signin when we type wrong password we get the error message
        INVALID_PASSWORD and during signup if we try to use the email id which already exists we get EMAIL_EXISTS.
    
+   86. Now that we have the token with us, the token is valid for 60 minutes only. If we don't logout for 60 minutes after 
+       logging in the token expires and now the token we have is invalid which we don't see it. So now let's add the code 
+       in the action creator auth.js to invalidate the token after one hour so that we can update the UI saying the token 
+       is no longer valid by logging out the user.
+
+       So, what exactly happens after logging in ?
+       * Take a look at the auth.js action creator auth. Inside that we call authSuccess
+       * we use authSuccess to tell that the user is successfully authenticated and dispatch the received token into reducer
+       * This token gets expired at 60th minute, so the current token gets expired after 60 minutes
+       * So we need to logout after 60th minute automatically. How we do it is by using checkAuthTimeout async action creator
+       * checkAuthTimeout is executed after getting token from authSuccess (after logging in)
+       * checkAuthTimeout calls/dispatches logout after 60 minutes to deactivate the token by using setTimeout hence this is async action
+       * Note that we have implemented an auto logout after one hour now but we still haven't implemented manual logout which we will do it later.
+

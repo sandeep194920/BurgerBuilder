@@ -26,6 +26,23 @@ export const authFail = (error) => {
   };
 };
 
+// sync - logout action
+export const logout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT,
+  };
+};
+
+// async action (async because we are using setTimeout) - used to check if the token in still valid or not due to the timeout. We will dispatch this after getting the success response
+// in auth below right after dispatching authSuccess()
+export const checkAuthTimeout = (expirationTime) => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime * 1000); // expiration time we get from backend is in milliseconds. To convert into seconds we multiply by 1000
+  };
+};
+
 // aysnc action : to get from backend. This info got from async action below will be sent to reducer through sync actions above
 export const auth = (email, password, isSignup) => {
   //if signup then we send to one url, if signin then different url. To know that we use isSignup here which is passed by Auth.js component
@@ -49,8 +66,9 @@ export const auth = (email, password, isSignup) => {
       .post(url, authData)
       .then((response) => {
         // here in response.data which is dipatched below, we get the token. This is dispatched in authSuccess() below and stored in reducer
-        console.log(response);
+        console.log(response); // 1  - addressed below in dispatch(checkAuthTimeout(response.data.expiresIn)) line.
         dispatch(authSuccess(response.data.idToken, response.data.localId));
+        dispatch(checkAuthTimeout(response.data.expiresIn)); // you can see this by logging in. The console log above commented as 1 gives you the data which contains this expiresIn attribute for your reference
       })
       .catch((error) => {
         console.log(error);
