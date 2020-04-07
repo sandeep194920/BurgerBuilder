@@ -5,6 +5,8 @@ import classes from "./Auth.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Spinner from "../../components/UI/Spinner/Spinner";
+// We need to redirect to homepage after signup or login
+import { Redirect } from "react-router";
 
 class Auth extends Component {
   state = {
@@ -142,8 +144,15 @@ class Auth extends Component {
       errorMessage = <p>{this.props.error.message}</p>;
     }
 
+    // if we are authenticated then we need to get redirected to the homepage after logging in
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/" />;
+    }
+
     return (
       <div className={classes.Auth}>
+        {authRedirect}
         {errorMessage}
         <form onSubmit={this.submitHandler}>
           {form}
@@ -160,6 +169,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
+    isAuthenticated: state.auth.token != null,
   };
 };
 

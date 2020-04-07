@@ -6,7 +6,7 @@ const controls = [
   { label: "Salad", type: "salad" },
   { label: "Meat", type: "meat" },
   { label: "Cheese", type: "cheese" },
-  { label: "Bacon", type: "bacon" }
+  { label: "Bacon", type: "bacon" },
 ];
 // ].map((control) => <BuildControl label={control.label} key={control.type} />);
 // can also uncomment the above line and modify JSX accordingly. In that case you can call only {controls} inside div below
@@ -34,7 +34,7 @@ const buildControls = (props) => {
         className={classes.OrderButton}
         disabled={!props.purchasable}
       >
-        ORDER NOW
+        {props.isAuth ? "ORDER NOW" : "SIGNUP TO ORDER"}
       </button>
     </div>
   );

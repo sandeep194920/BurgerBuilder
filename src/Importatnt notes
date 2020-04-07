@@ -896,3 +896,16 @@ Set 6 Workflow as follows:
        Here I've used CDM in Logout to dispatch the logout action and in the render of Logout we Redirect to /, homepage.
        Here I got a doubt; If I redirect in render then will it reach CDM ? 
        To confirm this, I added console.log both in render and CDM and it worked. Even though we redirect, the CDM is reached after redirecting to / in Logout.
+    
+    90. Let's work a bit on UI. We currently see the orders link even if we are not authenticated. Let's hide this for unauthenticated users.
+        Also, let's make the ORDER NOW button as Signup to Continue button if not authenticated. 
+        Implementing the removal of Orders link is easy and straight forward, which we do it in NavigationItems.js using conditional rendering.
+        For making ORDER NOW button as SIGNUP TO ORDER, we should do this in BuildControls which is a functional component. So we do this in 
+        BurgerBuilder and then pass this to BuildControls similar to what we did in 88.
+
+        So, now we check the caption of the button. If authenticated then we say ORDER NOW else we say SIGNUP TO ORDER and changing this caption alone is 
+        not enough. The idea is when SIGNUP TO ORDER is clicked then it should take us to Authenticate page, and if ORDER NOW is 
+        clicked it should take us to checkout as before. 
+        Let's first understand where it takes us if this button (SIGNUP TO ORDER or ORDER NOW) is clicked. This takes us to purchaseHandler. 
+        Here we need to check if authenticated and if yes then we need to proceed as before to set purchasing to true else we need to redirect 
+        to Auth page. This has been implemented and there is a problem here which we will solve next.

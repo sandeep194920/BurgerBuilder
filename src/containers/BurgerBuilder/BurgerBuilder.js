@@ -20,7 +20,7 @@ class BurgerBuilder extends Component {
   // Hence creating state to do the same and pass it to Burger --> BurgerIngredient component
 
   state = {
-    purchasing: false
+    purchasing: false,
     // loading: false, // this is not used anymore because the logic which was in cdm to get the ingredients from backend has been moved to the action creator - burgerBuilder.js
     // error: false // Used for ingredients fetching in componentDidMount; if ingredients fail then this will be used to display error message
     // This error is now fetched from reducer -burgerBuilder.js
@@ -95,8 +95,13 @@ class BurgerBuilder extends Component {
   };
 
   // When Order Now is clicked, it opens modal and the backdrop (Backdrop has been put inside Modal)
+  // When SIGNUP TO ORDER button is clicked, it redirects to the Auth.js page, hence we use if loop inside purchaseHandler
   purchaseHandler = () => {
-    this.setState({ purchasing: true });
+    if (this.props.isAuthenticated) {
+      this.setState({ purchasing: true });
+    } else {
+      this.props.history.push("/auth"); // this takes us to auth page when clicked on SIGNUP TO ORDER btn (user is not authenticated here)
+    }
   };
 
   // When Backdrop is clicked/Cancel button is clicked (inside OrderSummary), it closes the modal and the backdrop (Backdrop has been put inside Modal)
@@ -159,6 +164,7 @@ class BurgerBuilder extends Component {
             price={this.props.totalPrice}
             purchasable={this.updatePurchaseState(this.props.ingredients)} //Ne need of argument here as this ingredients can be directly used in updatePurchaseState() method
             ordered={this.purchaseHandler}
+            isAuth={this.props.isAuthenticated} // used in the BuildControls to ORDER NOW if logged in and Signup now if not authenticated
           />
         </Aux>
       );
@@ -190,7 +196,8 @@ const mapStateToProps = (state) => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
-    error: state.burgerBuilder.error
+    error: state.burgerBuilder.error,
+    isAuthenticated: state.auth.token != null,
   };
 };
 
@@ -200,7 +207,7 @@ const mapDispatchToProps = (dispatch) => {
     onIngredientRemoved: (ingName) =>
       dispatch(actions.removeIngredient(ingName)),
     onInitIngredients: () => dispatch(actions.initIngredients()),
-    onInitPurchase: () => dispatch(actions.purchaseInit())
+    onInitPurchase: () => dispatch(actions.purchaseInit()),
   };
 };
 
