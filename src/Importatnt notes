@@ -897,15 +897,33 @@ Set 6 Workflow as follows:
        Here I got a doubt; If I redirect in render then will it reach CDM ? 
        To confirm this, I added console.log both in render and CDM and it worked. Even though we redirect, the CDM is reached after redirecting to / in Logout.
     
-    90. Let's work a bit on UI. We currently see the orders link even if we are not authenticated. Let's hide this for unauthenticated users.
-        Also, let's make the ORDER NOW button as Signup to Continue button if not authenticated. 
-        Implementing the removal of Orders link is easy and straight forward, which we do it in NavigationItems.js using conditional rendering.
-        For making ORDER NOW button as SIGNUP TO ORDER, we should do this in BuildControls which is a functional component. So we do this in 
-        BurgerBuilder and then pass this to BuildControls similar to what we did in 88.
+   90. Let's work a bit on UI. We currently see the orders link even if we are not authenticated. Let's hide this for unauthenticated users.
+       Also, let's make the ORDER NOW button as Signup to Continue button if not authenticated. 
+       Implementing the removal of Orders link is easy and straight forward, which we do it in NavigationItems.js using conditional rendering.
+       For making ORDER NOW button as SIGNUP TO ORDER, we should do this in BuildControls which is a functional component. So we do this in 
+       BurgerBuilder and then pass this to BuildControls similar to what we did in 88.
 
-        So, now we check the caption of the button. If authenticated then we say ORDER NOW else we say SIGNUP TO ORDER and changing this caption alone is 
-        not enough. The idea is when SIGNUP TO ORDER is clicked then it should take us to Authenticate page, and if ORDER NOW is 
-        clicked it should take us to checkout as before. 
-        Let's first understand where it takes us if this button (SIGNUP TO ORDER or ORDER NOW) is clicked. This takes us to purchaseHandler. 
-        Here we need to check if authenticated and if yes then we need to proceed as before to set purchasing to true else we need to redirect 
-        to Auth page. This has been implemented and there is a problem here which we will solve next.
+       So, now we check the caption of the button. If authenticated then we say ORDER NOW else we say SIGNUP TO ORDER and changing this caption alone is 
+       not enough. The idea is when SIGNUP TO ORDER is clicked then it should take us to Authenticate page, and if ORDER NOW is 
+       clicked it should take us to checkout as before. 
+       Let's first understand where it takes us if this button (SIGNUP TO ORDER or ORDER NOW) is clicked. This takes us to purchaseHandler. 
+       Here we need to check if authenticated and if yes then we need to proceed as before to set purchasing to true else we need to redirect 
+       to Auth page. This has been implemented and there is a problem here which we will solve next.
+
+   91.The problem in this is, currently if we are not signed in and add ingredients to the burger and click on SIGNUP TO ORDER 
+      button then we will be redirected to auth page for signing up or signingin which is good, but after signingup/in we will 
+      be redirected back to the home page and the ingredients we added before clicking the SIGNUP TO ORDER button will be lost. 
+      How do we fix this issue? We should ideally be redirected to the checkout page after signingin since we have added the ingredients 
+      already before clicking SIGNUP TO ORDER btn. How do we achieve this of redirecting to checkout from auth page if we reach the 
+      auth page by clicking SIGNUP TO ORDER btn?
+      
+      * First if user logs in and then builds burger 
+
+      User Login --> Redirects to homepage --> Build burger --> Click ORDER NOW --> Checkout --> Done
+
+      * First if user builds the burger without logging in (Note RDPath is the authRedirectPath in auth reducer based on which the redirection from auth page happens after the user logs in)
+            
+      -> Note that RDPath is set to "/", homepage
+      
+      Add/Remove ingredients --> Click SIGNUP TO ORDER --> Redirected to Login Page (RDPath set to /checkout) --> Login and come to Checkout based on RDPath --> Checkout --> Done 
+

@@ -112,6 +112,11 @@ class Auth extends Component {
       };
     });
   };
+  // Loaded after render of Auth is done
+  componentDidMount() {
+    if (!this.props.buildingBurger && this.props.authRedirectPath !== "/")
+      this.props.onSetAuthRedirect("/"); // This is executed after this Auth comp has been loaded. Here, we set the redirectPath to homepage
+  }
 
   render() {
     // Similar to the one in ContactData
@@ -147,7 +152,9 @@ class Auth extends Component {
     // if we are authenticated then we need to get redirected to the homepage after logging in
     let authRedirect = null;
     if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to="/" />;
+      console.log("The path is ");
+      console.log(this.props.authRedirectPath);
+      authRedirect = <Redirect to={this.props.authRedirectPath} />;
     }
 
     return (
@@ -170,6 +177,8 @@ const mapStateToProps = (state) => {
     loading: state.auth.loading,
     error: state.auth.error,
     isAuthenticated: state.auth.token != null,
+    buildingBurger: state.burgerBuilder.building,
+    authRedirectPath: state.auth.authRedirectPath,
   };
 };
 
@@ -177,6 +186,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (email, password, isSignup) =>
       dispatch(actions.auth(email, password, isSignup)),
+    onSetAuthRedirect: (path) => dispatch(actions.setAuthRedirect(path)), // setting the authRedirectPath (property in the auth reducer) to homepage here
   };
 };
 

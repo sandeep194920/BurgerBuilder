@@ -6,6 +6,7 @@ const initialState = {
   userId: null,
   error: null,
   loading: false,
+  authRedirectPath: "/", // this changes on different conditions like if user (not signedin) clicks signedup btn and goes back to auth and then redirects to checkout page etc.
 };
 
 const authStart = (state, action) => {
@@ -31,6 +32,12 @@ const authLogout = (state, action) => {
   });
 };
 
+const setAuthRedirectPath = (state, action) => {
+  return updateObject(state, {
+    authRedirectPath: action.path,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -41,6 +48,8 @@ const reducer = (state = initialState, action) => {
       return authSuccess(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
+    case actionTypes.SET_AUTH_REDIRECT:
+      return setAuthRedirectPath(state, action);
     default:
       return state;
   }

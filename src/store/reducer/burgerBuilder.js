@@ -5,24 +5,26 @@ const INGREDIENT_PRICES = {
   salad: 0.5,
   cheese: 0.4,
   meat: 1.3,
-  bacon: 0.7
+  bacon: 0.7,
 };
 
 const initialState = {
   ingredients: null,
   totalPrice: 4,
-  error: false
+  error: false,
+  building: false, // this is used to redirect from auth to checkout when user is not signedup/in when building the burger
 };
 
 // utility function to reduce number of lines in ADD_INGREDIENT case
 const addIngredient = (state, action) => {
   const updatedIngredient = {
-    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+    [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
   };
   const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
   const updatedState = {
     ingredients: updatedIngredients,
-    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    building: true, // this is used to redirect from auth to checkout when user is not signedup/in when building the burger
   };
 
   return updateObject(state, updatedState);
@@ -31,12 +33,13 @@ const addIngredient = (state, action) => {
 // utility function to reduce number of lines in REMOVE_INGREDIENT case
 const removeIngredient = (state, action) => {
   const updatedIng = {
-    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
+    [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
   };
   const updatedIngs = updateObject(state.ingredients, updatedIng);
   const updatedSt = {
     ingredients: updatedIngs,
-    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+    building: true, // this is used to redirect from auth to checkout when user is not signedup/in when building the burger
   };
 
   return updateObject(state, updatedSt);
@@ -49,10 +52,11 @@ const setIngredients = (state, action) => {
       salad: action.ingredients.salad,
       bacon: action.ingredients.bacon,
       meat: action.ingredients.meat,
-      cheese: action.ingredients.cheese
+      cheese: action.ingredients.cheese,
     },
     error: false, // this is important bcoz if we had error before then this clears it out
-    totalPrice: 4 // this helps when redirecting to homepage after redirection after first order is been placed
+    totalPrice: 4, // this helps when redirecting to homepage after redirection after first order is been placed
+    building: false, // this is used to redirect from auth to checkout when user is not signedup/in when building the burger
   });
 };
 

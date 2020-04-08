@@ -76,3 +76,11 @@ export const auth = (email, password, isSignup) => {
       });
   };
 };
+
+// sync action - to update authRedirectPath in the auth reducer on differnt auth conditions
+export const setAuthRedirect = (path) => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT,
+    path: path,
+  };
+};
