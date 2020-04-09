@@ -947,3 +947,4 @@ Set 6 Workflow as follows:
          authSuccess can be dispatched to log the user again.
          If confusing then watch the video 336. Persistent Auth state with local storage,for much more clarity.
        
+   93. If you want to use refresh token (which is not that safe and not used here) please refer video. Ensuring App Security for insights on it.
