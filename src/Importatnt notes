@@ -948,3 +948,8 @@ Set 6 Workflow as follows:
          If confusing then watch the video 336. Persistent Auth state with local storage,for much more clarity.
        
    93. If you want to use refresh token (which is not that safe and not used here) please refer video. Ensuring App Security for insights on it.
+   
+   94. Not showing localhost:3000/orders and localhost:3000/checkout page for unauthenticated users. In point 90, we hide the orders nav link for unauthenticated users so that 
+       they can't click the link with out logging in. That's good but there in point 90 we didn't fix one thing. If the user manually 
+       visits the URL localhost:3000/orders or localhost:3000/checkout, then we see an error 401 returned by backend. Wouldn't it be nice if we redirect the unauthenticated 
+       users back to homepage if they visit orders page manually. Let's do that in App.js component. 
