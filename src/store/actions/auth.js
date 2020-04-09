@@ -28,6 +28,10 @@ export const authFail = (error) => {
 
 // sync - logout action
 export const logout = () => {
+  // clearing the local storage token due to expiry of expirationTime
+  localStorage.removeItem("token");
+  localStorage.removeItem("expirationDate");
+  localStorage.removeItem("userId");
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -67,6 +71,16 @@ export const auth = (email, password, isSignup) => {
       .then((response) => {
         // here in response.data which is dipatched below, we get the token. This is dispatched in authSuccess() below and stored in reducer
         console.log(response); // 1  - addressed below in dispatch(checkAuthTimeout(response.data.expiresIn)) line.
+        localStorage.setItem("token", response.data.idToken); // stored in browser local storage as we don't want the token to be lost on page refresh
+
+        // With token, we also need to store the expiration time in the local storage. But the expTime can't be stored directly like we store token.
+        // This is because the expTime is just a number which is not that useful. We need to know when the token expires. So the token expires in 60 minutes and
+        // the current time of current day is known and then we add this expTime 60 minutes to the current time of current day to know when the token expires.
+        const expirationDate = new Date(
+          new Date().getTime() + response.data.expiresIn * 1000
+        );
+        localStorage.setItem("expirationDate", expirationDate);
+        localStorage.setItem("userId", response.data.localId);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
         dispatch(checkAuthTimeout(response.data.expiresIn)); // you can see this by logging in. The console log above commented as 1 gives you the data which contains this expiresIn attribute for your reference
       })
@@ -82,5 +96,31 @@ export const setAuthRedirect = (path) => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT,
     path: path,
+  };
+};
+
+// async action - If page refreshes then the localstorage is checked if token exists and is within the expirationTime,
+// if yes then authSuccess is dispatched and the user gets automatically logged in again
+export const authCheckState = () => {
+  return (dispatch) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      dispatch(logout()); // not necessary to dispatch logout here, I could have just done return here as there is no user (no token) to logout, but that is ok
+    } else {
+      // checking if the current time is within the expirationTime which is in the localStorage. If that is the case then the user should be able to use this token, else this token is outdated and shouldnt be used
+      const expirationDate = new Date(localStorage.getItem("expirationDate")); // this is wrapped in the new Date() because the localstorage.getItem() will be a string
+      if (expirationDate > new Date()) {
+        // new Date() is now
+        const userId = localStorage.getItem("userId");
+        dispatch(authSuccess(token, userId));
+        dispatch(
+          checkAuthTimeout(
+            (expirationDate.getTime() - new Date().getTime()) / 1000
+          ) // the diffrence (in milliseconds, on division by 1000 we get seconds) says how much time the user still has for the token to be valid
+        );
+      } else {
+        dispatch(logout());
+      }
+    }
   };
 };

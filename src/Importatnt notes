@@ -927,3 +927,23 @@ Set 6 Workflow as follows:
       
       Add/Remove ingredients --> Click SIGNUP TO ORDER --> Redirected to Login Page (RDPath set to /checkout) --> Login and come to Checkout based on RDPath --> Checkout --> Done 
 
+   92. NOT LOSING TOKEN ON PAGE REFRESH - The major problem now is, if the user logs in then the token is stored and its all good, but if the user refreshes the page then 
+       redux store and the local state is set to default hence we lose all the data including the token. The reason we lose all the data 
+       on refresh is, we download single page app again. How do we handle this?
+       To persist the information we make use of a browser api called localstorage which is built into javascript. I'll use this is 
+       auth action creator in auth.js before dispatching authSuccess.
+       Inspect in Application tab in chrome and we get the fields we added into local storage. We have stored token and the 
+       expiration date. The expiration date that we have stored in localstorage is not the number which we get from backend but 
+       we modified it (in the auth action creator) to get the exact time it expires. Using these two - token and the expiration time 
+       we can keep the user logged in even if he refreshes the page. If the time has expired then we want to clean this up in the 
+       local storage because it is no longer valid. Cleaning this up can be done in logout dispatch action.
+       This clearing alone is not enough. What happens if we refresh now? We are still not using localstorage and using the store's data still.
+       So how to use localstorage? 
+       * When page is refreshed then the data in reducer is lost but the same data which is in localstorage remains as it is.
+       * When app reloads, then we somehow need to check if the token is stored in localstorage and is the expirationTime stored in localstorage is still valid.
+       * If this is valid then we need to dispatch authSuccess to log the user again after page refresh.
+       * Where can this be done? The first component that is hit when page is refreshed is the App component. There, we need to dispatch the action
+         authCheckState() in auth.js actions which checks if the token stored in localstorage still exists and also if the expirationTime has not expired. After checking this the 
+         authSuccess can be dispatched to log the user again.
+         If confusing then watch the video 336. Persistent Auth state with local storage,for much more clarity.
+       
