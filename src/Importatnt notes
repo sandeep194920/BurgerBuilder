@@ -958,4 +958,6 @@ Set 6 Workflow as follows:
        only the orders he/she placed. For this lets include the userId (which is stored in auth store) in the order in ContactData in orderHandler().
        This then calls and dispatches purchaseBurger() in the orders action creator. Not only should the code be adjusted in the code in orders.js actions & Orders.js container 
        but also in backend in rules (.indexOn) section because we are using orderBy in auth action creator. Watch video. 340. Displaying user specific orders.
-       
+
+* * * Tag v4.0-release - completed - DONE WITH AUTHENTICATION RELATED PART .
+
