@@ -101,7 +101,6 @@ class ContactData extends Component {
 
   orderHandler = (event) => {
     event.preventDefault(); // Since we use this inside a form, it treats the button below which calls this as submit and thus reloads the page which we don't need. Hence implementing this method here.
-    console.log(this.props);
 
     // We now get the ingredient props here from Checkout by passing prop inside Route with the help of render inside checkout component.
     // We place the code below responsible for sending order to the backend. We can use the code we initally used in the purchaseContinueHandler

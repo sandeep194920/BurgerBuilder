@@ -171,8 +171,6 @@ class Auth extends Component {
     // if we are authenticated then we need to get redirected to the homepage after logging in
     let authRedirect = null;
     if (this.props.isAuthenticated) {
-      console.log("The path is ");
-      console.log(this.props.authRedirectPath);
       authRedirect = <Redirect to={this.props.authRedirectPath} />;
     }
 
