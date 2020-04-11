@@ -968,4 +968,7 @@ Set 6 Workflow as follows:
    96. In the purchaseBurgerStart() reducer part in orders.js I have set loading:false which is not correct. It should be loading:true because it helps 
        the spinner to spin if it is loading (true) while the purchaseBurger is happening untill it finishes.
    
-   
+   97. In /checkout page, the Burger is misalligned which is not exactly placed in center. This is because the CheckoutSummary div is wrapping the div 
+       in which the Burger is placed. The div in which the Burger is placed has width of 100% and the outer div (CheckoutSummary) has a specific width (500px in our case).
+       This is due to the media query in CheckoutSummary. Let's remove that and this will be fixed.  
+       

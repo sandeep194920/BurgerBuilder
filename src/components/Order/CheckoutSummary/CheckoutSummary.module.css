@@ -4,8 +4,9 @@
   margin: auto;
 }
 
-@media (min-width: 700px) {
+/* This is not required because the above width 80% will be suitable for any screens. The below 500px width might spoil the look for small screens */
+/* @media (min-width: 700px) {
   .CheckoutSummary {
     width: 500px;
   }
-}
+} */
