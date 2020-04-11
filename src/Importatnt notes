@@ -2,16 +2,22 @@
 
 Set 1 Workflow as follows:
 
-1. Initial videos show how to setup the structure. Initially, everything will be div and we replace one by one with component
+1. Initial videos show how to setup the structure. Initially, everything will be div and we replace one by one with component.
+
 2. In video 159, he shows how to convert JS object to array. I've modified a little bit but the concept is same.
   * Doubt I have in this concept of conversion : He uses [...Array(some length)].map(........)
   * Here I see [...Array(lenght)] creates [-,-,-] empty spaces and maps though this, fills the spaces with content and 
     then returns it. But I tried doing - new Array(length).map() and it didn't work. But I see even this creates 
     empty spaces like this [-,-,-].  I will answer this below if I find it.
-Commit (0cf0fa5) - added functionality to convert object to array in burger to pass it t…
-3. In video 160, in the process of flattening the array, I used .flat() but he used reduce function. Both are right, but learn this, it might be useful.
+ 
+ Commit (0cf0fa5) - added functionality to convert object to array in burger to pass it t…
+
+3. In video 160, in the process of flattening the array, I used .flat() but he used reduce function. Both are right, but learn 
+   this, it might be useful.
+
 4. To know a bit about css flexbox - https://www.youtube.com/watch?v=JJSoEo8JSnc
    Flex box is best way to design grid css. 
+
 5. Now we are building BuildControls (which includes BuildControl) component.
 
 To summarize workflow till here: 
@@ -39,13 +45,17 @@ Next we will hookup BuildControls to state (video 163 - Connecting State to Buil
 Set 2 Workflow as follows:
 
 6. Added (My way to connect the state to BuildControls), and also disabled 'Less' btn if the ingredients are 0
-7. Commented the functionalities : addIngredient, removeIngredient in each component which I had created (comments say - My way of ... )
+
+7. Commented the functionalities : addIngredient, removeIngredient in each component which I had created 
+   (comments say - My way of ... )
+
 8. Built the same functionalities in Max's way. I did this just to compare my way to his and make my building process better
-  Note : I added a method countIngredients() in BurgerBuilder component to help remove ingredients. But when I saw Max's 
-  explanation, I didn't feel the need to add this. So you can see the uncommented way of doing the same in removeIngredientHandler()
-  Also, I felt disabled ingredient button functionality - My way is better than Max's way.
+   Note : I added a method countIngredients() in BurgerBuilder component to help remove ingredients. But when I saw Max's 
+   explanation, I didn't feel the need to add this. So you can see the uncommented way of doing the same in 
+   removeIngredientHandler(). Also, I felt disabled ingredient button functionality - My way is better than Max's way.
 
 9. Added price functionality and also dispalyed in UI. It's pretty straight forward.
+
 10. Now adding Order Now button in BuildControls component.
   * For this, it will also be good to disable this button if no ingredients are added. 
     Hence we make use of 'purchasable' property in BurgerBuilder state. If it's true then it is purchasable, else no.
@@ -58,24 +68,30 @@ Set 2 Workflow as follows:
     explanation about map and reduce shown with and without return statement
 
 11. Modal, Backdrop creation phase
-  * Modal is a wrapper (container), shown in middle of the page. Inside this, we can show any component (props.children) as per our needs
+  * Modal is a wrapper (container), shown in middle of the page. Inside this, we can show any component (props.children) as 
+    per our needs
   * Backdrop is used with Modal so that when the Backdrop is clicked, the modal disappears
   * Backdrop is not put inside Modal folder itself because, the backdrop can also be combined with sidedrawer (designed later)
-  * WHERE TO ADD ? --> So, first develop the modal and then think which container/ component is the suitable place to add this modal,
-    in our app it is BurgerBuilder container since it has state and other things there
+  * WHERE TO ADD ? --> So, first develop the modal and then think which container/ component is the suitable place to add this 
+    modal, in our app it is BurgerBuilder container since it has state and other things there
   
 12. Created OrderSummary
-13. Dynamically showing OrderSummary Modal now. 
+
+13. Dynamically showing OrderSummary Modal now.
+
 14. Created a Backdrop and added it to the Modal. We can add Backdrop anywhere like App or Layout, but then we
     need to make sure that we handle that properly by managing state etc..
     * But it makes more sense to place Backdrop inside Modal (For sidedrawer, its also suits to place backdrop in sidedrawer).
-      This is because Modal is closely connected with Backdrop. When Modal opens or closes, then Backdrop also needs to open/close.
-    * We also implement onClick in Backdrop because, as I said, if Modal closes then Backdrop should also close. Clicking BD should close both modal and BD.
+      This is because Modal is closely connected with Backdrop. When Modal opens or closes, then Backdrop also needs to 
+      open/close.
+    * We also implement onClick in Backdrop because, as I said, if Modal closes then Backdrop should also close. 
+      Clicking BD should close both modal and BD.
 
 15. Two buttons are now required to be present in OrderSummary. So it's better to create its own component. Hence created
     Button in UI folder. 
 
-16. Now that we built the Button, and used two buttons (Continue and Cancel) in the OrderSummary, we now need to implement the onClick for them.
+16. Now that we built the Button, and used two buttons (Continue and Cancel) in the OrderSummary, we now need to implement the 
+    onClick for them.
     Cancel Button is same as clicking backdrop so we can use purchaseCancelHandler (as backdrop) for that. We need to 
     implement Continue button click, and this will be purchaseContinueHandler. 
     * First we just give alert message in purchaseContinueHandler just so we know it's working. Later we will tweak it.
@@ -83,27 +99,29 @@ Set 2 Workflow as follows:
 17. Adding the price in the OrderSummary before we move to build Toolbar
 
 
-* * * Tag v0.2 - completed - build the burger, continue checkout or cancel. Now proceeding with the toolbar in the next version. Note: Continue button just shows alert for now. It's yet to be implemented
+* * * Tag v0.2 - completed - build the burger, continue checkout or cancel. Now proceeding with the toolbar in the next version. 
+      Note: Continue button just shows alert for now. It's yet to be implemented
 
 Set 3 Workflow as follows:
 
 18. Design of Toolbar - We are going to add this component in Layout component. Toolbar resides in Navigation Folder.
-    Other components like NavigationItems will also reside in Navigation component. (Refer point number 5 bullet points about Toolbar)
-    * Note: BEST PRACTICE : The toolbar component should contain <header></header> with in which the other components like button(for sidedrawer),
-          Logo, and navigation items should be. Navigation items inside the toolbar should be in <nav></nav>
-    * Note: z-index for toolbar is 90, backdrop 100, sidedrawer is 200 and modal 500. First Modal, next backdrop, next sidedrawer and then toolbar. 
-      We will see sidedrawer later.
+    Other components like NavigationItems will also reside in Navigation component.
+    (Refer point number 5 bullet points about Toolbar)
+    * Note: BEST PRACTICE : The toolbar component should contain <header></header> with in which the other components like 
+    button(for sidedrawer),Logo, and navigation items should be. Navigation items inside the toolbar should be in <nav></nav>
+    * Note: z-index for toolbar is 90, backdrop 100, sidedrawer is 200 and modal 500. First Modal, next backdrop, next sidedrawer 
+    and then toolbar. We will see sidedrawer later.
 
 19. Logo - Added from Max's resource file. In Logo.module.css, we set box-sizing:border-box. The meaning of this is - we
-           need the height of the .Logo to be 80%, and we also need padding to be the part of this. That is the meaning of
-           box-sizing:border-box
+    need the height of the .Logo to be 80%, and we also need padding to be the part of this. That is the meaning of
+    box-sizing:border-box.
            
 20. Now we need to do the navigation items which go into the <nav></nav> in the toolbar. We need to outsource this because 
     we will be using it again in the sidedrawer. NavigationItems component is created for this and then NavigationItem is created.
 
-21. Now that we added Navigation to toolbar (desktop), it's time to add Navigation to mobile devices and that is by sidedrawer component. Now 
-    we added SidDrawer but the logo looks big. So logo and navigation items need to be taken care of, so we next include
-    responsive css to NavigationItem.
+21. Now that we added Navigation to toolbar (desktop), it's time to add Navigation to mobile devices and that is by sidedrawer 
+    component. Now we added SidDrawer but the logo looks big. So logo and navigation items need to be taken care of, so we next 
+    include responsive css to NavigationItem.
 
     Note: So the problem at this point is that, the logo is bigger in sidedrawer. The reason is, in the Logo css, we 
     set height of logo to 80% to look good in the toolbar. But the same logo component when used in the sidedrawer looks
@@ -116,7 +134,8 @@ Set 3 Workflow as follows:
        we are actually setting the height of the logo when in toolbar or sidedrawer when those components are used accordingly.
   
    Here we are following second approach which I think makes more sennse as the logo can then be generic in logo css.
-   In conclusion, we reset logo height both in sidedrawer as well as toolbar accordingly. REFER Video 177. Working on Responsive Adjustments to understand this
+   In conclusion, we reset logo height both in sidedrawer as well as toolbar accordingly. REFER Video 177. Working on 
+   Responsive Adjustments to understand this.
 
 22. Now taking care of navigation items to look good on mobile devices (responsive css for NavigationItems). We are making 
     this in Mobile first way.
@@ -133,7 +152,8 @@ Set 3 Workflow as follows:
     actually belongs to the sidedrawer even though it resides on toolbar, because this button is mainly used for 
     showing or hiding sidedrawer.
 
-24. Added Max's css for DrawerToggle
+24. Added Max's css for DrawerToggle.
+
 25. Performance Optimizations : One thing at this point if you notice; the modal simply is rendered everytime
     even though we don't click Order Now btn. The reason for this is, the render method of BurgerBuilder is run everytime
     if something on the BurgerBuilder changes, for example, if I add a component, the BurgerIngredient is added and hence 
@@ -141,9 +161,10 @@ Set 3 Workflow as follows:
     render is run again. When this happens, the Modal (also OrderSummary inside Modal) is run everytime.
 
     So, to summarize, when BurgerIngredient is added/removed the Modal is rendered because it resides in render of BurgerBuilder
-    which changes when this happens. This is a performance hit. To avoid this we use shouldComponentUpdate. This shouldComponentUpdate
-    can be used in two places - Modal or OrderSummary. But the right place is Modal because it is the one which wraps 
-    OrderSummary. So I would convert Modal into class based (can be done with react hooks later) and implement shouldComponentUpdate.
+    which changes when this happens. This is a performance hit. To avoid this we use shouldComponentUpdate. This 
+    shouldComponentUpdate can be used in two places - Modal or OrderSummary. But the right place is Modal because it is the one 
+    which wraps OrderSummary. So I would convert Modal into class based (can be done with react hooks later) and implement 
+    shouldComponentUpdate.
 
    * What is PureComponent (class based) or React Memo (react hooks based)? 
    
@@ -154,9 +175,9 @@ Set 3 Workflow as follows:
 
 26. Modifying the folder structure a bit: When we started the project, the Layout was a stateless component but now 
     it handles state. So for a moment we feel its better to move this folder into Containers. But if we take a closer 
-    look at Layout, all it does is just Wraps the props.children (BurgerBuilder for now and other components like Authentication Page later),
-    and it also has fixed Toolbar and SidDrawer. So, the main focus is that it wraps the children and hence we can consider
-    this to be a higher order component. Moving Layout into hoc folder makes more sense, but its not mandatory. 
+    look at Layout, all it does is just Wraps the props.children (BurgerBuilder for now and other components like Authentication 
+    Page later),and it also has fixed Toolbar and SidDrawer. So, the main focus is that it wraps the children and hence we can 
+    consider this to be a higher order component. Moving Layout into hoc folder makes more sense, but its not mandatory. 
     I am moving it into hoc here.
 
     We are DONE WITH THE CRUCIAL BASE PART OF BURGER BUILDER
@@ -169,8 +190,9 @@ Set 4 Workflow as follows:
 
  Implementing Backend - Firebase - When we click Order Now button, the Orders should go and store in firebase
 
-27. Watch video for steps to create project on firebase console. No point in noting them here. (Video 209 - Creating the Firebase project)
-    Once you setup the database, in the rules part, set read and write to true. This can be changed once authentication is implemented.
+27. Watch video for steps to create project on firebase console. No point in noting them here. (Video 209 - Creating the 
+    Firebase project). Once you setup the database, in the rules part, set read and write to true. 
+    This can be changed once authentication is implemented.
 
     DB URL : https://react-my-burger-664c0.firebaseio.com/
 
@@ -192,10 +214,10 @@ Set 4 Workflow as follows:
     But for now in the purchaseContinueHandler(), we send the order to backend using POST request of axios. The url written
     in the post() is the url written in the post + baseURL written in the instance of axios.
 
-    example :instance --> baseURL('xyz.io'),  post('/orders.json'), mainURL -> 'xyz.io/orders' (For firebase, adding .json is important)
-    The requests and responses are asynchronous. Meaning, it doesn't expect for the program to stop while it requests data from server.
-    Instead the program continues and if we then try using this response in the normal flow, we might get an error 
-    as the response data might not be ready yet. Hence we use promises in then block of POST and GET of axios.
+    example :instance --> baseURL('xyz.io'),  post('/orders.json'), mainURL -> 'xyz.io/orders' (For firebase, adding .json 
+    is important). The requests and responses are asynchronous. Meaning, it doesn't expect for the program to stop while it 
+    requests data from server. Instead the program continues and if we then try using this response in the normal flow, we might 
+    get an error as the response data might not be ready yet. Hence we use promises in then block of POST and GET of axios.
     then block code is a different thread altogether and once its ready then that data is updated in the program wherever 
     necessary.
 
@@ -214,9 +236,8 @@ Set 4 Workflow as follows:
 
 31. Adding Error handler hoc - If something went wrong in a component like BurgerBuilder (or any other component) and we need to 
     display the error message (inside the modal on that component), then we can use a higher order component which 
-    returns a function which when executed executes the passed component with additional modal that exists. Sounds Confusing right?
-    Watch video 213. Handling Errors
-    We use withErrorHandler
+    returns a function which when executed executes the passed component with additional modal that exists. Sounds Confusing 
+    right? Watch video 213. Handling Errors, we use withErrorHandler
     Note : This type of hoc can be implemented on any component for any purpose, not only errors.
 
 32. In the previous task we posted orders into backend. Now let's get ingredients from backend using get method of axios.
@@ -226,19 +247,20 @@ Set 4 Workflow as follows:
 
     1. We changed if loop in the BurgerBuilder component. This is used because we render ingredients from backend and the
        components using this will fail if it's not loaded on time. Hence we show spinner dynamically for which we added if loop.
-       Components included under this if for dynamic rendering are the ones which depends on ingredients(passing props to its children).
-    2. The ComponentDidMount in withErrorHandler is converted into ComponentWillMount after this ingredient has been put to firebase.
-       The reason for this is, if we make a typo in ingredient rendering url, in axios.get('/ingredient.json'), we don't get 
-       the error displayed on the screen like what we get for post ('/orders.json').
-       This is because, the ingredients is fetched inside <BurgerBuilder/> which is a child of withErrorHandler and the CDM inside withErrorHandler
-       is executed after the child. In this case the cdm is never called. The error actually occurs in child part first in which case
-       the cdm in withErrorHandler never executed. So cdm is converted in to cwm. In future cwm will not be supported hence we 
-       can use constructor in withErrorHandler which I am not doing it here.
+       Components included under this if for dynamic rendering are the ones which depends on ingredients(passing props to its 
+       children).
+    2. The ComponentDidMount in withErrorHandler is converted into ComponentWillMount after this ingredient has been put to 
+       firebase. The reason for this is, if we make a typo in ingredient rendering url, in axios.get('/ingredient.json'), we 
+       don't get the error displayed on the screen like what we get for post ('/orders.json').
+       This is because, the ingredients is fetched inside <BurgerBuilder/> which is a child of withErrorHandler and the CDM 
+       inside withErrorHandler is executed after the child. In this case the cdm is never called. The error actually occurs in 
+       child part first in which case the cdm in withErrorHandler never executed. So cdm is converted in to cwm. In future cwm 
+       will not be supported hence we can use constructor in withErrorHandler which I am not doing it here.
 
-33. ComponentWillUnmount : This is used to unmount the component and clear anything like interceptors. For better understanding, watch
-    Video 215. Removing Old interceptors. Unmounting actually means disappear from dom. So ComponentWillUnmount will be 
-    executed when the component is disappeared from dom. At this time we need to clear (eject) any old interceptors, so that when we use
-    withErrorHandler(AnyComponent) we don't end up creating more and more unused interceptors.
+33. ComponentWillUnmount : This is used to unmount the component and clear anything like interceptors. For better understanding, 
+    watch Video 215. Removing Old interceptors. Unmounting actually means disappear from dom. So ComponentWillUnmount will be 
+    executed when the component is disappeared from dom. At this time we need to clear (eject) any old interceptors, so that when 
+    we use withErrorHandler(AnyComponent) we don't end up creating more and more unused interceptors.
 
 * * * Tag v1.1-release - completed - Completed Axios part. Now moving on to routing with react-router
 
@@ -246,10 +268,10 @@ Set 5 Workflow as follows:
 
  Implementing Routing - Single page application - Feels like multi page using react-router
  
-34. Now time to implement the second page. The page we built till now was BurgerBuilder, and the fixed toolbar and sidnavs (common for all pages),
-    but now we will build checkout page. To give a bigpicture, we first started with BurgerBuilder component and now
-    when we click checkout link on the toolbar, the BurgerBuilder should disappear and Checkout page should appear.
-    For this we implement routing to handle multiple pages. We create Checkout container (Folder, js and css) in same 
+34. Now time to implement the second page. The page we built till now was BurgerBuilder, and the fixed toolbar and sidnavs 
+    (common for all pages), but now we will build checkout page. To give a bigpicture, we first started with BurgerBuilder 
+    component and now when we click checkout link on the toolbar, the BurgerBuilder should disappear and Checkout page should 
+    appear. For this we implement routing to handle multiple pages. We create Checkout container (Folder, js and css) in same 
     level as BurgerBuilder inside containers folder.
 
     In the Checkout container we have info about what user will buy like burger itself, continue and cancel buttons. 
@@ -266,20 +288,22 @@ Set 5 Workflow as follows:
                     __ Checkout  --> This needs ingredients to pass it to CheckoutSummary
           
           How to get ingredients into Checkout now?
-          We will answer this later. Reference to this problem is lets say 111 (This is just for reference which I can use when I answer this below)
+          We will answer this later. Reference to this problem is lets say 111 (This is just for reference which I can use 
+          when I answer this below)
 
 35. npm install --save react-router-dom  
     Installed rreact-router-dom and react-router package. Above npm installs both of these.
 
-    Component Wrapped with BrowserRouter - The main component or the component used for Routing (This automatically includes children) should be 
-    wrapped with BrowserRouter so that where ever the Route is used it works.
+    Component Wrapped with BrowserRouter - The main component or the component used for Routing (This automatically includes 
+    children) should be wrapped with BrowserRouter so that where ever the Route is used it works.
     Switch is used to match the single Route. When that Route is hit then it stops checking other Route elements.
 
-36. Need to show Checkout component on clicking continue button. Checkout component should be replace BurgerBuilder on continue btn click
-    We comment the code responsible for sending order to backend on-click in purchaseContinueHandler because this part 
+36. Need to show Checkout component on clicking continue button. Checkout component should be replace BurgerBuilder on continue 
+    btn click We comment the code responsible for sending order to backend on-click in purchaseContinueHandler because this part 
     should be done later once we checkout finally after filling checkout form (which will be added later).
     Instead of sending code to backend, when we click continue we need to replace BurgerBuilder page by Checkout Page 
-    using Routing as I described above. Hence commenting the code responsible for sending order to backend in purchaseContinueHandler.
+    using Routing as I described above. Hence commenting the code responsible for sending order to backend in 
+    purchaseContinueHandler.
     
     NOTE : <Route path="/" component = {ABC} />   --> Suppose XYZ component is the child of ABC
     
@@ -323,9 +347,9 @@ Set 5 Workflow as follows:
     when we click on continue orderSummary, we now need to take care of using this queryParams in the Checkout to create 
     the ingredients. We do this in ComponentDidMount inside Checkout because when the continue button on the orderSummary is 
     clicked we show/mount the Checkout component on to the DOM. Hence ComponentDidMount is the ideal place to use this queryParams.
-    These queryParams which is passed in purchaseContinueHandler in BurgerBuilder to the Checkout component will be available in location props.
-    (Do a console log of props in the purchaseContinueHandler and you will know. The same props will be passed so you can access 
-    in Checkout component)
+    These queryParams which is passed in purchaseContinueHandler in BurgerBuilder to the Checkout component will be available 
+    in location props.(Do a console log of props in the purchaseContinueHandler and you will know. The same props will be passed 
+    so you can access in Checkout component).
     To extact this query params which is in search prop, we use URLSearchParams(this.props.location.search) inside CDM 
     of Checkout
 
@@ -333,8 +357,8 @@ Set 5 Workflow as follows:
     We will build it as a container since it manages its own state. This will be under Checkout folder.
     We show this ContactData as nested route i.e inside Checkout itself.
     
-    QUESTION I HAVE : But One thing I don't understand is Why we need nested route when we can just use that component normally inside 
-    checkout?
+    QUESTION I HAVE : But One thing I don't understand is Why we need nested route when we can just use that component normally 
+    inside checkout?
     The answer is that if I use ContactData normally then it will be loaded right away when Checkout is loaded. But we 
     want the behavior such that the ContactData should be loaded when the Checkout continue button is clicked.
 
@@ -342,7 +366,8 @@ Set 5 Workflow as follows:
     We will tweak ContactData later when we use forms.
     When we click button inside the form, it reloads the page. To avoid this default behavior we use event.preventDefault()
     inside the orderHandler() in ContactData.
-    Also, we need to pass ingredients and totalPrice from Checkout to ContactData within the Route as props. For this we can convert 
+    Also, we need to pass ingredients and totalPrice from Checkout to ContactData within the Route as props. For this we can 
+    convert 
 
     <Route path={this.props.match+"/contact-data"} component={ContactData}/>
     into 
@@ -352,11 +377,12 @@ Set 5 Workflow as follows:
                                                       This render takes arrow function as input. Refer Routing videos for this explanation.
                                                     
     By converting the <Route path= .. above, we are now able to pass the ingredients and totalPrice to ContactData, but the drawback is 
-    we will not be able to pass history, match and other Route related props (These props are required because we need to use history props in orderHandler
-    inside ContactData to redirect to homepage after order has been placed).
+    we will not be able to pass history, match and other Route related props (These props are required because we need to use history 
+    props in orderHandler inside ContactData to redirect to homepage after order has been placed).
 
     To get the Route props like history and match we can use two approaches.
-        1. To wrap the ContactData with withRouter (import {withRouter} from 'react-router-dom') because this is the component in which we like to get the Route props.                                           
+        1. To wrap the ContactData with withRouter (import {withRouter} from 'react-router-dom') because this is the component in 
+           which we like to get the Route props.                                           
         2. To pass on the props like how I do in Checkout component. I use 
 
         <Route
@@ -365,46 +391,50 @@ Set 5 Workflow as follows:
           <ContactData
               ingredients={this.state.ingredients}
               price={this.state.totalPrice}
-              {...props}/>---------------------------------------> props here is the props coming from react-router-dom (histoy, map and so on). I also tried ...this.props here and that is the Checkout component props and not react-router-dom's props
+              {...props}/>---------------------------------------> props here is the props coming from react-router-dom 
+                                                                   (histoy, map and so on). I also tried ...this.props here and 
+                                                                   that is the Checkout component props and not 
+                                                                   react-router-dom's props
 
-     I took this approach as Max but I also tried removing props in the render = {(removed here)} and for {...props} I did {...this.props} and 
-     that works too. Here I can simply pass the props which is used in Checkout and that includes Route props.
+     I took this approach as Max but I also tried removing props in the render = {(removed here)} and for {...props} I did 
+     {...this.props} and that works too. Here I can simply pass the props which is used in Checkout and that includes Route props.
 
     Again, all these are done here just to be able to use history props to redirect to homepage after ordering in ContactData
 
-TODO : At this point (Video 257. Order Submission & passing data between pages) everything is working fine but there is one warning which I'm not able 
-       to figure out at this time. 
+TODO : At this point (Video 257. Order Submission & passing data between pages) everything is working fine but there is one 
+       warning which I'm not able to figure out at this time. 
 
        When I click Order button (of ContactData), I get this warning below
 
-    Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+    Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in 
+    your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
     in ContactData (created by Context.Consumer)
     in withRouter(ContactData) (at Checkout.js:64)
     in Route (at Checkout.js:61)
     in div (at Checkout.js:50)
     in Checkout (created by Context.Consumer)
 
-    I tried reading through all the comments in QA section but no luck. I guess it has something to do with ComponentWillMount and componentWillUnmount.
-    I will come back to this once I have an answer for this.
+    I tried reading through all the comments in QA section but no luck. I guess it has something to do with ComponentWillMount 
+    and componentWillUnmount. I will come back to this once I have an answer for this.
 
 42. Now the goal is to create My Orders page. We create Orders folder inside the containers because like BurgerBuilder and 
     Checkout, even Orders should be a separate page so it should come under same level of BurgerBuilder and Checkout.
     In this Orders, we need to return list of individual Order Components. Hence we create Order and its Css in 
     the Order folder which already exists in components.
 
-43. Now that we have created My Orders page ( not yet getting the Orders from backend in there), we now update the Checkout Link to
-    Orders link. We replace anchor tag (<a />) in the NavigationItem with NavLink tag. NavLink is also known as Link tag having 
-    additional functionality of inbuilt active css class which we can use to lighlight the link. So if you use Link and apply 
-    css of active manually then that also would have same effect of using NavLink. 
+43. Now that we have created My Orders page ( not yet getting the Orders from backend in there), we now update the Checkout 
+    Link to Orders link. We replace anchor tag (<a />) in the NavigationItem with NavLink tag. NavLink is also known as Link 
+    tag having additional functionality of inbuilt active css class which we can use to lighlight the link. So if you use Link
+    and apply css of active manually then that also would have same effect of using NavLink. 
     The reason we replace <a/> tag is, when we click on a tag, then the page reloads but we don't need that behavior since
     we lose all the data of state if page reloads. Hence we use Link or NavLink.
     Take a look at the comments written in NavigationItem to get some clarity.
     This acive class concept is bit tricky. Go through video 259. Implementing NavLinks, to get more on this.
 
 44. Now in the orders page, lets now get the orders from backend. We get orders from firebase in object format, we convert
-    that to array so that we can use map on that. In this process, we use the key prop (we assign this unique key from orders backend), so that
-    we can use this as key in map function. All this is done in Orders.js. Also, to display errors if any, we use
-    withErrorHandler hoc in Orders.js. The hint when to use withErrorHandler is - use it when we use axios and when
+    that to array so that we can use map on that. In this process, we use the key prop (we assign this unique key from orders 
+    backend), so that we can use this as key in map function. All this is done in Orders.js. Also, to display errors if any, 
+    we use withErrorHandler hoc in Orders.js. The hint when to use withErrorHandler is - use it when we use axios and when
     we think error occurance is possible. 
     In this commit we wrote all the logic to get the orders from backend and wrapped the orders component with withErrorHandler.
     In the next commit we will work on displaying the fetched orders properly using order component.
@@ -412,16 +442,18 @@ TODO : At this point (Video 257. Order Submission & passing data between pages) 
 45. Let's modify Order.js component to display all the ingredients and price things which we get as props from Orders.js.
     Displaying Orders is done. Now need to work on checkout form next. 
 
-* * * Tag v1.2-release - completed - Completed Orders part, so we have BurgerBuilder and Orders done with only Checkout form design left. 
-                                    Now moving on to designing checkout form
+* * * Tag v1.2-release - completed - Completed Orders part, so we have BurgerBuilder and Orders done with only Checkout 
+                         form design left. Now moving on to designing checkout form
 
 Set 5 Workflow as follows:
 
  Designing checkout form - We'll design checkout form (ContactData.js) and its validation here. The design process includes
  * Currently the state in the ContactData is not used. Firstly, we need to decide which all data is used in ContactData
-   that we like to store in backend (now its hardcoded in orderHandler in customer object), and then need to sync that with the state.
+   that we like to store in backend (now its hardcoded in orderHandler in customer object), and then need to sync that with the 
+   state.
  * Dynamically use components of form
- * Cater for form validation. Note that the formik library works for form validation and form Submission which we are not using it here.
+ * Cater for form validation. Note that the formik library works for form validation and form Submission which we are not 
+   using it here.
 
 46. We start the form with first putting input in their own component (UI/Input) and using that in ContactData. Note that 
     this part of ContactData can also be done using formik (forms library) for future projects.
@@ -545,31 +577,34 @@ Set 5 Workflow as follows:
     *  This is the method which is activated or called (onChange) when the user types something into the inputElement field. 
     *  So, think this way - "The moment the user touches the inputElement and types something, the value is registered in state
        and during this time its a good idea to also check if the user is typing as per our defined rules. If the user
-       doesnt type as we want then we can throw the message here. So, again, the place to add is - soon where we capture the value 
-       onChange".
+       doesnt type as we want then we can throw the message here. So, again, the place to add is - soon where we capture the 
+       value onChange".
     *  So, the best place would be in inputChangedHandler() after the line - 'updatedFormElement.value = event.target.value;'
     *  In the above line, we get the value entered in the box and after this line (in the next line), we can validate 
        if the user entered the value as per the rules we defined like below:
 
         1-------updatedFormElement.value = event.target.value; // after this line, below is the validation check
-        2-------updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation); // I will explain this in a moment
+        2-------updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation); 
+                I will explain this in a moment
 
-    *  So, 1 says the value entered in to the inputElement and 2 validates if it is proper and returns true (if rule is met) or false (if rule not met).
-    *  Now the question is, all sounds good but where is the rule defined ? What is the second parameter passed into 2 this.checkValidity() ?
-    * Let's answer one by one. 
+    *  So, 1 says the value entered in to the inputElement and 2 validates if it is proper and returns true (if rule is met) or 
+       false (if rule not met).
+    *  Now the question is, all sounds good but where is the rule defined ? What is the second parameter passed 
+       into 2 this.checkValidity() ?
+    *  Let's answer one by one. 
     *  where is the rule defined ?
-       - The validation rule / rules can be defined in the state in each inputElement like name, state, email and so on. See ContactData. There 
-         you can find the validation object which are the rules.
+       - The validation rule / rules can be defined in the state in each inputElement like name, state, email and so on. See 
+         ContactData. There you can find the validation object which are the rules.
     *  What is the second parameter passed into 2 this.checkValidity() ?
-        _ This validation object from the state (deep copied object) is passed as the validation rules to check each rule is statisfied
-          in the checkValidity method. If each rule is statisfied then it returns true, and this true or false can be 
+        _ This validation object from the state (deep copied object) is passed as the validation rules to check each rule is 
+          statisfied in the checkValidity method. If each rule is statisfied then it returns true, and this true or false can be 
           represented in css later for showing errors or warnings.
     
     These are the steps followed to add validation to any form. Later we will learn formik library which makes our forms 
     and its validation easier. We don't learn in this project though :) 
 
-54. Now that we have added validation rules, we need to use this to give feedback to the user if the value entered in inputElement doesn't 
-    match the rule. So we are going to add a new Css class for this in the Input component to give a red colored look 
+54. Now that we have added validation rules, we need to use this to give feedback to the user if the value entered in inputElement 
+    doesn't match the rule. So we are going to add a new Css class for this in the Input component to give a red colored look 
     for the inputElement which is not validated. We have completed this part but now there is a problem. The problem is that, now
     we have all fields red colored right from the time we see the form which is not a good user experience. Instead, we 
     want the user to see red colored (as a sign of not validated - meaning not inputted as per rule) only when the user 
@@ -577,12 +612,12 @@ Set 5 Workflow as follows:
 
 55. When we touch the inputElement atleast once we need to apply red color css (apply validation rules).
 
-56. Now that we have tested individual inputElement for validation, now we need to check if the overall form is valid, and if yes, then we should 
-    be able to continue. This we do it by checking individual elements in the for in loop for validity inside inputChangedHandler(). 
-    Once everything is validated to true then the overall form will be valid and hence we can continue to order (click order btn).
-    Though we did everything required in the validation part, we have one glitch here. That is the deliverymethod. If you 
-    don't change the deliverymethod and leave it in Fastest (default) you wont get an error but when it is changed to 
-    Cheapest, we get the error. 
+56. Now that we have tested individual inputElement for validation, now we need to check if the overall form is valid, and if yes, 
+    then we should be able to continue. This we do it by checking individual elements in the for in loop for validity inside 
+    inputChangedHandler(). Once everything is validated to true then the overall form will be valid and hence we can continue 
+    to order (click order btn). Though we did everything required in the validation part, we have one glitch here. That is the 
+    deliverymethod. If you don't change the deliverymethod and leave it in Fastest (default) you wont get an error but when it is 
+    changed to Cheapest, we get the error. 
     This is because the validation (validation rules) on the deliverymethod is not defined 
     which is not required, but this creates a problem during checkValidity(value,rules) call where the rules are basically the
     validation object which is not present in the deliverymethod (which is not required as I said) and hence, this when 
@@ -600,21 +635,22 @@ Set 5 Workflow as follows:
     That solves the problem of deliverymethod drop-down validation. However, there is a small bug though and we will fix 
     this in next commit.
 
-58. We forgot to enter the default value for deliverymethod and I entered in this commit as fastest. This helps in registering the
-    value of deliverymethod as fastest in the backend if we dont touch the dropdown.
+58. We forgot to enter the default value for deliverymethod and I entered in this commit as fastest. This helps in registering 
+    the value of deliverymethod as fastest in the backend if we dont touch the dropdown.
 
  FYI : There is another bug which I came across, which I am not going to solve here, and also not addressed in the Max's lectures. 
        The bug is, in the ContactData form validation (overall form validation), everything seems to work fine when the data
        is entered manually into each inputElement and once all the inputElements are done, the ORDER button turns green from 
-       gray indicating formIsValid is true now, meaning overall form is valid (each element validated successfully and now ready to proceed).
+       gray indicating formIsValid is true now, meaning overall form is valid (each element validated successfully and now 
+       ready to proceed).
        However, when entering a data in the name field, it gives some suggestions to fill all the fields (all inputElements) 
-       with some cached data of form. When I click the prepopulated data, all the fields are filled but the ORDER btn doesnt immediately turn 
-       green. 
-       The reason (my assumption) is, I have used {valid:false} and the logic to turn this true for each inputElement, where it says each element 
-       when touched turns up the valid property to true and the overall form will be valid if and only if the individual elements are valid:true. 
-       In case of autopopulated data, though all the fields will be filled, the fields individually won't be touched by user and that can still 
-       keep the individual inputElement valid : false. This is the reason why sometimes the overall form, formIsValid, is false and the ORDER btn doesnt 
-       turn green. 
+       with some cached data of form. When I click the prepopulated data, all the fields are filled but the ORDER btn doesnt 
+       immediately turn green. 
+       The reason (my assumption) is, I have used {valid:false} and the logic to turn this true for each inputElement, where 
+       it says each element when touched turns up the valid property to true and the overall form will be valid if and only 
+       if the individual elements are valid:true. In case of autopopulated data, though all the fields will be filled, the 
+       fields individually won't be touched by user and that can still keep the individual inputElement valid : false. This is 
+       the reason why sometimes the overall form, formIsValid, is false and the ORDER btn doesnt turn green. 
        I guess this problem doesnt occur if we use formik library, but not sure since I havent used it yet.
 
 * * * Tag v2-release - completed - DONE WITH CHECKOUT FORM. NEED TO MOVE TO REDUX NOW.
@@ -625,9 +661,9 @@ Set 6 Workflow as follows:
  
   Note: All the basics and advanced REDUX concepts have been explained in https://github.com/sandeep194920/react-counter-with-redux
   
-  59. First, we need to look at which all components have state (containers) and which parts of those states need to be 
-      put into redux store. Let's see some of the containers and its state and decide which could be a better candidate 
-      to go into the redux store.
+59. First, we need to look at which all components have state (containers) and which parts of those states need to be 
+    put into redux store. Let's see some of the containers and its state and decide which could be a better candidate 
+    to go into the redux store.
 
       * BurgerBuilder state
 
@@ -658,35 +694,37 @@ Set 6 Workflow as follows:
       * Orders.js state has orders =[] where the orders are coming from backend. We do this part later in advanced redux part
         as this is async part of redux. orders need to be fetched asynchronously from firebase. 
   
-  60. Installing redux and react-redux. 
-      npm install --save redux react-redux
-      Let's start by creating store folder in src and adding actions.js and reducer.js as learnt in the redux-counter project.
+60. Installing redux and react-redux. 
+    npm install --save redux react-redux
+    Let's start by creating store folder in src and adding actions.js and reducer.js as learnt in the redux-counter project.
       
       * Where to start from?
       ** Let's start with BurgerBuilder. As I told, we will be dealing with ingredients and totalPrice. First ingredients.
-         So we can see we have handlers addIngredientHandler and removeIngredientHandler related to the ingredients. These are good fit to go into the 
-         actions. Remember, the handlers could be most likely the actions, because in the handlers we change somethings in 
-         state and that is what we generally do in actions to update the store. After this, we can update the store accordingly.
+         So we can see we have handlers addIngredientHandler and removeIngredientHandler related to the ingredients. These 
+         are good fit to go into the actions. Remember, the handlers could be most likely the actions, because in the handlers 
+         we change somethings in state and that is what we generally do in actions to update the store. After this, we can update 
+         the store accordingly.
   
-  61. Connecting react with redux. 
-  62. Now that we have created store in index.js, let's implement two actions ADD_INGREDIENT and REMOVE_INGREDIENT in the reducer.
-      Note : In the BurgerBuilder state, we have ingredients as null because we get the components from firebase in ComponentDidMount.
-      We will add this functionality of getting from backend into redux store later (async action - advanced redux) but for now we 
-      will hardcode ingredients in redux. 
+61. Connecting react with redux. 
 
-  63. Now that we have implemented ADD_INGREDIENT and REMOVE_INGREDIENT reducers, let's connect BurgerBuilder with store.
-      We have already added Provider in the index.js and passed store into that, let's now receive it in BurgerBuilder with 
-      the help of connect(), the function that returns hoc.
+62. Now that we have created store in index.js, let's implement two actions ADD_INGREDIENT and REMOVE_INGREDIENT in the reducer.
+    Note : In the BurgerBuilder state, we have ingredients as null because we get the components from firebase in ComponentDidMount.
+    We will add this functionality of getting from backend into redux store later (async action - advanced redux) but for now we 
+    will hardcode ingredients in redux. 
 
-  64. Let's work on totalPrice and move it into the reducer from BurgerBuilder. Also, we will take a look at the disabled order button
-      in the next commit .We can now delete addIngredientHanlder() and removeIngredientHanlder() in BurgerBuilder as we are handling them in 
-      reducer.js.  
+63. Now that we have implemented ADD_INGREDIENT and REMOVE_INGREDIENT reducers, let's connect BurgerBuilder with store.
+    We have already added Provider in the index.js and passed store into that, let's now receive it in BurgerBuilder with 
+    the help of connect(), the function that returns hoc.
 
-  65. We now work on enabling order button in BurgerBuilder. updatePurchaseState() method is the one which used to update
-      purchasable property of state of BurgerBuilder till now. But now, we can remove purchasable property from state 
-      and we can call updatePurchaseState() directly in BurgerBuilder's BuildControls component call in render method.
-      Now if you see the state of BurgerBuilder, we have only 3 properties mentioned below - all related to UI of this 
-      particular component only, so it makes sense to be in this state itself.
+64. Let's work on totalPrice and move it into the reducer from BurgerBuilder. Also, we will take a look at the disabled order 
+    button in the next commit .We can now delete addIngredientHanlder() and removeIngredientHanlder() in BurgerBuilder as we 
+    are handling them in reducer.js.  
+
+65. We now work on enabling order button in BurgerBuilder. updatePurchaseState() method is the one which used to update
+    purchasable property of state of BurgerBuilder till now. But now, we can remove purchasable property from state 
+    and we can call updatePurchaseState() directly in BurgerBuilder's BuildControls component call in render method.
+    Now if you see the state of BurgerBuilder, we have only 3 properties mentioned below - all related to UI of this 
+    particular component only, so it makes sense to be in this state itself.
 
         state = {
             purchasing: false,
@@ -694,15 +732,15 @@ Set 6 Workflow as follows:
             error: false 
         };
 
-  66. We now think of checkout component. The BurgerBuilder used to pass queryparams for the reason explained in point number 38. 
-      above to the checkout component. The checkout component then uses this queryParams to build the ingredients in its 
-      local state. Now we don't need queryparams passing and receiving hassle anymore as we use redux now. Let's adjust the 
-      code in both the components accordingly. 
-      Let's also look at ContactData component. The Checkout component passes ingredients and totalPrice to the ContactData
-      hence we can use redux there as well. 
+66. We now think of checkout component. The BurgerBuilder used to pass queryparams for the reason explained in point number 38. 
+    above to the checkout component. The checkout component then uses this queryParams to build the ingredients in its 
+    local state. Now we don't need queryparams passing and receiving hassle anymore as we use redux now. Let's adjust the 
+    code in both the components accordingly. 
+    Let's also look at ContactData component. The Checkout component passes ingredients and totalPrice to the ContactData
+    hence we can use redux there as well. 
 
-* * * Tag v2.1 - completed - redux part for sync part (ingredients and totalPrice) in BurgerBuilder, Checkout and ContactData components. 
-                             Need to move to async part next (fetching orders and ingredients from backend)
+* * * Tag v2.1 - completed - redux part for sync part (ingredients and totalPrice) in BurgerBuilder, Checkout and ContactData 
+                 components. Need to move to async part next (fetching orders and ingredients from backend)
   
   Set 7 Workflow as follows:
 
@@ -711,24 +749,25 @@ Set 6 Workflow as follows:
   * Get ingredients from backend
   * Setup proper file structure for actions and reducers as learnt in react counter project 
 
-  67. Let's first setup redux devtools.
-      Link - https://github.com/zalmoxisus/redux-devtools-extension
-      In this link we use 1.3 Advanced Store Setup later for async actions done using redux middleware, but for now, for 
-      sync actions let's use Basic setup, 1.1 Basic Store, in the index.js.
+67. Let's first setup redux devtools.
+    Link - https://github.com/zalmoxisus/redux-devtools-extension
+    In this link we use 1.3 Advanced Store Setup later for async actions done using redux middleware, but for now, for 
+    sync actions let's use Basic setup, 1.1 Basic Store, in the index.js.
 
-  68. Let's modify the folder structure a bit. We can create folders for reducer and actions inside store and convert
-      actions.js to actionTypes.js since it is only used to define the constants. 
+68. Let's modify the folder structure a bit. We can create folders for reducer and actions inside store and convert
+    actions.js to actionTypes.js since it is only used to define the constants. 
   
-  69. Let's now create some action creators and rename the existing actions and reducers accordingly. 
-      NOTE : If I have a folder structure src/xyz/index.js, and if I 
+69. Let's now create some action creators and rename the existing actions and reducers accordingly. 
+    NOTE : If I have a folder structure src/xyz/index.js, and if I 
             
             import * as something from 'src/xyz'
 
             then it automatically imports index.js (This facility exists only for index.js).
 
-  70. Let's now work on async action creators. i.e fetching data from backend (ingredients and orders). Though we
-      do this from next commit, lets setup devtools advanced in this commit. We have ingredients fetching code from the 
-      backend in BurgerBuilder's ComponentDidMount (which is not being used currently). We can take two approaches now to get the code from backend and use in reducer.
+70. Let's now work on async action creators. i.e fetching data from backend (ingredients and orders). Though we
+    do this from next commit, lets setup devtools advanced in this commit. We have ingredients fetching code from the 
+    backend in BurgerBuilder's ComponentDidMount (which is not being used currently). We can take two approaches now 
+    to get the code from backend and use in reducer.
       
       Approaches:
       * The first approach is to use the code already present in CDM of BurgerBuilder, then get the response from backend
@@ -739,34 +778,35 @@ Set 6 Workflow as follows:
         npm install --save redux-thunk
         Also, we use devtools advanced now countering the point mentioned in 67. above.
     
-  71. We now will fetch async ingredients from backend. This is done in BurgerBuilder action creator in store/actions/BurgerBuilder.js.
-      We don't need loading state in BurgerBuilder because we are not using ingredients fetch from backend in CDM of BurgerBuilder
-      anymore. We do this in burgerBuilder.js action creator. Also, the error in the state of BurgerBuilder is been handled in reducer- burgerBuilder.
+71. We now will fetch async ingredients from backend. This is done in BurgerBuilder action creator in 
+    store/actions/BurgerBuilder.js. We don't need loading state in BurgerBuilder because we are not using ingredients fetch 
+    from backend in CDM of BurgerBuilder anymore. We do this in burgerBuilder.js action creator. Also, the error in the state 
+    of BurgerBuilder is been handled in reducer- burgerBuilder.
 
-  72. I forgot to set ingredients to null in the last commit in the reducer - burgerBuilder.js. Also, I noticed that 
-      the order of ingredients varies (salad comes at bottom) as per alphabetical order in backend. We can fix that by 
-      manually setting each backend ingredient to the same ingredient in the reducer - burgerBuilder.js
+72. I forgot to set ingredients to null in the last commit in the reducer - burgerBuilder.js. Also, I noticed that 
+    the order of ingredients varies (salad comes at bottom) as per alphabetical order in backend. We can fix that by 
+    manually setting each backend ingredient to the same ingredient in the reducer - burgerBuilder.js
 
-  73. Now that we got ingredients from backend in action creator - burgerBuilder.js (async), let's now work on orders.  
-      using same async technique. The logic for posting order to backend is in orderHandler() in ContactData. This should 
-      now be dispatched in an action.
-      We need actionTypes for order success and failure. Also, we work on order reducer.
+73. Now that we got ingredients from backend in action creator - burgerBuilder.js (async), let's now work on orders.  
+    using same async technique. The logic for posting order to backend is in orderHandler() in ContactData. This should 
+    now be dispatched in an action.
+    We need actionTypes for order success and failure. Also, we work on order reducer.
   
-  74. We have two reducers now, burgerBuilder and order. Let's combine them in the index.js and modify our components 
-      which use them.
-      Before this, let's fix a bug we have now. If you are on localhost:3000/checkout, it gives an error as the it uses
-      ingredients Initially which is null. Hence, if the ingredients is null, we choose to redirect to homepage here.
-      Let's implement these two functionalities here (this bug and reducers combining).
+74. We have two reducers now, burgerBuilder and order. Let's combine them in the index.js and modify our components 
+    which use them.
+    Before this, let's fix a bug we have now. If you are on localhost:3000/checkout, it gives an error as the it uses
+    ingredients Initially which is null. Hence, if the ingredients is null, we choose to redirect to homepage here.
+    Let's implement these two functionalities here (this bug and reducers combining).
 
-  75. Let's fix redirecting to homepage after placing order which was used in orderHandler() through history props before. 
-      We could use this by passing props into redux but let's do this redux way by creating action PURCHASE_INIT. 
-      (This part can be done in numerous ways. Max has used one of the ways in 313. Handling Purchases and update UI)
+75. Let's fix redirecting to homepage after placing order which was used in orderHandler() through history props before. 
+    We could use this by passing props into redux but let's do this redux way by creating action PURCHASE_INIT. 
+    (This part can be done in numerous ways. Max has used one of the ways in 313. Handling Purchases and update UI)
 
       How it is redirected here to homepage after checkout ? 
       * We have the action PURCHASE_BURGER_SUCCESS which when dispatched, the purchased property is set to true in the 
         this action in order.js reducer
-      * Then we check if purchased is true (which is set above in reducer - order.js) in Checkout component (render method) and if it is, then 
-        we redirect to homepage, localhost:3000/
+      * Then we check if purchased is true (which is set above in reducer - order.js) in Checkout component (render method) 
+        and if it is, then we redirect to homepage, localhost:3000/
       * Now, since we have set purchased to true in reducer - order.js, it should be set to false because next time after 
         reaching homepage by redirect this should work as before, so we need to set this purchased to false.
       * We set this to false in BurgerBuilder purchaseContinueHandler(). 
@@ -774,14 +814,14 @@ Set 6 Workflow as follows:
       Also, after ordering the first time and redirected back to the homepage, we see the price is still not adjusted back to 
       default. We will reset this in burgerBuilder reducer in SET_INGREDIENTS case.
   
-  76. We have posted the ingredients in the last commit. Now it's time to work on getting the orders from backend via redux. 
-      We currently have this logic in Orders.js ComponentDidMount.
+76. We have posted the ingredients in the last commit. Now it's time to work on getting the orders from backend via redux. 
+    We currently have this logic in Orders.js ComponentDidMount.
 
-  77. Now that we have all we want with redux in place, let's work on making our reducer Switch case statements bit more 
-      leaner by outsourcing the cases to updateObject method (utility.js in the store folder).
+77. Now that we have all we want with redux in place, let's work on making our reducer Switch case statements bit more 
+    leaner by outsourcing the cases to updateObject method (utility.js in the store folder).
 
-  78. Let's now reduce the Switch cases even more leaner by using an internal function in the reducer. This is not necessary 
-      but optional if you want to see one line return statement in each case statement of reducer.
+78. Let's now reduce the Switch cases even more leaner by using an internal function in the reducer. This is not necessary 
+    but optional if you want to see one line return statement in each case statement of reducer.
 
 * * * Tag v3.0-release - completed - DONE WITH REDUX ADVANCED. NEED TO MOVE TO AUTHENTICATION PART NOW.
 
@@ -793,7 +833,7 @@ Set 6 Workflow as follows:
   * Also redirecting into different pages based on authentication status.
   * Add guards to the routes (some pages can be accessed only if user is authenticated)
 
-  79. How authentication works in Single Page Applications ?
+79. How authentication works in Single Page Applications ?
 
       1. To login and get token
                                 Auth-->
@@ -804,51 +844,52 @@ Set 6 Workflow as follows:
     
     * The Single Page App sends the authentication details like username/email and a password to the server.
     * The server then responds back with a token (JSON Object) which is then stored in local on SPA (redux store generally).
-    * Note that the token will be lost in local whenever the user refreshes the page. We need to take care of this which we will in this module.
+    * Note that the token will be lost in local whenever the user refreshes the page. We need to take care of this which we will 
+      in this module.
 
      2. Once logged in, to get the access to a page or a resource
 
-                                    Token--> Here we send the same token to the backend which we received from server to gain access to a resource
-                               _ _ _ _ _ _ _
-                           SPA              Server
-                               _ _ _ _ _ _ _
-                                    <--Token (This token is a json and is stored on the client in local storage)
+                    Token--> Here we send the same token to the backend which we received from server to gain access to a resource
+               _ _ _ _ _ _ _
+           SPA              Server
+               _ _ _ _ _ _ _
+                    <--Token (This token is a json and is stored on the client in local storage)
 
-   80. Let's start by creating authentication form and add a new page for /auth. Also, we create validation logic here for the 
-       auth form similar to the ContactData form.
+80. Let's start by creating authentication form and add a new page for /auth. Also, we create validation logic here for the 
+    auth form similar to the ContactData form.
     
-   81. Let's create an action creator for the Submit button in the auth form in Auth.js component. This will be created in actions/auth.js in store folder.
-       The idea is we create the authStart,authSuccess,authFail and auth (async) action creators for this. We will confirm if 
-       this works by creating these action creators and then connecting it with Auth component using connect. Once this 
-       is done we can first dispatch authStart (no need to reach reducer here because we dont implement this is reducer. 
-       This directly goes to backend with the given url for signup and signin) which is inside auth and when we click submit button in Auth component,
-       the submitHandler() is called and there the preventDefault is used to avoid page refresh. After that the onAuth action is dispatched 
-       which calls auth - async action that intern calls authStart - sync action. We can see this in redux devtools in chrome 
-       browser to check if this works.
+81. Let's create an action creator for the Submit button in the auth form in Auth.js component. This will be created in 
+    actions/auth.js in store folder. The idea is we create the authStart,authSuccess,authFail and auth (async) action creators 
+    for this. We will confirm if this works by creating these action creators and then connecting it with Auth component using 
+    connect. Once this is done we can first dispatch authStart (no need to reach reducer here because we dont implement this is 
+    reducer. This directly goes to backend with the given url for signup and signin) which is inside auth and when we click 
+    submit button in Auth component, the submitHandler() is called and there the preventDefault is used to avoid page refresh. 
+    After that the onAuth action is dispatched which calls auth - async action that intern calls authStart - sync action. We can 
+    see this in redux devtools in chrome browser to check if this works.
 
-   82. The goal is now to signup the user(register the user in backend) and also get the token from backend.
-       You can watch video 326 - Getting a token from backend to know this.
+82. The goal is now to signup the user(register the user in backend) and also get the token from backend.
+    You can watch video 326 - Getting a token from backend to know this.
    
-   83. Now that we have signup process in place, let's work on login process. I will add another button below Signup to switch to Signin.
-       Note that, in the authentication process (both in signin and signup), we dont need our action creator to reach reducer unless 
-       we need our token to be passed and stored in the store. What I mean is, we can successfully register and login only
-       with the help of action creator auth and no need of reducer. Reducer comes in to picture only when we need to store our 
-       token after logging in. In the next step lets store token in backend which we receive after login. Note that we also receive this 
-       token after signup as well.
+83. Now that we have signup process in place, let's work on login process. I will add another button below Signup to switch to 
+    Signin. Note that, in the authentication process (both in signin and signup), we dont need our action creator to reach 
+    reducer unless we need our token to be passed and stored in the store. What I mean is, we can successfully register and login
+    only with the help of action creator auth and no need of reducer. Reducer comes in to picture only when we need to store our 
+    token after logging in. In the next step lets store token in backend which we receive after login. Note that we also receive 
+    this token after signup as well.
 
-   84. Signin is complete. When we signin we have the access to get the token. Let's store that token in our reducers to 
-       access the sources in the future which are protected. For this let's create a reducer auth.js. 
+84. Signin is complete. When we signin we have the access to get the token. Let's store that token in our reducers to 
+    access the sources in the future which are protected. For this let's create a reducer auth.js. 
 
-   85. Now that we are getting token and userId in the reducer, let's show spinner (using loading:true - authStart) in Auth 
-       page when we click on login or signup button. Let's also show the error (using error:true - authFail) in the Auth 
-       page when we click on login (providing wrong password). Note that we are going to use (show) the error message given 
-       by firebase backend. By using the error message, during signin when we type wrong password we get the error message
-       INVALID_PASSWORD and during signup if we try to use the email id which already exists we get EMAIL_EXISTS.
+85. Now that we are getting token and userId in the reducer, let's show spinner (using loading:true - authStart) in Auth 
+    page when we click on login or signup button. Let's also show the error (using error:true - authFail) in the Auth 
+    page when we click on login (providing wrong password). Note that we are going to use (show) the error message given 
+    by firebase backend. By using the error message, during signin when we type wrong password we get the error message
+    INVALID_PASSWORD and during signup if we try to use the email id which already exists we get EMAIL_EXISTS.
    
-   86. Now that we have the token with us, the token is valid for 60 minutes only. If we don't logout for 60 minutes after 
-       logging in the token expires and now the token we have is invalid which we don't see it. So now let's add the code 
-       in the action creator auth.js to invalidate the token after one hour so that we can update the UI saying the token 
-       is no longer valid by logging out the user.
+86. Now that we have the token with us, the token is valid for 60 minutes only. If we don't logout for 60 minutes after 
+    logging in the token expires and now the token we have is invalid which we don't see it. So now let's add the code 
+    in the action creator auth.js to invalidate the token after one hour so that we can update the UI saying the token 
+    is no longer valid by logging out the user.
 
        So, what exactly happens after logging in ?
        * Take a look at the auth.js action creator auth. Inside that we call authSuccess
@@ -856,108 +897,119 @@ Set 6 Workflow as follows:
        * This token gets expired at 60th minute, so the current token gets expired after 60 minutes
        * So we need to logout after 60th minute automatically. How we do it is by using checkAuthTimeout async action creator
        * checkAuthTimeout is executed after getting token from authSuccess (after logging in)
-       * checkAuthTimeout calls/dispatches logout after 60 minutes to deactivate the token by using setTimeout hence this is async action
-       * Note that we have implemented an auto logout after one hour now but we still haven't implemented manual logout which we will do it later.
+       * checkAuthTimeout calls/dispatches logout after 60 minutes to deactivate the token by using setTimeout hence this is 
+         async action
+       * Note that we have implemented an auto logout after one hour now but we still haven't implemented manual logout which 
+         we will do it later
 
-   87. Now that we have implemented autologout after 60 minutes functionality (we'll do manual logout later), let's 
-       use the token we got to make requests to protected resources. What I mean is, if you see in our app now, the user 
-       has access to all the URLs. The idea is only logged in users should have access to certain URLs (specially orders). Let's adjust the 
-       Rules in the backend (firebase accordingly). Watch the video 331. Accessing protected resources, for the adjustments need to be 
-       made in the backend. After adjusting the Rules in the database, now all the users can access ingredients as before 
-       but only loggedin users can access orders page.
+87. Now that we have implemented autologout after 60 minutes functionality (we'll do manual logout later), let's 
+    use the token we got to make requests to protected resources. What I mean is, if you see in our app now, the user 
+    has access to all the URLs. The idea is only logged in users should have access to certain URLs (specially orders). 
+    Let's adjust the Rules in the backend (firebase accordingly). Watch the video 331. Accessing protected resources, for 
+    the adjustments need to be made in the backend. After adjusting the Rules in the database, now all the users can access 
+    ingredients as before but only loggedin users can access orders page.
 
-       NOTE THIS IS IMPORTANT : After adjusting the backend for orders, we can't get to orders page and it gives 401 error.
-       Now the question is, can we get to the orders page if we login without adjusting our code? 
-       The answer is NO NO. Because, remember that if we restrict access to some page and say we need to have access to this 
-       if we have token, then we need to pass that token with the URL. For example the token needs to be attached to the 
-       orders URL to get access to that page. So, let me change the code in the fetchOrders() and purchaseBurger() 
-       actions (basically wherever we use the orders URL) to receive token. 
+    NOTE THIS IS IMPORTANT : After adjusting the backend for orders, we can't get to orders page and it gives 401 error.
+    Now the question is, can we get to the orders page if we login without adjusting our code? 
+    The answer is NO NO. Because, remember that if we restrict access to some page and say we need to have access to this 
+    if we have token, then we need to pass that token with the URL. For example the token needs to be attached to the 
+    orders URL to get access to that page. So, let me change the code in the fetchOrders() and purchaseBurger() 
+    actions (basically wherever we use the orders URL) to receive token. 
   
-   88. Let's update UI a bit. Now even after logging in, we see Authenticate navigation item. Let's change that to Logout if 
-       we are authenticated. This needs to be done in NavigationItem component but the problem is we cannot use connect here 
-       since this is a functional component. Ofcourse react hooks can be used or this can be turned into class based component
-       but we'll take a different approach. Let's find the suitable class based component close to NavigationItem and we can 
-       implement this there. Layout is such component which is close to the NavigationItem so let's use that. 
+88. Let's update UI a bit. Now even after logging in, we see Authenticate navigation item. Let's change that to Logout if 
+    we are authenticated. This needs to be done in NavigationItem component but the problem is we cannot use connect here 
+    since this is a functional component. Ofcourse react hooks can be used or this can be turned into class based component
+    but we'll take a different approach. Let's find the suitable class based component close to NavigationItem and we can 
+    implement this there. Layout is such component which is close to the NavigationItem so let's use that. 
 
                  __ Toolbar---\
                 |              |
        Layout---|              |-----NavigationItems --- NavigationItem
  (connect used) |___ SidDrawer /
 
-    All the components except Layout are functional and connect can't be used (though it can be used through react-hooks or these can be turned to class based),
-    hence using redux store isAuthenticated in Layout and passing it on to NavigationItem. 
-    Now we have implemented the logic for showing Logout when the user is authenticated but we still don't logout when we click that. 
-    Let's do this next.
+    All the components except Layout are functional and connect can't be used (though it can be used through react-hooks or 
+    these can be turned to class based), hence using redux store isAuthenticated in Layout and passing it on to NavigationItem. 
+    Now we have implemented the logic for showing Logout when the user is authenticated but we still don't logout when we click 
+    that. Let's do this next.
 
-   89. Now what should happend if I click on logout button (Manual logout functionality Implementation) ? It should clear the token obviously
-       in the reducer and then redirect back to home page. This can be done in multiple ways but let's create a Logout container 
-       and then dispatch the action there. The reason we cannot directly dispatch in the NavigationItem is its the functional component
-       as told above in 88.
-       Here I've used CDM in Logout to dispatch the logout action and in the render of Logout we Redirect to /, homepage.
-       Here I got a doubt; If I redirect in render then will it reach CDM ? 
-       To confirm this, I added console.log both in render and CDM and it worked. Even though we redirect, the CDM is reached after redirecting to / in Logout.
+89. Now what should happend if I click on logout button (Manual logout functionality Implementation) ? It should clear the token 
+    obviously in the reducer and then redirect back to home page. This can be done in multiple ways but let's create a Logout 
+    container and then dispatch the action there. The reason we cannot directly dispatch in the NavigationItem is its the 
+    functional component as told above in 88.
+    Here I've used CDM in Logout to dispatch the logout action and in the render of Logout we Redirect to /, homepage.
+    Here I got a doubt; If I redirect in render then will it reach CDM ? 
+    To confirm this, I added console.log both in render and CDM and it worked. Even though we redirect, the CDM is reached after 
+    redirecting to / in Logout.
     
-   90. Let's work a bit on UI. We currently see the orders link even if we are not authenticated. Let's hide this for unauthenticated users.
-       Also, let's make the ORDER NOW button as Signup to Continue button if not authenticated. 
-       Implementing the removal of Orders link is easy and straight forward, which we do it in NavigationItems.js using conditional rendering.
-       For making ORDER NOW button as SIGNUP TO ORDER, we should do this in BuildControls which is a functional component. So we do this in 
-       BurgerBuilder and then pass this to BuildControls similar to what we did in 88.
+90. Let's work a bit on UI. We currently see the orders link even if we are not authenticated. Let's hide this for unauthenticated
+    users. Also, let's make the ORDER NOW button as Signup to Continue button if not authenticated. 
+    Implementing the removal of Orders link is easy and straight forward, which we do it in NavigationItems.js using conditional 
+    rendering. For making ORDER NOW button as SIGNUP TO ORDER, we should do this in BuildControls which is a functional component. 
+    So we do this in BurgerBuilder and then pass this to BuildControls similar to what we did in 88.
 
-       So, now we check the caption of the button. If authenticated then we say ORDER NOW else we say SIGNUP TO ORDER and changing this caption alone is 
-       not enough. The idea is when SIGNUP TO ORDER is clicked then it should take us to Authenticate page, and if ORDER NOW is 
-       clicked it should take us to checkout as before. 
-       Let's first understand where it takes us if this button (SIGNUP TO ORDER or ORDER NOW) is clicked. This takes us to purchaseHandler. 
-       Here we need to check if authenticated and if yes then we need to proceed as before to set purchasing to true else we need to redirect 
-       to Auth page. This has been implemented and there is a problem here which we will solve next.
+    So, now we check the caption of the button. If authenticated then we say ORDER NOW else we say SIGNUP TO ORDER and changing 
+    this caption alone is not enough. The idea is when SIGNUP TO ORDER is clicked then it should take us to Authenticate page, and 
+    if ORDER NOW is clicked it should take us to checkout as before. 
+    Let's first understand where it takes us if this button (SIGNUP TO ORDER or ORDER NOW) is clicked. This takes us to 
+    purchaseHandler. Here we need to check if authenticated and if yes then we need to proceed as before to set purchasing to true 
+    else we need to redirect to Auth page. This has been implemented and there is a problem here which we will solve next.
 
-   91.The problem in this is, currently if we are not signed in and add ingredients to the burger and click on SIGNUP TO ORDER 
-      button then we will be redirected to auth page for signing up or signingin which is good, but after signingup/in we will 
-      be redirected back to the home page and the ingredients we added before clicking the SIGNUP TO ORDER button will be lost. 
-      How do we fix this issue? We should ideally be redirected to the checkout page after signingin since we have added the ingredients 
-      already before clicking SIGNUP TO ORDER btn. How do we achieve this of redirecting to checkout from auth page if we reach the 
-      auth page by clicking SIGNUP TO ORDER btn?
+91.The problem in this is, currently if we are not signed in and add ingredients to the burger and click on SIGNUP TO ORDER 
+    button then we will be redirected to auth page for signing up or signingin which is good, but after signingup/in we will 
+    be redirected back to the home page and the ingredients we added before clicking the SIGNUP TO ORDER button will be lost. 
+    How do we fix this issue? We should ideally be redirected to the checkout page after signingin since we have added the 
+    ingredients already before clicking SIGNUP TO ORDER btn. How do we achieve this of redirecting to checkout from auth page 
+    if we reach the auth page by clicking SIGNUP TO ORDER btn?
       
       * First if user logs in and then builds burger 
 
       User Login --> Redirects to homepage --> Build burger --> Click ORDER NOW --> Checkout --> Done
 
-      * First if user builds the burger without logging in (Note RDPath is the authRedirectPath in auth reducer based on which the redirection from auth page happens after the user logs in)
+      * First if user builds the burger without logging in (Note RDPath is the authRedirectPath in auth reducer based on which 
+        the redirection from auth page happens after the user logs in)
             
       -> Note that RDPath is set to "/", homepage
       
-      Add/Remove ingredients --> Click SIGNUP TO ORDER --> Redirected to Login Page (RDPath set to /checkout) --> Login and come to Checkout based on RDPath --> Checkout --> Done 
+      Add/Remove ingredients --> Click SIGNUP TO ORDER --> Redirected to Login Page (RDPath set to /checkout) --> Login and come 
+                                 to Checkout based on RDPath --> Checkout --> Done 
 
-   92. NOT LOSING TOKEN ON PAGE REFRESH - The major problem now is, if the user logs in then the token is stored and its all good, but if the user refreshes the page then 
-       redux store and the local state is set to default hence we lose all the data including the token. The reason we lose all the data 
-       on refresh is, we download single page app again. How do we handle this?
-       To persist the information we make use of a browser api called localstorage which is built into javascript. I'll use this is 
-       auth action creator in auth.js before dispatching authSuccess.
-       Inspect in Application tab in chrome and we get the fields we added into local storage. We have stored token and the 
-       expiration date. The expiration date that we have stored in localstorage is not the number which we get from backend but 
-       we modified it (in the auth action creator) to get the exact time it expires. Using these two - token and the expiration time 
-       we can keep the user logged in even if he refreshes the page. If the time has expired then we want to clean this up in the 
-       local storage because it is no longer valid. Cleaning this up can be done in logout dispatch action.
-       This clearing alone is not enough. What happens if we refresh now? We are still not using localstorage and using the store's data still.
-       So how to use localstorage? 
-       * When page is refreshed then the data in reducer is lost but the same data which is in localstorage remains as it is.
-       * When app reloads, then we somehow need to check if the token is stored in localstorage and is the expirationTime stored in localstorage is still valid.
-       * If this is valid then we need to dispatch authSuccess to log the user again after page refresh.
-       * Where can this be done? The first component that is hit when page is refreshed is the App component. There, we need to dispatch the action
-         authCheckState() in auth.js actions which checks if the token stored in localstorage still exists and also if the expirationTime has not expired. After checking this the 
-         authSuccess can be dispatched to log the user again.
-         If confusing then watch the video 336. Persistent Auth state with local storage,for much more clarity.
+92. NOT LOSING TOKEN ON PAGE REFRESH - The major problem now is, if the user logs in then the token is stored and its all good, 
+    but if the user refreshes the page then redux store and the local state is set to default hence we lose all the data including 
+    the token. The reason we lose all the data on refresh is, we download single page app again. How do we handle this?
+    To persist the information we make use of a browser api called localstorage which is built into javascript. I'll use this is 
+    auth action creator in auth.js before dispatching authSuccess.
+    Inspect in Application tab in chrome and we get the fields we added into local storage. We have stored token and the 
+    expiration date. The expiration date that we have stored in localstorage is not the number which we get from backend but 
+    we modified it (in the auth action creator) to get the exact time it expires. Using these two - token and the expiration time 
+    we can keep the user logged in even if he refreshes the page. If the time has expired then we want to clean this up in the 
+    local storage because it is no longer valid. Cleaning this up can be done in logout dispatch action.
+    This clearing alone is not enough. What happens if we refresh now? We are still not using localstorage and using the store's 
+    data still.
+
+    So how to use localstorage? 
+    * When page is refreshed then the data in reducer is lost but the same data which is in localstorage remains as it is.
+    * When app reloads, then we somehow need to check if the token is stored in localstorage and is the expirationTime stored in 
+      localstorage is still valid.
+    * If this is valid then we need to dispatch authSuccess to log the user again after page refresh.
+    * Where can this be done? The first component that is hit when page is refreshed is the App component. There, we need to 
+      dispatch the action authCheckState() in auth.js actions which checks if the token stored in localstorage still exists and 
+      also if the expirationTime has not expired. After checking this the authSuccess can be dispatched to log the user again.
+      If confusing then watch the video 336. Persistent Auth state with local storage,for much more clarity.
        
-   93. If you want to use refresh token (which is not that safe and not used here) please refer video. Ensuring App Security for insights on it.
+93. If you want to use refresh token (which is not that safe and not used here) please refer video. Ensuring App Security for 
+    insights on it.
    
-   94. Not showing localhost:3000/orders and localhost:3000/checkout page for unauthenticated users. In point 90, we hide the orders nav link for unauthenticated users so that 
-       they can't click the link with out logging in. That's good but there in point 90 we didn't fix one thing. If the user manually 
-       visits the URL localhost:3000/orders or localhost:3000/checkout, then we see an error 401 returned by backend. Wouldn't it be nice if we redirect the unauthenticated 
-       users back to homepage if they visit orders page manually. Let's do that in App.js component. 
+94. Not showing localhost:3000/orders and localhost:3000/checkout page for unauthenticated users. In point 90, we hide the orders 
+    nav link for unauthenticated users so that they can't click the link with out logging in. That's good but there in point 90 we 
+    didn't fix one thing. If the user manually visits the URL localhost:3000/orders or localhost:3000/checkout, then we see an 
+    error 401 returned by backend. Wouldn't it be nice if we redirect the unauthenticated users back to homepage if they visit 
+    orders page manually. Let's do that in App.js component. 
 
-   95. When the user is logged in now he has access to /orders page and currently he can see orders of all the users which is bad. The user should be able 
-       only the orders he/she placed. For this lets include the userId (which is stored in auth store) in the order in ContactData in orderHandler().
-       This then calls and dispatches purchaseBurger() in the orders action creator. Not only should the code be adjusted in the code in orders.js actions & Orders.js container 
-       but also in backend in rules (.indexOn) section because we are using orderBy in auth action creator. Watch video. 340. Displaying user specific orders.
+95. When the user is logged in now he has access to /orders page and currently he can see orders of all the users which is bad. 
+    The user should be able only the orders he/she placed. For this lets include the userId (which is stored in auth store) in 
+    the order in ContactData in orderHandler(). This then calls and dispatches purchaseBurger() in the orders action creator. 
+    Not only should the code be adjusted in the code in orders.js actions & Orders.js container but also in backend in rules 
+    (.indexOn) section because we are using orderBy in auth action creator. Watch video. 340. Displaying user specific orders.
 
 * * * Tag v4.0-release - completed - DONE WITH AUTHENTICATION RELATED PART .
 
@@ -965,36 +1017,43 @@ Set 6 Workflow as follows:
 
   * Minor modifications and fixes to the codebase
 
-   96. In the purchaseBurgerStart() reducer part in orders.js I have set loading:false which is not correct. It should be loading:true because it helps 
-       the spinner to spin if it is loading (true) while the purchaseBurger is happening untill it finishes.
+96. In the purchaseBurgerStart() reducer part in orders.js I have set loading:false which is not correct. It should be 
+    loading:true because it helps the spinner to spin if it is loading (true) while the purchaseBurger is happening until it 
+    finishes (purchaseBurgerSuccess or purchaseBurgerFail).
    
-   97. In /checkout page, the Burger is misalligned which is not exactly placed in center. This is because the CheckoutSummary div is wrapping the div 
-       in which the Burger is placed. The div in which the Burger is placed has width of 100% and the outer div (CheckoutSummary) has a specific width (500px in our case).
-       This is due to the media query in CheckoutSummary. Let's remove that and this will be fixed.  
+97. In /checkout page, the Burger is misalligned which is not exactly placed in center. This is because the CheckoutSummary 
+    div is wrapping the div in which the Burger is placed. The div in which the Burger is placed has width of 100% and the outer
+    div (CheckoutSummary) has a specific width (500px in our case). This is due to the media query in CheckoutSummary. 
+    Let's remove that and this will be fixed.  
        
-   98. In the Toolbar, if the user is authenticated then the Orders and Logout nav links are shown. But in the mobile view (reduced browser size), if the user 
-       is authenticated, we still see the Authenticate button and no Orders and Logout buttons are seen. The reason is we are not passing the isAuth prop in 
-       Layout in <SideDrawer/> which should be used in SidDrawer component to conditionally show that. Let's fix this in Layout.
+98. In the Toolbar, if the user is authenticated then the Orders and Logout nav links are shown. But in the mobile view 
+    (reduced browser size), if the user is authenticated, we still see the Authenticate button and no Orders and Logout buttons 
+    are seen. The reason is we are not passing the isAuth prop in Layout in <SideDrawer/> which should be used in SidDrawer 
+    component to conditionally show that. Let's fix this in Layout.
    
-   99. Now that the SidDrawer nav links are fixed, there is still a glitch. When clicked on a nav link in the SidDrawer the page opens but the 
-       SidDrawer remains as is and doesnt automatically close. Let's fix this in  SidDrawer.js component. 
+99. Now that the SidDrawer nav links are fixed, there is still a glitch. When clicked on a nav link in the SidDrawer the page 
+    opens but the SidDrawer remains as is and doesnt automatically close. Let's fix this in  SidDrawer.js component. 
 
-   100. Let's check the ContactData.js and Auth.js components. In ContactData we have inputChangedHandler() and this method has the code where we update the objects. We can use utility function we 
-       have built in the store folder. Since we can now use this file for ContactData, no need to place this file inside the store. We can place this inside 
-       a folder called shared at the outer level (src folder) where any component or function can use this. Let's do the same for inputChangedHandler() in Auth.js.
+100. Let's check the ContactData.js and Auth.js components. In ContactData we have inputChangedHandler() and this method has the 
+    code where we update the objects. We can use utility function we have built in the store folder. Since we can now use this 
+    file for ContactData, no need to place this file inside the store. We can place this inside a folder called shared at the 
+    outer level (src folder) where any component or function can use this. Let's do the same for inputChangedHandler() in Auth.js.
 
-   101. We are using checkValidity() method in two places: ContactData and Auth. Let's outsource it to the utility.
+101. We are using checkValidity() method in two places: ContactData and Auth. Let's outsource it to the utility.
 
-   102. It will be nicer if we can see the redux devtools only in the development mode and not in production mode. We can use Env variables
-        to do this. Watch Video. Using Environment Variables, to know how. I'm implementing this here. Max has config folder since he has manually
-        ejected but I don't have it. But that is ok if we don't find it. It still works as shown in second part of the video.
+102. It will be nicer if we can see the redux devtools only in the development mode and not in production mode. We can use 
+     Env variables to do this. Watch Video. Using Environment Variables, to know how. I'm implementing this here. Max has config 
+     folder since he has manually ejected but I don't have it. But that is ok if we don't find it. It still works as shown in 
+     second part of the video.
     
-   103. Let's now remove console logs.
+103. Let's now remove console logs.
 
-   104. I'm not using lazy loading here. But feel free to take a look at videos below for that. 
+104. I'm not using lazy loading here. But feel free to take a look at videos below for that. 
         
-        * For react version before 16.6 - Video 215. Loading Routes Lazily
-        * For react version after 16.6 - Video 216. Lazy Loading with React Suspense
+    * For react version before 16.6 - Video 215. Loading Routes Lazily
+    * For react version after 16.6 - Video 216. Lazy Loading with React Suspense
+   
+105. Let's now format this file properly (in terms of spacing).
 
 
          
