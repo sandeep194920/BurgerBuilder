@@ -984,3 +984,7 @@ Set 6 Workflow as follows:
        a folder called shared at the outer level (src folder) where any component or function can use this. Let's do the same for inputChangedHandler() in Auth.js.
 
    101. We are using checkValidity() method in two places: ContactData and Auth. Let's outsource it to the utility.
+
+   102. It will be nicer if we can see the redux devtools only in the development mode and not in production mode. We can use Env variables
+        to do this. Watch Video. Using Environment Variables, to know how. I'm implementing this here. Max has config folder since he has manually
+        ejected but I don't have it. But that is ok if we don't find it. It still works as shown in second part of the video.
