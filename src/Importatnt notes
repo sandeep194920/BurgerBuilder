@@ -965,3 +965,7 @@ Set 6 Workflow as follows:
 
   * Minor modifications and fixes to the codebase
 
+   96. In the purchaseBurgerStart() reducer part in orders.js I have set loading:false which is not correct. It should be loading:true because it helps 
+       the spinner to spin if it is loading (true) while the purchaseBurger is happening untill it finishes.
+   
+   

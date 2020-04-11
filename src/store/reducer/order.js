@@ -4,7 +4,7 @@ import { updateObject } from "../../store/utility";
 const initialState = {
   orders: [],
   loading: false,
-  purchased: false
+  purchased: false,
 };
 
 // utility function to reduce number of lines in PURCHASE_INIT case
@@ -13,18 +13,18 @@ const purchaseInit = (state, action) => {
 };
 // utility function to reduce number of lines in PURCHASE_BURGER_START case
 const purchaseBurgerStart = (state, action) => {
-  return updateObject(state, { loading: false });
+  return updateObject(state, { loading: true });
 };
 // utility function to reduce number of lines in PURCHASE_BURGER_SUCCESS case
 const purchaseBurgerSuccess = (state, action) => {
   const newOrder = updateObject(action.orderData, {
-    id: action.orderID
+    id: action.orderID,
   });
 
   return updateObject(state, {
     loading: false,
     purchased: true,
-    orders: state.orders.concat({ newOrder })
+    orders: state.orders.concat({ newOrder }),
   });
 };
 // utility function to reduce number of lines in PURCHASE_BURGER_FAIL case
@@ -39,7 +39,7 @@ const fetchOrdersStart = (state, action) => {
 const fetchOrdersSuccess = (state, action) => {
   return updateObject(state, {
     loading: false,
-    orders: action.orders
+    orders: action.orders,
   });
 };
 // utility function to reduce number of lines in FETCH_ORDERS_FAIL case
