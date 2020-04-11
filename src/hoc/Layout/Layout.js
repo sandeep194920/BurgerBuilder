@@ -40,6 +40,7 @@ class Layout extends Component {
         {/* Instead of sideDrawerToggleHandler above in the toolbar, we could have used sidDrawerOpenHandler because
         we are using this button just to open the sideDrawer. However, it might help us in future just in case */}
         <Sidedrawer
+          isAuth={this.props.isAuthenticated}
           closed={this.sidDrawerClosedHandler}
           open={this.state.showSideDrawer}
         />
