@@ -990,3 +990,11 @@ Set 6 Workflow as follows:
         ejected but I don't have it. But that is ok if we don't find it. It still works as shown in second part of the video.
     
    103. Let's now remove console logs.
+
+   104. I'm not using lazy loading here. But feel free to take a look at videos below for that. 
+        
+        * For react version before 16.6 - Video 215. Loading Routes Lazily
+        * For react version after 16.6 - Video 216. Lazy Loading with React Suspense
+
+
+         
