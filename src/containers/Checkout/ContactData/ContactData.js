@@ -8,6 +8,7 @@ import Input from "../../../components/UI/Input/Input";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../../store/actions/index";
+import { updateObject } from "../../../shared/utility";
 
 class ContactData extends Component {
   state = {
@@ -183,25 +184,52 @@ class ContactData extends Component {
 
     // Now I need to change the value of the inputIdentifier in the state. This has to be done immutably. For this I can use json.Stringify or using spread operator of all layers like below
     // name, street, country, email, zipcode . These are passed in as inputIdentifier and our aim is to set to value attribute
-    const updatedOrderForm = {
-      ...this.state.orderForm, // This is the shallow copy of orderForm
-    };
-    const updatedFormElement = {
-      ...updatedOrderForm[inputIdentifier], // This gives object of each key like orderForm[input], orderForm[country] and so on
-    };
+
+    // Initially used before UpdateObject - The below commented code below can be updated using updateObject utility function
+    // const updatedOrderForm = {
+    //   ...this.state.orderForm, // This is the shallow copy of orderForm
+    // };
+
+    // Initially used before UpdateObject - The below commented code below can be updated using updateObject utility function
+
+    // const updatedFormElement = {
+    //   ...updatedOrderForm[inputIdentifier], // This gives object of each key like orderForm[input], orderForm[country] and so on
+    // };
+
+    //  Initially used before UpdateObject - The above commented code below can be updated using updateObject utility function
+
+    const updatedFormElement = updateObject(
+      this.state.orderForm[inputIdentifier],
+      {
+        value: event.target.value,
+        touched: true,
+        valid: this.checkValidity(
+          event.target.value,
+          this.state.orderForm[inputIdentifier].validation
+        ),
+      }
+    );
+
+    // Initially used before UpdateObject - Now used above where we pass everything to updateObject second argument
+
     // In updatedForm I need to now update the value. This is done immuatbly
-    updatedFormElement.value = event.target.value; // updatedFormElement may be name, email and so on
+    //updatedFormElement.value = event.target.value; // updatedFormElement may be name, email and so on
 
     // As soon as this is touched (user places cursor on this inputElement), the touched property of state (if exisits for this input) should become true.
     // This helps to display error only on this inputElement if user enters unexpected input (violates the validation rules)
-    updatedFormElement.touched = true;
+    //updatedFormElement.touched = true;
 
-    updatedFormElement.valid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
-    );
+    // Initially used before UpdateObject - Now used above where we pass everything to updateObject second argument
 
-    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    // updatedFormElement.valid = this.checkValidity(
+    //   updatedFormElement.value,
+    //   updatedFormElement.validation
+    // );
+    const updatedOrderForm = updateObject(this.state.orderForm, {
+      [inputIdentifier]: updatedFormElement,
+    });
+
+    // updatedOrderForm[inputIdentifier] = updatedFormElement;
 
     // Checking overall form validity. For this, I have added isFormValid property to state and initially set to false
     let formIsValid = true; // let this be true initially and this changes on every iteration below because the this.state.orderForm[inputElement].valid below could be false.

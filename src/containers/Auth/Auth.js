@@ -7,6 +7,7 @@ import * as actions from "../../store/actions/index";
 import Spinner from "../../components/UI/Spinner/Spinner";
 // We need to redirect to homepage after signup or login
 import { Redirect } from "react-router";
+import { updateObject } from "../../shared/utility";
 
 class Auth extends Component {
   state = {
@@ -81,18 +82,34 @@ class Auth extends Component {
   }
 
   inputChangedHandler = (event, controlName) => {
-    const updatedControls = {
-      ...this.state.controls,
-      [controlName]: {
-        ...this.state.controls[controlName],
+    // Before using updateObject() utility to copy and update the objects efficiently
+
+    // const updatedControls = {
+    //   ...this.state.controls,
+    //   [controlName]: {
+    //     ...this.state.controls[controlName],
+    //     value: event.target.value,
+    //     valid: this.checkValidity(
+    //       event.target.value,
+    //       this.state.controls[controlName].validation
+    //     ),
+    //     touched: true,
+    //   },
+    // };
+    // this.setState({ controls: updatedControls });
+
+    // After using updateObject() utility to copy and update the objects efficiently
+
+    const updatedControls = updateObject(this.state.controls, {
+      [controlName]: updateObject(this.state.controls[controlName], {
         value: event.target.value,
         valid: this.checkValidity(
           event.target.value,
           this.state.controls[controlName].validation
         ),
         touched: true,
-      },
-    };
+      }),
+    });
     this.setState({ controls: updatedControls });
   };
 

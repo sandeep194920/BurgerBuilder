@@ -978,3 +978,7 @@ Set 6 Workflow as follows:
    
    99. Now that the SidDrawer nav links are fixed, there is still a glitch. When clicked on a nav link in the SidDrawer the page opens but the 
        SidDrawer remains as is and doesnt automatically close. Let's fix this in  SidDrawer.js component. 
+
+   100. Let's check the ContactData.js and Auth.js components. In ContactData we have inputChangedHandler() and this method has the code where we update the objects. We can use utility function we 
+       have built in the store folder. Since we can now use this file for ContactData, no need to place this file inside the store. We can place this inside 
+       a folder called shared at the outer level (src folder) where any component or function can use this. Let's do the same for inputChangedHandler() in Auth.js.
