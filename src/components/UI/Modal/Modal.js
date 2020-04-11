@@ -8,7 +8,7 @@ class Modal extends Component {
 
   // Adding this method CDU to check if Modal is being called when ingredient is added or removed. So this is for testing purpose
   componentDidUpdate() {
-    console.log("[Modal] component");
+    // console.log("[Modal] component");
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -36,7 +36,7 @@ class Modal extends Component {
           className={classes.Modal}
           style={{
             transform: this.props.show ? "translateY(0)" : "translateX(-100vh)", // in translateX, vh was missed till now so the modal wasn't getting out of way
-            opacity: this.props.show ? "1" : "0"
+            opacity: this.props.show ? "1" : "0",
           }}
         >
           {this.props.children}

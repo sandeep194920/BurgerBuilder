@@ -70,7 +70,7 @@ export const auth = (email, password, isSignup) => {
       .post(url, authData)
       .then((response) => {
         // here in response.data which is dipatched below, we get the token. This is dispatched in authSuccess() below and stored in reducer
-        console.log(response); // 1  - addressed below in dispatch(checkAuthTimeout(response.data.expiresIn)) line.
+        //console.log(response); // 1  - addressed below in dispatch(checkAuthTimeout(response.data.expiresIn)) line.
         localStorage.setItem("token", response.data.idToken); // stored in browser local storage as we don't want the token to be lost on page refresh
 
         // With token, we also need to store the expiration time in the local storage. But the expTime can't be stored directly like we store token.
@@ -85,7 +85,6 @@ export const auth = (email, password, isSignup) => {
         dispatch(checkAuthTimeout(response.data.expiresIn)); // you can see this by logging in. The console log above commented as 1 gives you the data which contains this expiresIn attribute for your reference
       })
       .catch((error) => {
-        console.log(error);
         dispatch(authFail(error.response.data.error));
       });
   };

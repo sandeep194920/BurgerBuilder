@@ -988,3 +988,5 @@ Set 6 Workflow as follows:
    102. It will be nicer if we can see the redux devtools only in the development mode and not in production mode. We can use Env variables
         to do this. Watch Video. Using Environment Variables, to know how. I'm implementing this here. Max has config folder since he has manually
         ejected but I don't have it. But that is ok if we don't find it. It still works as shown in second part of the video.
+    
+   103. Let's now remove console logs.

@@ -8,11 +8,11 @@ class Logout extends Component {
   // Also I need to redirect to home page after logout
 
   componentDidMount() {
-    console.log("Yes this is executed - CDM logout comp");
+    // console.log("Yes this is executed - CDM logout comp");
     this.props.onLogout();
   }
   render() {
-    console.log("Yes this is executed - render logout comp");
+    // console.log("Yes this is executed - render logout comp");
     return <Redirect to="/" />;
   }
 }

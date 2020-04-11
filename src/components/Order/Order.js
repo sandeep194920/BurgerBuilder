@@ -3,16 +3,14 @@ import classes from "./Order.module.css";
 
 const order = (props) => {
   // props.ingredients is an object so we have to convert it to array to map it and display
-  console.log(props.ingredients);
 
   const ingredients = [];
   for (let ingredientName in props.ingredients) {
     ingredients.push({
       name: ingredientName,
-      amount: props.ingredients[ingredientName]
+      amount: props.ingredients[ingredientName],
     });
   }
-  console.log(ingredients);
 
   const ingredientOutput = ingredients.map((ingredient) => {
     return (
@@ -22,7 +20,7 @@ const order = (props) => {
           display: "inline-block",
           margin: "0 8px",
           border: "1px solid #ccc",
-          padding: "5px"
+          padding: "5px",
         }}
         key={ingredient.name}
       >

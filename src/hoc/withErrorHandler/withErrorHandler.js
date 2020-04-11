@@ -5,13 +5,13 @@ const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
     // This state is required only for the error which is used to show the modal below
     state = {
-      error: null
+      error: null,
     };
     // Note that this method will be executed after the Wrapped component (BurgerBuilder in this case)is executed.
     // That means the axios instance written in BurgerBuilder is executed and then reaches the interceptors written
     // inside this below componentDidMount()
     componentWillMount() {
-      console.log("CWM withErrorHandler"); // Testing which one is executed first. This one vs BurgerBuilder CDM
+      //console.log("CWM withErrorHandler"); // Testing which one is executed first. This one vs BurgerBuilder CDM
       // Changing this from cdm to cwm. Because this must be loaded before child comps loaded. Constructor also can be used instead of cwm
       //used to clear error if any occured in response interceptors below
       this.reqInterceptor = axios.interceptors.request.use((req) => {
