@@ -8,7 +8,7 @@ import Input from "../../../components/UI/Input/Input";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../../store/actions/index";
-import { updateObject } from "../../../shared/utility";
+import { updateObject, checkValidity } from "../../../shared/utility";
 
 class ContactData extends Component {
   state = {
@@ -146,35 +146,37 @@ class ContactData extends Component {
     this.props.onOrderBurger(order, this.props.token);
   };
 
-  checkValidity(value, rules) {
-    // This is required if rules is undefined for a particular type of inputElement. In this case we have deliveryMethod for which we dont have any validation.
-    if (!rules) {
-      return true;
-    }
-    // if this method returns true then the field on the form is valid else not
-    let isValid = false;
+  // checkValidity has been outsourced to utility function
 
-    // All the rules in the validation object (for inputElement) is validated here and returned as true or false
-    if (rules.required) {
-      isValid = value.trim() !== "";
-    }
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength; // Zipcode has a minLenth rule here so this would be applied for that
-    }
+  // checkValidity(value, rules) {
+  //   // This is required if rules is undefined for a particular type of inputElement. In this case we have deliveryMethod for which we dont have any validation.
+  //   if (!rules) {
+  //     return true;
+  //   }
+  //   // if this method returns true then the field on the form is valid else not
+  //   let isValid = false;
 
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid; // Zipcode has a maxLenth rule here so this would be applied for that
-    }
-    // The bug of minLength and maxLength has now been fixed by adding && isValid. You are also considering the minLength
-    // result for maxLength validation so that both has to be true for the result to be true. That solves the problem.
+  //   // All the rules in the validation object (for inputElement) is validated here and returned as true or false
+  //   if (rules.required) {
+  //     isValid = value.trim() !== "";
+  //   }
+  //   if (rules.minLength) {
+  //     isValid = value.length >= rules.minLength; // Zipcode has a minLenth rule here so this would be applied for that
+  //   }
 
-    // The other ways is by turining isValid initially defined to true and including that in every check. Max does take
-    // this approach but I am leaving mine here for now. We can come back to this if my rule doesn't work as expected.
+  //   if (rules.maxLength) {
+  //     isValid = value.length <= rules.maxLength && isValid; // Zipcode has a maxLenth rule here so this would be applied for that
+  //   }
+  //   // The bug of minLength and maxLength has now been fixed by adding && isValid. You are also considering the minLength
+  //   // result for maxLength validation so that both has to be true for the result to be true. That solves the problem.
 
-    // console.log(isValid);
+  //   // The other ways is by turining isValid initially defined to true and including that in every check. Max does take
+  //   // this approach but I am leaving mine here for now. We can come back to this if my rule doesn't work as expected.
 
-    return isValid;
-  }
+  //   // console.log(isValid);
+
+  //   return isValid;
+  // }
 
   inputChangedHandler = (event, inputIdentifier) => {
     // console.log(event.target.value);
@@ -203,7 +205,7 @@ class ContactData extends Component {
       {
         value: event.target.value,
         touched: true,
-        valid: this.checkValidity(
+        valid: checkValidity(
           event.target.value,
           this.state.orderForm[inputIdentifier].validation
         ),

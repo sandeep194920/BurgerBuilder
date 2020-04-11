@@ -982,3 +982,5 @@ Set 6 Workflow as follows:
    100. Let's check the ContactData.js and Auth.js components. In ContactData we have inputChangedHandler() and this method has the code where we update the objects. We can use utility function we 
        have built in the store folder. Since we can now use this file for ContactData, no need to place this file inside the store. We can place this inside 
        a folder called shared at the outer level (src folder) where any component or function can use this. Let's do the same for inputChangedHandler() in Auth.js.
+
+   101. We are using checkValidity() method in two places: ContactData and Auth. Let's outsource it to the utility.
