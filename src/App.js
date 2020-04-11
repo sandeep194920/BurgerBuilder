@@ -31,9 +31,11 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/checkout" component={Checkout} />
+          <Route path="/auth" component={Auth} />
           <Route path="/orders" component={Orders} />
           <Route path="/logout" component={Logout} />
           <Route path="/" component={BurgerBuilder} />
+
           {/* Redirect redirects us to / for any unknown routes */}
           {/* Note that in all of the Routes above, we pass history and other props by default which is 
           given by react-router-dom. In case if we need additional props of that particular component we can write like 

@@ -74,12 +74,15 @@ export const fetchOrderFail = (error) => {
     error: error,
   };
 };
-// async action
-export const fetchOrders = (token) => {
+// async action - called in componentDidMount() of Orders.js component
+export const fetchOrders = (token, userId) => {
   return (dispatch) => {
     dispatch(fetcheOrderStart());
+    // We need the orders related to the particular user who logs in, so let's filter that in firebase backend and get the orders related to the authenticated user alone
+    const queryParams =
+      "?auth=" + token + '&orderBy="userId"&equalTo="' + userId + '"';
     axios
-      .get("/orders.json?auth=" + token) // the token needs to be passed as it is a secured URL which doesnt work without it. That means, the user needs to be logged in to access this. Also not that this must be ?auth and nothing else
+      .get("/orders.json" + queryParams) // the token needs to be passed as it is a secured URL which doesnt work without it. That means, the user needs to be logged in to access this. Also not that this must be ?auth and nothing else
       .then(
         // The response.data we get back is objects and we need to convert that to an array to get orders so that we can map on it.
         (response) => {

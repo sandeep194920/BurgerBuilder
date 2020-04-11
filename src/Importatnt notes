@@ -953,3 +953,9 @@ Set 6 Workflow as follows:
        they can't click the link with out logging in. That's good but there in point 90 we didn't fix one thing. If the user manually 
        visits the URL localhost:3000/orders or localhost:3000/checkout, then we see an error 401 returned by backend. Wouldn't it be nice if we redirect the unauthenticated 
        users back to homepage if they visit orders page manually. Let's do that in App.js component. 
+
+   95. When the user is logged in now he has access to /orders page and currently he can see orders of all the users which is bad. The user should be able 
+       only the orders he/she placed. For this lets include the userId (which is stored in auth store) in the order in ContactData in orderHandler().
+       This then calls and dispatches purchaseBurger() in the orders action creator. Not only should the code be adjusted in the code in orders.js actions & Orders.js container 
+       but also in backend in rules (.indexOn) section because we are using orderBy in auth action creator. Watch video. 340. Displaying user specific orders.
+       

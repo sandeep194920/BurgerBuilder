@@ -120,6 +120,7 @@ class ContactData extends Component {
       ingredients: this.props.ingredients,
       price: this.props.price,
       orderData: formData,
+      userId: this.props.userId, // Because of this we can fetch the orders related to specific user
 
       // customer data now comes from state
     };
@@ -265,6 +266,7 @@ const mapStateToProps = (state) => {
     price: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
     token: state.auth.token,
+    userId: state.auth.userId, // Because of this we can fetch the orders related to specific user
   };
 };
 const mapDispatchToProps = (dispatch) => {
