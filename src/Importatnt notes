@@ -975,3 +975,6 @@ Set 6 Workflow as follows:
    98. In the Toolbar, if the user is authenticated then the Orders and Logout nav links are shown. But in the mobile view (reduced browser size), if the user 
        is authenticated, we still see the Authenticate button and no Orders and Logout buttons are seen. The reason is we are not passing the isAuth prop in 
        Layout in <SideDrawer/> which should be used in SidDrawer component to conditionally show that. Let's fix this in Layout.
+   
+   99. Now that the SidDrawer nav links are fixed, there is still a glitch. When clicked on a nav link in the SidDrawer the page opens but the 
+       SidDrawer remains as is and doesnt automatically close. Let's fix this in  SidDrawer.js component. 
